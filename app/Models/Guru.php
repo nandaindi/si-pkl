@@ -22,4 +22,9 @@ class Guru extends Model
     {
         return $this->hasMany(JadwalSidang::class, 'penguji_id');
     }
+
+    public function siswaBimbingan()
+    {
+        return $this->hasMany(Siswa::class, 'pembimbing_id');
+    }
 }

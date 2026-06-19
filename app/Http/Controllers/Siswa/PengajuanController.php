@@ -61,11 +61,20 @@ class PengajuanController extends Controller
             return redirect()->route('siswa.pengajuan.index')->with('error', 'Anda sudah memiliki pengajuan yang aktif atau disetujui.');
         }
 
-        PengajuanPkl::create([
+        $pengajuan = PengajuanPkl::create([
             'siswa_id' => $siswa->id,
             'tempat_pkl_id' => $request->tempat_pkl_id,
             'status' => 'pending',
         ]);
+
+        if ($siswa->pembimbing && $siswa->pembimbing->user) {
+            $siswa->pembimbing->user->notify(new \App\Notifications\PklNotification(
+                'Pengajuan PKL Baru',
+                "{$siswa->user->name} mengajukan tempat PKL baru.",
+                route('pembimbing.pengajuan.index'),
+                'file-text'
+            ));
+        }
 
         return redirect()->route('siswa.pengajuan.index')->with('success', 'Pengajuan PKL berhasil dikirim. Menunggu persetujuan pembimbing.');
     }

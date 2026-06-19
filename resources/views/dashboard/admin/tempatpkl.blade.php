@@ -1,5 +1,4 @@
 @extends ('layouts.app')
-
 @section ('content')
     <div>
         <div class="max-w-7xl mx-auto">
@@ -10,14 +9,12 @@
                 </div>
                 <a
                     href="{{ route('admin.tempat-pkl.create') }}"
-                    class="bg-blue-700 hover:bg-blue-800 text-white px-5 py-2.5 rounded-xl text-sm font-bold flex items-center gap-2 "
+                    class="bg-slate-900 hover:bg-slate-800 text-white px-5 py-2.5 rounded-xl text-sm font-bold flex items-center gap-2 "
                 >
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
                     Tambah Tempat PKL
                 </a>
             </div>
-
-            <!-- Bilah Pencarian & Filter -->
             <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm flex flex-col sm:flex-row justify-between items-center gap-4 mb-6">
                 <form action="{{ route('admin.tempat-pkl.index') }}" method="GET" class="relative w-full sm:w-96">
                     <input
@@ -25,15 +22,13 @@
                         name="search"
                         value="{{ request('search') }}"
                         placeholder="Cari nama instansi atau alamat..."
-                        class="w-full pl-10 pr-4 py-2 border border-slate-300 rounded-lg focus:ring-blue-700 focus:border-blue-700 text-sm"
+                        class="w-full pl-10 pr-4 py-2 border border-slate-300 rounded-lg focus:border-slate-300 text-sm"
                     />
                     <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                         <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
                     </div>
                 </form>
             </div>
-
-            <!-- Tabel -->
             <div class="bg-white overflow-hidden rounded-2xl border border-slate-200 shadow-sm">
                 <div class="overflow-x-auto">
                     <table class="w-full text-left border-collapse">
@@ -73,7 +68,7 @@
                                     <td class="px-6 py-4 text-sm text-slate-500">{{ $tempat->alamat }}</td>
                                     <td class="px-6 py-4 text-sm text-slate-500">
                                         <span
-                                            class="px-3 py-1 bg-blue-50 text-blue-700 rounded-full font-bold text-xs font-label"
+                                            class="px-3 py-1 bg-slate-50 text-slate-900 rounded-full font-bold text-xs font-label"
                                             >{{ $tempat->kuota }} Siswa</span
                                         >
                                     </td>
@@ -81,7 +76,7 @@
                                         <div class="flex items-center justify-end gap-2">
                                             <a
                                                 href="{{ route('admin.tempat-pkl.edit', $tempat->id) }}"
-                                                class="p-1.5 bg-blue-50 text-blue-600 hover:bg-blue-600 hover:text-white rounded-lg transition-colors "
+                                                class="p-1.5 bg-slate-50 text-slate-900 hover:bg-slate-200 hover:text-slate-900 rounded-lg transition-colors "
                                                 title="Edit Data"
                                             >
                                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
@@ -109,7 +104,6 @@
                                 <tr>
                                     <td colspan="5" class="px-6 py-12 text-center text-slate-500">
                                         <div class="flex flex-col items-center justify-center">
-                                            
                                             <p class="text-sm font-medium">Belum ada data tempat PKL yang didaftarkan.</p>
                                         </div>
                                     </td>

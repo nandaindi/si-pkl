@@ -1,55 +1,37 @@
 @extends ('layouts.guest')
-
 @section ('styles')
-    <!-- Hallmark stamp: 
- macrostructure: 01 Bento Grid
- nav: N1b SaaS Three-Section
- footer: Ft8 Marquee Scroll
- theme: Hum (Playful & Alive, Plus Jakarta Sans)
- -->
     <style>
         /* Hallmark · genre: playful · macrostructure: Bento Grid · theme: Hum · enrichment: none · nav: N1b · footer: Ft8 */
-
         :root {
         --font-body: 'Plus Jakarta Sans', sans-serif;
         --font-display: 'Poppins', sans-serif;
         --font-label: 'JetBrains Mono', monospace;
-
         /* Senior Developer - Clean Theme Colors (OKLCH based) */
         --color-paper: oklch(98.5% 0.003 240); /* extremely soft slate-50 background */
         --color-paper-2: #ffffff; /* crisp white for cards */
         --color-paper-3: oklch(95.5% 0.005 240); /* subtle slate-100 hover */
         --color-ink: oklch(25% 0.01 240); /* deep charcoal slate-900 text */
         --color-ink-muted: oklch(55% 0.01 240);/* secondary slate-500 text */
-
         --color-accent: oklch(50% 0.16 250); /* Royal Indigo accent */
         --color-accent-deep: oklch(40% 0.16 250);
-
         --color-accent-2: oklch(60% 0.16 150); /* Emerald Green success accent */
         --color-accent-2-deep: oklch(50% 0.16 150);
-
         --color-accent-3: oklch(60% 0.18 28); /* Coral Red danger accent */
         --color-accent-3-deep: oklch(50% 0.18 28);
-
         --color-mint: oklch(80% 0.16 150);
         --color-mint-deep: oklch(50% 0.16 150);
-
         --color-border: oklch(92% 0.005 240);
-
         --radius-card: 20px;
         --radius-pill: 999px;
         --radius-input: 12px;
-
         --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
         --ease-snap: cubic-bezier(0.22, 1, 0.36, 1);
-
         --text-xs: 0.75rem;
         --text-sm: 0.875rem;
         --text-base: 1rem;
         --text-md: 1.25rem;
         --text-lg: 1.5rem;
         }
-
         html, body {
         overflow-x: clip;
         font-family: var(--font-body);
@@ -57,14 +39,12 @@
         color: var(--color-ink);
         -webkit-font-smoothing: antialiased;
         }
-
         .font-display {
         font-family: var(--font-display);
         }
         .font-label {
         font-family: var(--font-label);
         }
-
         .mono-label {
         font-family: var(--font-label);
         font-size: 11px;
@@ -73,7 +53,6 @@
         color: var(--color-ink-muted);
         font-weight: 600;
         }
-
         /* Nav N1b Style overrides */
         .nav-hum {
         position: fixed;
@@ -91,7 +70,6 @@
         border-bottom-color: var(--color-border);
         box-shadow: 0 8px 30px -15px oklch(20% 0.012 250 / 0.1);
         }
-
         /* Button System (Chunky Push Feedback) */
         .btn {
         --btn-face: var(--color-accent);
@@ -111,7 +89,6 @@
         cursor: pointer;
         position: relative;
         isolation: isolate;
-
         transform: none;
         transition: background-color 160ms, opacity 160ms;
         font-size: var(--text-sm);
@@ -126,43 +103,35 @@
         .btn:active {
             opacity: 0.8;
         }
-
         .btn--sm {
         padding: 0.5rem 1.1rem;
         font-size: 13px;
         }
-
         .btn--cyan {
         --btn-face: var(--color-accent-2);
         --btn-edge: var(--color-accent-2-deep);
         --btn-cast: oklch(60% 0.16 150 / 0.2);
         --btn-ink: #ffffff;
         }
-
         .btn--coral {
         --btn-face: var(--color-accent-3);
         --btn-edge: var(--color-accent-3-deep);
         --btn-cast: oklch(60% 0.18 28 / 0.2);
         --btn-ink: #ffffff;
         }
-
         .btn--soft {
         --btn-face: var(--color-paper-2);
         --btn-ink: var(--color-ink);
         --btn-edge: var(--color-border);
         --btn-cast: transparent;
         border: 1px solid var(--color-border);
-
         }
         .btn--soft:hover {
         --btn-face: var(--color-paper-3);
-
         }
         .btn--soft:active {
         transform: none;
-
         }
-
         /* Headline & Highlights (Signature #2) */
         .hero__title {
         font-family: var(--font-display);
@@ -187,7 +156,6 @@
         box-decoration-break: clone;
         padding-bottom: 0.02em;
         }
-
         /* Bento Grid (F1 Bento Grid) */
         .bento-shell {
         max-width: 1200px;
@@ -208,7 +176,6 @@
         grid-auto-rows: minmax(13rem, auto);
         gap: 1.5rem;
         }
-
         /* Claymorphic shadows and variables */
         :root {
             --shadow-clay: 0 12px 32px -12px oklch(20% 0.012 250 / 0.12),
@@ -218,7 +185,6 @@
                                  inset -8px -8px 16px oklch(20% 0.012 250 / 0.06),
                                  inset 8px 8px 16px oklch(100% 0 0 / 0.95);
         }
-
         .card-bento {
         background: var(--color-paper-2);
         border: 2px solid var(--color-border);
@@ -234,9 +200,8 @@
         }
         .card-bento:hover {
         box-shadow: var(--shadow-clay-hover);
-        border-color: var(--color-accent);
+        border-color: var(--color-border);
         }
-
         /* Asymmetric spans */
         .span-2x2 { grid-column: span 2; grid-row: span 2; }
         .span-2x1 { grid-column: span 2; }
@@ -261,7 +226,6 @@
         grid-row: span 1 !important;
         }
         }
-
         /* Interactive Mascot (Signature #5 with 3D details & Speech Bubble) */
         .mascot-box {
         display: flex;
@@ -334,7 +298,6 @@
         background: var(--color-ink);
         border-radius: var(--radius-pill);
         }
-
         /* Speech Bubble */
         .speech-bubble {
         position: absolute;
@@ -381,7 +344,6 @@
         animation: none;
         }
         }
-
         /* Star-burst effect (Signature #7) */
         .star-burst {
         position: absolute;
@@ -400,7 +362,6 @@
         60% { transform: translate(-50%, -50%) scale(1.2) rotate(35deg); opacity: 0.9; }
         100% { transform: translate(-50%, -50%) scale(1.4) rotate(45deg); opacity: 0; }
         }
-
         /* Success tick-up completion scale pulse */
         .pulse-celebrate {
         animation: pulse-celebrate-anim 400ms var(--ease-spring);
@@ -410,7 +371,6 @@
         0%, 100% { transform: scale(1); }
         50% { transform: scale(1.06); }
         }
-
         /* Footer Marquee Scroll (Ft8) */
         .foot-marquee {
         overflow: hidden;
@@ -441,13 +401,11 @@
         {
         .foot-marquee__track { animation: none; }
         }
-
         /* Standardized scroll reveals */
         .gsap-reveal {
         opacity: 0;
         transform: none;
         }
-
         /* 01 Connector decoration rules */
         .connector-line {
             position: absolute;
@@ -461,7 +419,6 @@
                    0%, 100% { opacity: 0.2; transform: scaleX(0.9); }
                    50% { opacity: 0.7; transform: scaleX(1.1); }
                }
-
                /* 02 Log typing simulation rules */
                .typing-cursor {
                    display: inline-block;
@@ -477,7 +434,6 @@
                    from, to { background-color: transparent }
                    50% { background-color: var(--color-accent-2-deep) }
                }
-
                /* 03 Radial Progress Ring rules */
                .radial-stat {
                    position: relative;
@@ -503,7 +459,6 @@
                    transform-origin: 50% 50%;
                    transition: stroke-dashoffset 1.5s var(--ease-spring);
                }
-
                /* 05 Touch Approval Swipe Card rules */
                .swipe-card-container {
                    position: relative;
@@ -537,7 +492,6 @@
                    right: 14px;
                    color: var(--color-mint-deep);
                }
-
                /* 06 Live blink dot */
                .live-dot {
                    display: inline-block;
@@ -552,7 +506,6 @@
                    from { opacity: 0.3; transform: scale(0.8); }
                    to { opacity: 1; transform: scale(1.2); }
                }
-
                /* 07 Holographic Glare Certificate card rules */
                .certificate-card {
                    transform-style: preserve-3d;
@@ -585,7 +538,6 @@
                .certificate-card:hover .certificate-hologram {
                    opacity: 1;
                }
-
                /* 08 Infinite marquee partner logo rules */
                .marquee-logo-container {
                    overflow: hidden;
@@ -624,13 +576,10 @@
                }
     </style>
 @endsection
-
 @section ('content')
     <div class="selection:bg-black selection:text-white">
-        <!-- Nav: N1b Canonical SaaS -->
         <header class="nav-hum" id="nav-hum">
             <nav class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-                <!-- Left: Logo & Wordmark -->
                 <div class="flex items-center gap-3.5">
                     <img
                         src="{{ asset('images/logosmk.png') }}"
@@ -648,8 +597,6 @@
                         >
                     </div>
                 </div>
-
-                <!-- Right: Action -->
                 <div>
                     @auth
                         <a href="{{ url('/dashboard') }}" class="btn btn--soft btn--sm">Masuk Dasbor</a>
@@ -659,23 +606,17 @@
                 </div>
             </nav>
         </header>
-
         <main class="pt-24">
-            <!-- Header Section with Slider (Visi Misi & Banner 2) -->
             <section class="max-w-7xl mx-auto text-center px-4 sm:px-6 mb-16 relative">
-                <!-- Decorative glow behind the image -->
-                <div class="absolute inset-0 bg-blue-100 rounded-[2.5rem] blur-3xl opacity-40 -z-10"></div>
-
+                <div class="absolute inset-0 bg-slate-100 rounded-[2.5rem] blur-3xl opacity-40 -z-10"></div>
                 <div
                     class="relative w-full overflow-hidden rounded-2xl drop-shadow-xl gsap-reveal slider-container"
                     style="animation-delay: 0.2s"
                 >
-                    <!-- Slides Track -->
                     <div
                         class="flex transition-transform duration-500 ease-out cursor-grab active:cursor-grabbing"
                         id="hero-slider-track"
                     >
-                        <!-- Slide 1: Visi Misi -->
                         <div class="min-w-full flex justify-center items-center select-none">
                             <img
                                 src="{{ asset('images/visimissi.png') }}"
@@ -683,7 +624,6 @@
                                 class="w-full h-auto object-contain rounded-2xl pointer-events-none"
                             />
                         </div>
-                        <!-- Slide 2: Banner 2 -->
                         <div class="min-w-full flex justify-center items-center select-none">
                             <img
                                 src="{{ asset('images/banner2.png') }}"
@@ -692,8 +632,6 @@
                             />
                         </div>
                     </div>
-
-                    <!-- Prev/Next Controls -->
                     <button
                         id="slider-prev"
                         class="absolute left-4 top-1/2 -translate-y-1/2 bg-white/85 hover:bg-white text-slate-800 p-2.5 rounded-full shadow-md border border-slate-200/50 backdrop-blur-sm z-30 transition-all cursor-pointer select-none"
@@ -706,8 +644,6 @@
                     >
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path></svg>
                     </button>
-
-                    <!-- Indicators -->
                     <div class="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 z-30">
                         <button
                             class="w-2.5 h-2.5 rounded-full bg-slate-900/50 border border-white/40 cursor-pointer slider-dot is-active"
@@ -722,20 +658,14 @@
                     </div>
                 </div>
             </section>
-
-            <!-- Bento Grid Shell -->
             <section class="bento-shell">
                 <div class="bento-grid">
-                    <!-- Tile 1 (2x2): Welcome & Core CTA (Claymorphic Style) -->
                     <article
                         class="card-bento span-2x2 !bg-white gsap-reveal relative overflow-hidden"
                         style="box-shadow: var(--shadow-clay)"
                     >
-                        <!-- Connector Decoration Lines (01 Interactive Coordination) -->
                         <div class="connector-line" style="top: 25%; left: 0; width: 60%"></div>
                         <div class="connector-line" style="top: 60%; right: 0; width: 40%; animation-delay: 1.5s"></div>
-
-                        <!-- Background Pattern Grid -->
                         <div
                             class="absolute inset-0 pointer-events-none opacity-[0.03]"
                             style="
@@ -743,7 +673,6 @@
                                 background-size: 20px 20px;
                             "
                         ></div>
-
                         <div class="relative z-10 w-full md:w-5/6">
                             <span class="mono-label block mb-4">01 · HUB KOORDINASI</span>
                             <h2 class="font-extrabold text-2xl tracking-tight leading-snug mb-4 text-slate-900">
@@ -779,15 +708,12 @@
                             @endauth
                         </div>
                     </article>
-
-                    <!-- Tile 2 (1x2): Laporan Harian Siswa (Glassmorphism & Live Typing Effect) -->
                     <article class="card-bento span-1x2 tint-cyan gsap-reveal" id="portal-siswa">
                         <div>
                             <span class="mono-label block mb-4">02 · AKTIVITAS SISWA</span>
                             <h2 class="font-bold text-xl tracking-tight leading-snug mb-6">
                                 Pencacatan Laporan Harian
                             </h2>
-
                             <div class="space-y-4">
                                 @forelse ($laporan_terbaru as $laporan)
                                 <div class="card-glass p-3.5 rounded-xl flex flex-col gap-2">
@@ -817,8 +743,6 @@
                             </span>
                         </div>
                     </article>
-
-                    <!-- Tile 3 (1x1): Live Stats (Radial Progress Illustration) -->
                     <article class="card-bento span-1x1 tint-coral gsap-reveal flex flex-col justify-between">
                         <div>
                             <span class="mono-label block mb-2">03 · STATISTIK AKTIF</span>
@@ -833,7 +757,6 @@
                                 >
                                 <span class="text-xs font-bold text-slate-600 block mt-1">Siswa Tersebar</span>
                             </div>
-                            <!-- Radial Progress Ring Visualizer -->
                             <div class="radial-stat">
                                 <svg width="60" height="60" viewBox="0 0 60 60">
                                     <circle class="radial-circle-bg" cx="30" cy="30" r="27" />
@@ -846,18 +769,13 @@
                             <span class="mono-label text-[10px] text-slate-500 block">TKR · MP · DKV · TKJ</span>
                         </div>
                     </article>
-
-                    <!-- Tile 4 (1x1): Mascot (Eye Tracking & Click Speech Interaction) -->
                     <article class="card-bento span-1x1 gsap-reveal flex flex-col justify-between" id="mascot-tile">
                         <div>
                             <span class="mono-label block mb-2">04 · INTERAKSI</span>
                             <h3 class="text-slate-500 text-xs font-semibold">Maskot SI-PKL</h3>
                         </div>
                         <div class="mascot-box">
-                            <!-- Floating Speech Bubble -->
                             <div class="speech-bubble" id="mascot-speech">Hai! Tetap semangat ya!</div>
-
-                            <!-- Mascot Face with eyes following mouse -->
                             <div class="mascot-face" id="mascot-face-interactive">
                                 <div class="mascot-eyes">
                                     <div class="mascot-eye">
@@ -876,8 +794,6 @@
                             >
                         </div>
                     </article>
-
-                    <!-- Tile 5 (2x1): Guru Pembimbing (Interactive Touch Swipe Approval Demo) -->
                     <article
                         class="card-bento span-2x1 tint-cyan gsap-reveal flex flex-col justify-between"
                         id="portal-guru"
@@ -889,16 +805,11 @@
                             </h2>
                             <p class="text-slate-500 text-[11px] leading-relaxed max-w-md">Guru memonitor keaslian aktivitas kerja lapangan seluruh jurusan secara langsung.</p>
                         </div>
-
-                        <!-- Swipe Card simulator -->
                         <div
                             class="swipe-card-container bg-slate-100/60 rounded-2xl border border-slate-200/60 p-1 relative overflow-hidden flex items-center justify-center"
                         >
-                            <!-- Swipe Action overlay text indicators -->
                             <div class="swipe-action-indicator swipe-action-left">Revisi ✗</div>
                             <div class="swipe-action-indicator swipe-action-right">Setuju ✓</div>
-
-                            <!-- Current draggable log card -->
                             <div
                                 id="interactive-swipe-card"
                                 class="swipe-card absolute inset-x-2 bg-white p-3 rounded-xl border border-slate-200 shadow-sm flex items-center justify-between z-20"
@@ -928,15 +839,12 @@
                             </div>
                         </div>
                     </article>
-
-                    <!-- Tile 6 (1x1): Sidang / Evaluasi (Clay Calendar Countdown) -->
                     <article class="card-bento span-1x1 tint-pear gsap-reveal flex flex-col justify-between">
                         <div>
                             <span class="mono-label block mb-2">06 · EVALUASI</span>
                             <h3 class="text-slate-800 font-bold text-sm">Sidang Laporan</h3>
                         </div>
                         @if (isset($jadwal_sidang_terbaru) && $jadwal_sidang_terbaru)
-                        <!-- Mini Claymorphic Calendar Block -->
                         <div
                             class="bg-white/80 p-2.5 rounded-xl border border-slate-200 shadow-sm my-auto flex gap-3 items-center"
                         >
@@ -967,29 +875,22 @@
                         </div>
                         @endif
                     </article>
-
-                    <!-- Tile 7 (1x1): E-Sertifikat (3D Tilt Holographic glare) -->
                     <article class="card-bento span-1x1 tint-coral gsap-reveal flex flex-col justify-between">
                         <div>
                             <span class="mono-label block mb-2">07 · KELULUSAN</span>
                             <h3 class="text-slate-800 font-bold text-sm">Dokumentasi Resmi</h3>
                         </div>
-
-                        <!-- 3D Holographic Glare certificate container -->
                         <div
                             id="holographic-cert"
                             class="certificate-card p-3 flex flex-col items-center justify-center text-center aspect-[4/3] w-full mt-1"
                         >
                             <div class="certificate-hologram" id="cert-glare"></div>
-
-                            <!-- Gold Ribbon Icon -->
                             <svg class="w-7 h-7 text-amber-500 mb-1" fill="currentColor" viewBox="0 0 24 24">
                                 <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H7c0-2.76 2.24-5 5-5s5 2.24 5 5c0 1.04-.42 1.99-1.07 2.75z" />
                             </svg>
                             <span class="text-[10px] font-extrabold text-slate-800">E-Sertifikat Digital</span>
                             <span class="text-[8px] text-slate-400 font-mono mt-0.5">ID: CERT-MANDIRI-01</span>
                         </div>
-
                         <div class="pt-2">
                             <a
                                 href="{{ route('login') }}"
@@ -1000,8 +901,6 @@
                             </a>
                         </div>
                     </article>
-
-                    <!-- Tile 8 (2x1): Industri Kemitraan (Infinite Logo Marquee) -->
                     <article
                         class="card-bento span-2x1 gsap-reveal flex flex-col justify-between"
                         id="portal-mitra"
@@ -1012,8 +911,6 @@
                             <h2 class="font-bold text-lg tracking-tight leading-snug mb-1">Kemitraan Aktif PKL</h2>
                             <p class="text-slate-500 text-xs leading-relaxed max-w-md">Kemitraan resmi dengan dunia usaha & industri (DUDI) untuk seluruh kompetensi keahlian.</p>
                         </div>
-
-                        <!-- Infinite Loop marquee tracks representing real mitra -->
                         <div class="marquee-logo-container">
                             <div class="marquee-logo-track animate-marquee">
                                 @foreach ($mitra_list as $mitra)
@@ -1021,7 +918,6 @@
                                     {{ $mitra->nama_instansi }}
                                 </div>
                                 @endforeach
-                                {{-- Duplicate for seamless infinite loop --}}
                                 @foreach ($mitra_list as $mitra)
                                 <div class="bg-white/80 py-2 px-3.5 rounded-xl border border-slate-200/80 shadow-sm text-center font-bold text-[9px] text-slate-700">
                                     {{ $mitra->nama_instansi }}
@@ -1033,8 +929,6 @@
                 </div>
             </section>
         </main>
-
-        <!-- Footer: Premium Structured Footer (Cohesive Light Theme) -->
         <footer
             class="border-t"
             style="
@@ -1045,7 +939,6 @@
             aria-label="Footer"
         >
             <div class="max-w-7xl mx-auto px-6 py-12 md:py-16 grid grid-cols-1 md:grid-cols-4 gap-8 md:gap-12">
-                <!-- Col 1: Logo & School Info -->
                 <div class="col-span-1 md:col-span-2 space-y-4">
                     <div class="flex items-center gap-3">
                         <img src="{{ asset('images/logosmk.png') }}" alt="Logo" class="w-12 h-12 object-contain" />
@@ -1067,8 +960,6 @@
                         style="color: var(--color-ink-muted)"
                     >Jl. Raya Panongan No.01, Kec. Panongan, Kabupaten Tangerang, Banten. Portal digital monitoring & verifikasi Praktik Kerja Lapangan (PKL) siswa.</p>
                 </div>
-
-                <!-- Col 2: Kompetensi Keahlian -->
                 <div class="space-y-3">
                     <h5
                         class="text-[10px] font-extrabold tracking-widest uppercase font-mono"
@@ -1099,8 +990,6 @@
                         </li>
                     </ul>
                 </div>
-
-                <!-- Col 3: Hubungi Hubin -->
                 <div class="space-y-3">
                     <h5
                         class="text-[10px] font-extrabold tracking-widest uppercase font-mono"
@@ -1134,8 +1023,6 @@
                     </ul>
                 </div>
             </div>
-
-            <!-- Bottom Bar -->
             <div
                 class="border-t py-6 px-6"
                 style="border-color: var(--color-border); background-color: var(--color-paper-3)"
@@ -1152,8 +1039,6 @@
                 </div>
             </div>
         </footer>
-
-        <!-- Staggered Entry Reveals -->
         <script>
             document.addEventListener('DOMContentLoaded', () => {
                 const nav = document.getElementById('nav-hum');
@@ -1168,7 +1053,6 @@
                     },
                     { passive: true },
                 );
-
                 if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
                     gsap.set('.gsap-reveal', { opacity: 1, y: 0 });
                 } else {
@@ -1178,20 +1062,17 @@
                         { opacity: 1, y: 0, duration: 0.8, ease: 'power2.out', stagger: 0.1 },
                     );
                 }
-
                 const counters = document.querySelectorAll('.stat-count');
                 const countUp = (el) => {
                     const target = parseInt(el.getAttribute('data-target'), 10);
                     let current = 0;
                     const duration = 1200; // ms
                     const startTime = performance.now();
-
                     const update = (now) => {
                         const progress = Math.min((now - startTime) / duration, 1);
                         const ease = 1 - Math.pow(2, -10 * progress); // easeOutExpo
                         const val = Math.floor(ease * target);
                         el.textContent = val;
-
                         if (progress < 1) {
                             requestAnimationFrame(update);
                         } else {
@@ -1205,7 +1086,6 @@
                     };
                     requestAnimationFrame(update);
                 };
-
                 const obs = new IntersectionObserver(
                     (entries) => {
                         entries.forEach((e) => {
@@ -1217,31 +1097,24 @@
                     },
                     { threshold: 0.2 },
                 );
-
                 counters.forEach((c) => obs.observe(c));
-
                 document.addEventListener('click', (e) => {
                     const btn = e.target.closest('.btn, .btn-star');
                     if (btn) {
                         const rect = btn.getBoundingClientRect();
                         const star = document.createElement('div');
                         star.className = 'star-burst';
-
                         const x = e.clientX - rect.left;
                         const y = e.clientY - rect.top;
-
                         star.style.left = `${x}px`;
                         star.style.top = `${y}px`;
-
                         btn.style.position = btn.style.position || 'relative';
                         btn.appendChild(star);
-
                         setTimeout(() => {
                             star.remove();
                         }, 450);
                     }
                 });
-
                 const typingLog = document.getElementById('autotyping-log');
                 if (typingLog) {
                     const texts = [
@@ -1253,7 +1126,6 @@
                     let textIdx = 0;
                     let charIdx = 0;
                     let isDeleting = false;
-
                     function type() {
                         const currentText = texts[textIdx];
                         if (isDeleting) {
@@ -1263,9 +1135,7 @@
                             typingLog.textContent = currentText.substring(0, charIdx + 1);
                             charIdx++;
                         }
-
                         let delay = isDeleting ? 25 : 55;
-
                         if (!isDeleting && charIdx === currentText.length) {
                             delay = 2200; // Pause at end of text
                             isDeleting = true;
@@ -1274,12 +1144,10 @@
                             textIdx = (textIdx + 1) % texts.length;
                             delay = 600; // Pause before starting next text
                         }
-
                         setTimeout(type, delay);
                     }
                     setTimeout(type, 1000);
                 }
-
                 const circle = document.getElementById('radial-progress-circle');
                 if (circle) {
                     const progressObserver = new IntersectionObserver(
@@ -1295,30 +1163,23 @@
                     );
                     progressObserver.observe(circle.closest('.card-bento'));
                 }
-
                 const mascotFace = document.getElementById('mascot-face-interactive');
                 const speechBubble = document.getElementById('mascot-speech');
                 const pupilLeft = document.getElementById('pupil-left');
                 const pupilRight = document.getElementById('pupil-right');
                 const mascotTile = document.getElementById('mascot-tile');
-
                 if (mascotFace && pupilLeft && pupilRight) {
                     document.addEventListener('mousemove', (e) => {
                         const rect = mascotFace.getBoundingClientRect();
                         const faceX = rect.left + rect.width / 2;
                         const faceY = rect.top + rect.height / 2;
-
                         const angle = Math.atan2(e.clientY - faceY, e.clientX - faceX);
-
                         const distance = Math.min(4, Math.hypot(e.clientX - faceX, e.clientY - faceY) / 30);
-
                         const dx = Math.cos(angle) * distance;
                         const dy = Math.sin(angle) * distance;
-
                         pupilLeft.style.transform = `translate(${dx}px, ${dy}px)`;
                         pupilRight.style.transform = `translate(${dx}px, ${dy}px)`;
                     });
-
                     const quotes = [
                         'Sudahkah kamu mengisi laporan harian hari ini?',
                         'Aktivitas magang terpantau dengan aman!',
@@ -1328,25 +1189,21 @@
                         'Butuh bantuan? Silakan login terlebih dahulu.',
                     ];
                     let bubbleTimeout;
-
                     mascotFace.addEventListener('click', () => {
                         const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
                         speechBubble.textContent = randomQuote;
                         speechBubble.classList.add('is-visible');
-
                         const rect = mascotFace.getBoundingClientRect();
                         const cardRect = mascotTile.getBoundingClientRect();
                         const x = rect.left - cardRect.left + rect.width / 2;
                         const y = rect.top - cardRect.top + rect.height / 2;
                         createMascotParticles(x, y, mascotTile);
-
                         clearTimeout(bubbleTimeout);
                         bubbleTimeout = setTimeout(() => {
                             speechBubble.classList.remove('is-visible');
                         }, 2500);
                     });
                 }
-
                 function createMascotParticles(x, y, container) {
                     for (let i = 0; i < 8; i++) {
                         const p = document.createElement('div');
@@ -1359,16 +1216,13 @@
                         p.style.left = `${x}px`;
                         p.style.top = `${y}px`;
                         container.appendChild(p);
-
                         const angle = Math.random() * Math.PI * 2;
                         const speed = 2 + Math.random() * 4;
                         const dx = Math.cos(angle) * speed;
                         const dy = Math.sin(angle) * speed;
-
                         let curX = x;
                         let curY = y;
                         let opacity = 1;
-
                         const anim = () => {
                             curX += dx;
                             curY += dy;
@@ -1385,7 +1239,6 @@
                         requestAnimationFrame(anim);
                     }
                 }
-
                 const swipeCard = document.getElementById('interactive-swipe-card');
                 const studentName = document.getElementById('swipe-student-name');
                 const studentLog = document.getElementById('swipe-student-log');
@@ -1394,7 +1247,6 @@
                 const swipeContainer = swipeCard ? swipeCard.closest('.swipe-card-container') : null;
                 const indicatorLeft = swipeContainer ? swipeContainer.querySelector('.swipe-action-left') : null;
                 const indicatorRight = swipeContainer ? swipeContainer.querySelector('.swipe-action-right') : null;
-
                 if (swipeCard && swipeContainer) {
                     const students = [
                         { name: 'Ahmad Rifai (TKR)', log: 'Toyota Astra Motor · Tune-up mesin & kelistrikan bodi' },
@@ -1406,24 +1258,20 @@
                         { name: 'Budi Santoso (TKJ)', log: 'Biznet Networks · Instalasi kabel FO & setup router core' },
                     ];
                     let currentStudentIdx = 0;
-
                     let startX = 0;
                     let currentX = 0;
                     let isDragging = false;
-
                     swipeCard.addEventListener('mousedown', (e) => {
                         if (e.target.closest('button')) return;
                         isDragging = true;
                         startX = e.clientX;
                         swipeCard.style.transition = 'none';
                     });
-
                     document.addEventListener('mousemove', (e) => {
                         if (!isDragging) return;
                         currentX = e.clientX - startX;
                         const dragOffset = currentX * 0.6;
                         swipeCard.style.transform = `translateX(${dragOffset}px) rotate(${dragOffset * 0.08}deg)`;
-
                         if (dragOffset > 0) {
                             if (indicatorRight) indicatorRight.style.opacity = Math.min(1, dragOffset / 50);
                             if (indicatorLeft) indicatorLeft.style.opacity = 0;
@@ -1432,7 +1280,6 @@
                             if (indicatorRight) indicatorRight.style.opacity = 0;
                         }
                     });
-
                     document.addEventListener('mouseup', () => {
                         if (!isDragging) return;
                         isDragging = false;
@@ -1445,14 +1292,12 @@
                             resetCard();
                         }
                     });
-
                     swipeCard.addEventListener('touchstart', (e) => {
                         if (e.target.closest('button')) return;
                         isDragging = true;
                         startX = e.touches[0].clientX;
                         swipeCard.style.transition = 'none';
                     });
-
                     swipeCard.addEventListener('touchmove', (e) => {
                         if (!isDragging) return;
                         currentX = e.touches[0].clientX - startX;
@@ -1466,7 +1311,6 @@
                             if (indicatorRight) indicatorRight.style.opacity = 0;
                         }
                     });
-
                     swipeCard.addEventListener('touchend', () => {
                         if (!isDragging) return;
                         isDragging = false;
@@ -1479,7 +1323,6 @@
                             resetCard();
                         }
                     });
-
                     btnSetujui.addEventListener('click', (e) => {
                         e.stopPropagation();
                         triggerAction(true);
@@ -1488,7 +1331,6 @@
                         e.stopPropagation();
                         triggerAction(false);
                     });
-
                     function resetCard() {
                         swipeCard.style.transition = 'transform 300ms var(--ease-spring)';
                         swipeCard.style.transform = 'none';
@@ -1496,34 +1338,27 @@
                         if (indicatorRight) indicatorRight.style.opacity = 0;
                         currentX = 0;
                     }
-
                     function triggerAction(isApproved) {
                         swipeCard.style.transition = 'transform 300ms ease-in, opacity 300ms';
                         swipeCard.style.transform = `translateX(${isApproved ? 220 : -220}px) rotate(${isApproved ? 15 : -15}deg)`;
                         swipeCard.style.opacity = 0;
                         if (indicatorLeft) indicatorLeft.style.opacity = 0;
                         if (indicatorRight) indicatorRight.style.opacity = 0;
-
                         setTimeout(() => {
                             currentStudentIdx = (currentStudentIdx + 1) % students.length;
                             const nextStudent = students[currentStudentIdx];
-
                             studentName.textContent = nextStudent.name;
                             studentLog.textContent = nextStudent.log;
-
                             swipeCard.style.transition = 'none';
                             swipeCard.style.transform = `scale(0.9) translateY(10px)`;
                             swipeCard.style.opacity = 0;
-
                             swipeCard.offsetHeight; // force redraw
-
                             swipeCard.style.transition = 'transform 400ms var(--ease-spring), opacity 300ms';
                             swipeCard.style.transform = 'none';
                             swipeCard.style.opacity = 1;
                         }, 350);
                     }
                 }
-
                 const sidangRoom = document.getElementById('sidang-room');
                 if (sidangRoom) {
                     const schedules = [
@@ -1538,11 +1373,9 @@
                         sidangRoom.style.opacity = 0;
                         const timeEl = document.getElementById('sidang-time');
                         if (timeEl) timeEl.style.opacity = 0;
-
                         setTimeout(() => {
                             sidangRoom.textContent = schedules[scheduleIdx].room;
                             if (timeEl) timeEl.textContent = schedules[scheduleIdx].time;
-
                             sidangRoom.style.transition = 'opacity 300ms';
                             sidangRoom.style.opacity = 1;
                             if (timeEl) {
@@ -1552,7 +1385,6 @@
                         }, 300);
                     }, 4000);
                 }
-
                 const certContainer = document.getElementById('holographic-cert');
                 const certGlare = document.getElementById('cert-glare');
                 if (certContainer && certGlare) {
@@ -1560,42 +1392,33 @@
                         const rect = certContainer.getBoundingClientRect();
                         const x = e.clientX - rect.left;
                         const y = e.clientY - rect.top;
-
                         const px = x / rect.width - 0.5;
                         const py = y / rect.height - 0.5;
-
                         const rx = -py * 24;
                         const ry = px * 24;
-
                         certContainer.style.transform = `rotateX(${rx}deg) rotateY(${ry}deg) scale(1.03)`;
-
                         const percentageX = (x / rect.width) * 100;
                         const percentageY = (y / rect.height) * 100;
                         certGlare.style.backgroundPosition = `${percentageX}% ${percentageY}%`;
                     });
-
                     certContainer.addEventListener('mouseleave', () => {
                         certContainer.style.transform = 'none';
                         certGlare.style.backgroundPosition = '0% 0%';
                     });
                 }
-
                 const sliderTrack = document.getElementById('hero-slider-track');
                 const btnPrev = document.getElementById('slider-prev');
                 const btnNext = document.getElementById('slider-next');
                 const sliderDots = document.querySelectorAll('.slider-dot');
-
                 if (sliderTrack && btnPrev && btnNext) {
                     let slideIdx = 0;
                     const totalSlides = 2;
                     let slideStartX = 0;
                     let slideCurrentX = 0;
                     let isSlideDragging = false;
-
                     function updateSlider() {
                         sliderTrack.style.transition = 'transform 500ms cubic-bezier(0.25, 1, 0.5, 1)';
                         sliderTrack.style.transform = `translateX(-${slideIdx * 100}%)`;
-
                         sliderDots.forEach((dot, idx) => {
                             if (idx === slideIdx) {
                                 dot.classList.add('is-active');
@@ -1604,41 +1427,34 @@
                             }
                         });
                     }
-
                     btnNext.addEventListener('click', () => {
                         slideIdx = (slideIdx + 1) % totalSlides;
                         updateSlider();
                     });
-
                     btnPrev.addEventListener('click', () => {
                         slideIdx = (slideIdx - 1 + totalSlides) % totalSlides;
                         updateSlider();
                     });
-
                     sliderDots.forEach((dot) => {
                         dot.addEventListener('click', () => {
                             slideIdx = parseInt(dot.getAttribute('data-index'), 10);
                             updateSlider();
                         });
                     });
-
                     sliderTrack.addEventListener('mousedown', (e) => {
                         isSlideDragging = true;
                         slideStartX = e.clientX;
                         sliderTrack.style.transition = 'none';
                     });
-
                     document.addEventListener('mousemove', (e) => {
                         if (!isSlideDragging) return;
                         slideCurrentX = e.clientX - slideStartX;
                         const offset = -slideIdx * sliderTrack.clientWidth + slideCurrentX;
                         sliderTrack.style.transform = `translateX(${offset}px)`;
                     });
-
                     document.addEventListener('mouseup', () => {
                         if (!isSlideDragging) return;
                         isSlideDragging = false;
-
                         const threshold = sliderTrack.clientWidth / 6;
                         if (slideCurrentX < -threshold) {
                             slideIdx = Math.min(totalSlides - 1, slideIdx + 1);
@@ -1648,24 +1464,20 @@
                         updateSlider();
                         slideCurrentX = 0;
                     });
-
                     sliderTrack.addEventListener('touchstart', (e) => {
                         isSlideDragging = true;
                         slideStartX = e.touches[0].clientX;
                         sliderTrack.style.transition = 'none';
                     });
-
                     sliderTrack.addEventListener('touchmove', (e) => {
                         if (!isSlideDragging) return;
                         slideCurrentX = e.touches[0].clientX - slideStartX;
                         const offset = -slideIdx * sliderTrack.clientWidth + slideCurrentX;
                         sliderTrack.style.transform = `translateX(${offset}px)`;
                     });
-
                     sliderTrack.addEventListener('touchend', () => {
                         if (!isSlideDragging) return;
                         isSlideDragging = false;
-
                         const threshold = sliderTrack.clientWidth / 6;
                         if (slideCurrentX < -threshold) {
                             slideIdx = Math.min(totalSlides - 1, slideIdx + 1);
@@ -1675,12 +1487,10 @@
                         updateSlider();
                         slideCurrentX = 0;
                     });
-
                     let autoSlideTimer = setInterval(() => {
                         slideIdx = (slideIdx + 1) % totalSlides;
                         updateSlider();
                     }, 8000);
-
                     const resetAutoSlide = () => {
                         clearInterval(autoSlideTimer);
                         autoSlideTimer = setInterval(() => {
@@ -1688,7 +1498,6 @@
                             updateSlider();
                         }, 8000);
                     };
-
                     btnPrev.addEventListener('click', resetAutoSlide);
                     btnNext.addEventListener('click', resetAutoSlide);
                     sliderDots.forEach((d) => d.addEventListener('click', resetAutoSlide));

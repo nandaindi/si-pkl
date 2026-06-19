@@ -8,6 +8,7 @@ use App\Models\Siswa;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
+use App\Models\Guru;
 
 class SiswaController extends Controller
 {
@@ -27,7 +28,12 @@ class SiswaController extends Controller
 
     public function create()
     {
-        return view('dashboard.admin.siswa.create');
+        $pembimbings = Guru::whereHas('user', function ($q) {
+            $q->whereHas('roles', function ($q2) {
+                $q2->where('name', 'pembimbing');
+            });
+        })->with('user')->get();
+        return view('dashboard.admin.siswa.create', compact('pembimbings'));
     }
 
     public function store(Request $request)
@@ -39,6 +45,7 @@ class SiswaController extends Controller
             'nisn' => 'required|string|unique:siswas',
             'kelas' => 'required|string|max:255',
             'jurusan' => 'required|string|max:255',
+            'pembimbing_id' => 'nullable|exists:gurus,id',
         ]);
 
         DB::transaction(function () use ($request) {
@@ -54,6 +61,7 @@ class SiswaController extends Controller
                 'nisn' => $request->nisn,
                 'kelas' => $request->kelas,
                 'jurusan' => $request->jurusan,
+                'pembimbing_id' => $request->pembimbing_id,
             ]);
         });
 
@@ -62,7 +70,12 @@ class SiswaController extends Controller
 
     public function edit(Siswa $siswa)
     {
-        return view('dashboard.admin.siswa.edit', compact('siswa'));
+        $pembimbings = Guru::whereHas('user', function ($q) {
+            $q->whereHas('roles', function ($q2) {
+                $q2->where('name', 'pembimbing');
+            });
+        })->with('user')->get();
+        return view('dashboard.admin.siswa.edit', compact('siswa', 'pembimbings'));
     }
 
     public function update(Request $request, Siswa $siswa)
@@ -74,6 +87,7 @@ class SiswaController extends Controller
             'nisn' => 'required|string|unique:siswas,nisn,'.$siswa->id,
             'kelas' => 'required|string|max:255',
             'jurusan' => 'required|string|max:255',
+            'pembimbing_id' => 'nullable|exists:gurus,id',
         ]);
 
         DB::transaction(function () use ($request, $siswa) {
@@ -90,6 +104,7 @@ class SiswaController extends Controller
                 'nisn' => $request->nisn,
                 'kelas' => $request->kelas,
                 'jurusan' => $request->jurusan,
+                'pembimbing_id' => $request->pembimbing_id,
             ]);
         });
 

@@ -52,6 +52,16 @@ class NilaiController extends Controller
             ],
         );
 
+        $siswa = \App\Models\Siswa::find($request->siswa_id);
+        if ($siswa && $siswa->user) {
+            $siswa->user->notify(new \App\Notifications\PklNotification(
+                'Nilai Bimbingan Masuk',
+                "Guru Pembimbing telah memasukkan Nilai Bimbingan PKL Anda.",
+                '#',
+                'award'
+            ));
+        }
+
         return redirect()->route('pembimbing.nilai.index')->with('success', 'Nilai pembimbing berhasil disimpan.');
     }
 }

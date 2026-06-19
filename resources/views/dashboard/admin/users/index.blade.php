@@ -1,5 +1,4 @@
 @extends ('layouts.app')
-
 @section ('content')
     @section ('header')
         <h2 class="font-semibold text-xl text-textMain leading-tight">{{ __('User Management') }}</h2>
@@ -13,7 +12,6 @@
                     <h3 class="text-lg font-medium text-textMain">Daftar Pengguna</h3>
                     <x-primary-button> + Tambah Pengguna </x-primary-button>
                 </div>
-
                 <div class="overflow-x-auto">
                     <table class="w-full text-left border-collapse">
                         <thead>
@@ -52,7 +50,6 @@
                         </tbody>
                     </table>
                 </div>
-
                 <div class="mt-4">{{ $users->links() }}</div>
             </div>
         </div>

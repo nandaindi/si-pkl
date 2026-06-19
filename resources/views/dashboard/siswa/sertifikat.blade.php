@@ -1,5 +1,4 @@
 @extends ('layouts.app')
-
 @section ('content')
     @section ('header')
         <h2 class="font-semibold text-xl text-slate-800 leading-tight">{{ __('Sertifikat PKL') }}</h2>
@@ -10,9 +9,7 @@
                 <h2 class="text-2xl font-bold text-slate-900 font-display">Unduh Sertifikat PKL</h2>
                 <p class="text-slate-500 text-sm mt-1">Sertifikat resmi tanda kelulusan magang industri.</p>
             </div>
-
             @if ($sertifikat)
-                <!-- Certificate Card -->
                 <div
                     class="bg-white p-8 rounded-xl border border-slate-200 relative overflow-hidden text-center"
                 >
@@ -25,7 +22,6 @@
                         class="inline-block mt-1 px-4 py-1.5 bg-slate-100 text-slate-800 font-bold text-sm rounded-xl font-label"
                         >{{ $sertifikat->nomor_sertifikat }}</span
                     >
-
                     <div class="mt-8 pt-6 border-t border-slate-100">
                         <a
                             href="{{ route('sertifikat.cetak', $sertifikat->id) }}"
@@ -38,7 +34,6 @@
                     </div>
                 </div>
             @else
-                <!-- Locked Card -->
                 <div
                     class="bg-white p-8 rounded-xl border border-slate-200 relative overflow-hidden text-center"
                 >

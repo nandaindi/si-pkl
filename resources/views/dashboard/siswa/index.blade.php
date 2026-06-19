@@ -1,5 +1,4 @@
 @extends ('layouts.app')
-
 @section ('content')
     @section ('header')
         <h2 class="font-semibold text-xl text-slate-800 leading-tight">{{ __('Dashboard Siswa') }}</h2>
@@ -7,7 +6,6 @@
     <div class="py-6">
         <div class="max-w-7xl mx-auto">
             @if(isset($belum_isi_laporan_hari_ini) && $belum_isi_laporan_hari_ini)
-                <!-- Alert Banner -->
                 <div class="mb-6 bg-rose-50 border border-rose-200 rounded-xl p-5 flex flex-col sm:flex-row items-start sm:items-center gap-4 shadow-sm">
                     <div class="w-12 h-12 rounded-full bg-white flex items-center justify-center shadow-sm shrink-0 border border-rose-100">
                         <svg class="w-6 h-6 text-rose-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
@@ -21,10 +19,7 @@
                     </a>
                 </div>
             @endif
-
-            <!-- Bento Grid Layout -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <!-- Welcome Banner (Col Span 2) -->
                 <div
                     class="md:col-span-2 bg-white border border-slate-300 rounded-xl p-6 flex flex-col justify-between relative overflow-hidden"
                 >
@@ -32,7 +27,6 @@
                         <h2 class="text-3xl font-extrabold text-slate-900 mb-4 tracking-tight font-display">
                             Halo, {{ Auth::user()->name }}
                         </h2>
-
                         @if ($siswa)
                             <div class="mt-6 flex flex-wrap gap-x-8 gap-y-3 border-t border-slate-100 pt-6 text-sm text-slate-600">
                                 <div>
@@ -53,8 +47,6 @@
                         @endif
                     </div>
                 </div>
-
-                <!-- Quick Actions & Download (Col Span 1) -->
                 <div
                     class="bg-white border border-slate-300 rounded-xl p-6 flex flex-col justify-between relative overflow-hidden"
                 >
@@ -69,15 +61,11 @@
                         @endif
                     </div>
                 </div>
-
-                <!-- Bento Row 2: Stats cards -->
-                <!-- 1. PKL Application Status -->
                 <div
                     class="bg-white border border-slate-300 rounded-xl p-6 flex flex-col justify-between relative overflow-hidden"
                 >
                     <div class="mt-8">
                         <span class="text-xs font-semibold text-slate-400 block mb-1">Status Pengajuan PKL</span>
-
                         @if ($pengajuan_pkl)
                             <h4 class="text-xl font-extrabold text-slate-900 tracking-tight mt-1 font-display">
                                 {{ $pengajuan_pkl->tempatPkl->nama_instansi }}
@@ -97,8 +85,6 @@
                         @endif
                     </div>
                 </div>
-
-                <!-- 2. Laporan Harian Count -->
                 <a
                     href="{{ route('siswa.jurnal-harian.index') }}"
                     class="group bg-white hover:bg-slate-50 transition-colors border border-slate-300 rounded-xl p-6 flex flex-col justify-between relative overflow-hidden"
@@ -108,18 +94,15 @@
                         <h4 class="text-5xl font-extrabold text-slate-900 tracking-tight font-label">
                             {{ $laporan_harian_count }} <span class="text-lg text-slate-400 font-normal">Hari</span>
                         </h4>
-                        <p class="text-slate-500 text-xs mt-2 font-medium group-hover:text-blue-700 transition-colors">Tulis & monitoring laporan harian &rarr;</p>
+                        <p class="text-slate-500 text-xs mt-2 font-medium group-hover:text-slate-900 transition-colors">Tulis & monitoring laporan harian &rarr;</p>
                     </div>
                 </a>
-
-                <!-- 3. Exam Schedule -->
                 <a
                     href="{{ route('siswa.jadwal-sidang.index') }}"
                     class="group bg-white hover:bg-slate-50 transition-colors border border-slate-300 rounded-xl p-6 flex flex-col justify-between relative overflow-hidden"
                 >
                     <div class="mt-8">
                         <span class="text-xs font-semibold text-slate-400 block mb-1">Jadwal Sidang Laporan</span>
-
                         @if ($jadwal_sidang)
                             <h4 class="text-lg font-extrabold text-slate-900 tracking-tight mt-1 font-display">
                                 {{

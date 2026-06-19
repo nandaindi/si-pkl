@@ -21,7 +21,7 @@ class SertifikatController extends Controller
                         $q->where('name', 'like', "%{$search}%");
                     });
                 })
-                ->with(['siswa.user', 'siswa.sertifikat', 'siswa.laporanHarians', 'siswa.nilaiPkls', 'siswa.laporanAkhir'])
+                ->with(['siswa.user', 'siswa.sertifikat', 'siswa.laporanHarians', 'siswa.nilaiPkls', 'siswa.laporanAkhirs'])
                 ->get() 
             : collect();
 

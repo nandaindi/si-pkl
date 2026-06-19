@@ -1,12 +1,10 @@
 @extends ('layouts.app')
-
 @section ('content')
     <div class="max-w-4xl mx-auto py-8">
         <div class="mb-8">
             <h2 class="text-2xl font-bold text-slate-900">Edit Data Siswa</h2>
             <p class="text-slate-500 text-sm mt-1">Perbarui akun dan profil siswa.</p>
         </div>
-
         <form
             action="{{ route('admin.siswa.update', $siswa->id) }}"
             method="POST"
@@ -14,7 +12,6 @@
         >
             @csrf
             @method ('PUT')
-
             <h3 class="text-lg font-bold text-slate-800 mb-4 border-b pb-2">Informasi Akun (Login)</h3>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
                 <div>
@@ -24,7 +21,7 @@
                         name="name"
                         value="{{ old('name', $siswa->user->name) }}"
                         required
-                        class="w-full px-4 py-2 border border-slate-300 rounded-xl focus:ring-blue-700 focus:border-blue-700"
+                        class="w-full px-4 py-2 border border-slate-300 rounded-xl focus:border-slate-300"
                     />
                     @error ('name')
                         <span class="text-red-500 text-xs mt-1">{{ $message }}</span>
@@ -37,7 +34,7 @@
                         name="email"
                         value="{{ old('email', $siswa->user->email) }}"
                         required
-                        class="w-full px-4 py-2 border border-slate-300 rounded-xl focus:ring-blue-700 focus:border-blue-700"
+                        class="w-full px-4 py-2 border border-slate-300 rounded-xl focus:border-slate-300"
                     />
                     @error ('email')
                         <span class="text-red-500 text-xs mt-1">{{ $message }}</span>
@@ -54,7 +51,7 @@
                         <input
                             :type="show ? 'text' : 'password'"
                             name="password"
-                            class="w-full px-4 py-2 border border-slate-300 rounded-xl focus:ring-blue-700 focus:border-blue-700 pr-10"
+                            class="w-full px-4 py-2 border border-slate-300 rounded-xl focus:border-slate-300 pr-10"
                             placeholder="Minimal 8 karakter"
                         />
                         <button type="button" @click="show = !show" class="absolute inset-y-0 right-0 pr-3 flex items-center text-slate-400 hover:text-slate-600 focus:outline-none">
@@ -72,7 +69,7 @@
                         <input
                             :type="show ? 'text' : 'password'"
                             name="password_confirmation"
-                            class="w-full px-4 py-2 border border-slate-300 rounded-xl focus:ring-blue-700 focus:border-blue-700 pr-10"
+                            class="w-full px-4 py-2 border border-slate-300 rounded-xl focus:border-slate-300 pr-10"
                             placeholder="Ulangi password"
                         />
                         <button type="button" @click="show = !show" class="absolute inset-y-0 right-0 pr-3 flex items-center text-slate-400 hover:text-slate-600 focus:outline-none">
@@ -82,7 +79,6 @@
                     </div>
                 </div>
             </div>
-
             <h3 class="text-lg font-bold text-slate-800 mb-4 border-b pb-2">Data Profil Siswa</h3>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
                 <div class="md:col-span-2">
@@ -92,9 +88,24 @@
                         name="nisn"
                         value="{{ old('nisn', $siswa->nisn) }}"
                         required
-                        class="w-full px-4 py-2 border border-slate-300 rounded-xl focus:ring-blue-700 focus:border-blue-700"
+                        class="w-full px-4 py-2 border border-slate-300 rounded-xl focus:border-slate-300"
                     />
                     @error ('nisn')
+                        <span class="text-red-500 text-xs mt-1">{{ $message }}</span>
+                    @enderror
+                </div>
+                <div class="md:col-span-2">
+                    <label class="block text-sm font-medium text-slate-700 mb-2">Guru Pembimbing</label>
+                    <select
+                        name="pembimbing_id"
+                        class="w-full px-4 py-2 border border-slate-300 rounded-xl focus:border-slate-300 appearance-none bg-white"
+                    >
+                        <option value="">Belum Ditentukan</option>
+                        @foreach($pembimbings as $guru)
+                            <option value="{{ $guru->id }}" {{ old('pembimbing_id', $siswa->pembimbing_id) == $guru->id ? 'selected' : '' }}>{{ $guru->user->name }}</option>
+                        @endforeach
+                    </select>
+                    @error ('pembimbing_id')
                         <span class="text-red-500 text-xs mt-1">{{ $message }}</span>
                     @enderror
                 </div>
@@ -103,7 +114,7 @@
                     <select
                         name="kelas"
                         required
-                        class="w-full px-4 py-2 border border-slate-300 rounded-xl focus:ring-blue-700 focus:border-blue-700 appearance-none bg-white"
+                        class="w-full px-4 py-2 border border-slate-300 rounded-xl focus:border-slate-300 appearance-none bg-white"
                     >
                         <option value="" disabled>Pilih Kelas</option>
                         <option value="X" {{ old('kelas', $siswa->kelas) == 'X' ? 'selected' : '' }}>X</option>
@@ -119,7 +130,7 @@
                     <select
                         name="jurusan"
                         required
-                        class="w-full px-4 py-2 border border-slate-300 rounded-xl focus:ring-blue-700 focus:border-blue-700 appearance-none bg-white"
+                        class="w-full px-4 py-2 border border-slate-300 rounded-xl focus:border-slate-300 appearance-none bg-white"
                     >
                         <option value="" disabled>Pilih Jurusan</option>
                         <option value="Teknik Kendaraan Ringan" {{ old('jurusan', $siswa->jurusan) == 'Teknik Kendaraan Ringan' ? 'selected' : '' }}>Teknik Kendaraan Ringan</option>
@@ -132,7 +143,6 @@
                     @enderror
                 </div>
             </div>
-
             <div class="flex items-center justify-end gap-4 mt-8 pt-4 border-t border-slate-100">
                 <a
                     href="{{ route('admin.siswa.index') }}"
@@ -141,7 +151,7 @@
                 >
                 <button
                     type="submit"
-                    class="bg-blue-700 hover:bg-blue-800 text-white px-6 py-2.5 rounded-xl text-sm font-bold "
+                    class="bg-slate-900 hover:bg-slate-800 text-white px-6 py-2.5 rounded-xl text-sm font-bold "
                 >
                     Perbarui Data Siswa
                 </button>

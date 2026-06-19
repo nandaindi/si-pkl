@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Siswa extends Model
 {
-    protected $fillable = ['user_id', 'nisn', 'kelas', 'jurusan'];
+    protected $fillable = ['user_id', 'nisn', 'kelas', 'jurusan', 'pembimbing_id'];
 
     public function user()
     {
@@ -41,5 +41,10 @@ class Siswa extends Model
     public function sertifikat()
     {
         return $this->hasOne(Sertifikat::class);
+    }
+
+    public function pembimbing()
+    {
+        return $this->belongsTo(Guru::class, 'pembimbing_id');
     }
 }

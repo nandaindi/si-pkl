@@ -127,6 +127,15 @@ class JurnalHarianController extends Controller
             'status' => 'disetujui',
         ]);
 
+        if ($siswa->pembimbing && $siswa->pembimbing->user) {
+            $siswa->pembimbing->user->notify(new \App\Notifications\PklNotification(
+                'Jurnal Harian Baru',
+                "{$siswa->user->name} telah mengisi jurnal harian untuk tanggal " . \Carbon\Carbon::parse($tanggal_input)->format('d M Y') . ".",
+                route('pembimbing.laporan-harian.show', $siswa->id),
+                'book-open'
+            ));
+        }
+
         return redirect()->route('siswa.jurnal-harian.index')->with('success', 'Jurnal harian berhasil dicatat.');
     }
 

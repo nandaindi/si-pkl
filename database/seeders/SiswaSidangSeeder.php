@@ -27,7 +27,7 @@ class SiswaSidangSeeder extends Seeder
             'nisn' => '0051001001',
             'kelas' => 'XII TKJ 1',
             'jurusan' => 'Teknik Komputer Jaringan',
-            'tempat_pkl_id' => 1, // PT. Gajah Tunggal Tbk.
+            'tempat_pkl_nama' => 'PT. Gajah Tunggal Tbk.',
             'stage' => 'siap_sidang',
             'pkl_start' => '2026-03-01',
         ],
@@ -37,7 +37,7 @@ class SiswaSidangSeeder extends Seeder
             'nisn' => '0051001002',
             'kelas' => 'XII MP 1',
             'jurusan' => 'Manajemen Perkantoran',
-            'tempat_pkl_id' => 3, // PT. Ya Op
+            'tempat_pkl_nama' => 'PT. Ya Op',
             'stage' => 'siap_sidang',
             'pkl_start' => '2026-03-01',
         ],
@@ -47,7 +47,7 @@ class SiswaSidangSeeder extends Seeder
             'nisn' => '0051001003',
             'kelas' => 'XII DKV 1',
             'jurusan' => 'Desain Komunikasi Visual',
-            'tempat_pkl_id' => 4, // PT. Korek
+            'tempat_pkl_nama' => 'PT. Korek',
             'stage' => 'siap_sidang',
             'pkl_start' => '2026-03-01',
         ],
@@ -57,7 +57,7 @@ class SiswaSidangSeeder extends Seeder
             'nisn' => '0051001004',
             'kelas' => 'XII TKR 1',
             'jurusan' => 'Teknik Kendaraan Ringan',
-            'tempat_pkl_id' => 1,
+            'tempat_pkl_nama' => 'PT. Gajah Tunggal Tbk.',
             'stage' => 'siap_sidang',
             'pkl_start' => '2026-03-01',
         ],
@@ -68,7 +68,7 @@ class SiswaSidangSeeder extends Seeder
             'nisn' => '0051001005',
             'kelas' => 'XII TKJ 1',
             'jurusan' => 'Teknik Komputer Jaringan',
-            'tempat_pkl_id' => 3,
+            'tempat_pkl_nama' => 'PT. Ya Op',
             'stage' => 'sudah_sidang',
             'pkl_start' => '2026-02-15',
         ],
@@ -79,7 +79,7 @@ class SiswaSidangSeeder extends Seeder
             'nisn' => '0051001006',
             'kelas' => 'XII MP 1',
             'jurusan' => 'Manajemen Perkantoran',
-            'tempat_pkl_id' => 4,
+            'tempat_pkl_nama' => 'PT. Korek',
             'stage' => 'laporan_selesai',
             'pkl_start' => '2026-03-10',
         ],
@@ -90,7 +90,7 @@ class SiswaSidangSeeder extends Seeder
             'nisn' => '0051001007',
             'kelas' => 'XII DKV 1',
             'jurusan' => 'Desain Komunikasi Visual',
-            'tempat_pkl_id' => 1,
+            'tempat_pkl_nama' => 'PT. Gajah Tunggal Tbk.',
             'stage' => 'pkl_berjalan',
             'pkl_start' => '2026-05-01',
         ],
@@ -176,11 +176,20 @@ class SiswaSidangSeeder extends Seeder
                 'user_id' => $user->id,
                 'kelas' => $data['kelas'],
                 'jurusan' => $data['jurusan'],
+                'pembimbing_id' => $pembimbing->id,
+            ]
+        );
+
+        $tempatPkl = \App\Models\TempatPkl::firstOrCreate(
+            ['nama_instansi' => $data['tempat_pkl_nama']],
+            [
+                'alamat' => 'Alamat ' . $data['tempat_pkl_nama'],
+                'kuota' => 10,
             ]
         );
 
         $pengajuan = PengajuanPkl::firstOrCreate(
-            ['siswa_id' => $siswa->id, 'tempat_pkl_id' => $data['tempat_pkl_id']],
+            ['siswa_id' => $siswa->id, 'tempat_pkl_id' => $tempatPkl->id],
             ['status' => 'disetujui']
         );
         if ($pengajuan->updated_at < Carbon::parse($data['pkl_start'])) {
@@ -191,13 +200,17 @@ class SiswaSidangSeeder extends Seeder
         $templates = $this->kegiatanTemplates[$data['jurusan']] ?? $this->kegiatanTemplates['Teknik Komputer Jaringan'];
 
         $daysCount = match ($data['stage']) {
-            'siap_sidang', 'sudah_sidang' => 30,
-            'laporan_selesai' => 25,
-            'pkl_berjalan' => 10,
+            'siap_sidang', 'sudah_sidang' => 90,
+            'laporan_selesai' => 90,
+            'pkl_berjalan' => 45,
         };
 
-        for ($i = 0; $i < $daysCount; $i++) {
-            $date = $pklStart->copy()->addDays($i);
+        $inserted = 0;
+        $currentDay = 0;
+        while ($inserted < $daysCount) {
+            $date = $pklStart->copy()->addDays($currentDay);
+            $currentDay++;
+            
             if ($date->isWeekend()) {
                 continue;
             }
@@ -208,12 +221,13 @@ class SiswaSidangSeeder extends Seeder
                 [
                     'siswa_id' => $siswa->id,
                     'tanggal' => $date->toDateString(),
-                    'kegiatan' => $kegiatan,
                 ],
                 [
+                    'kegiatan' => $kegiatan,
                     'status' => 'disetujui',
                 ]
             );
+            $inserted++;
         }
 
         if (in_array($data['stage'], ['siap_sidang', 'sudah_sidang', 'laporan_selesai'])) {

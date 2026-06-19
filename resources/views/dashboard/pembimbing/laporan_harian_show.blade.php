@@ -1,5 +1,4 @@
 @extends ('layouts.app')
-
 @section ('content')
     @section ('header')
         <h2 class="font-semibold text-xl text-slate-800 leading-tight">{{ __('Laporan Harian Siswa') }}</h2>
@@ -16,9 +15,6 @@
                 </a>
             </div>
             <div class="mb-8 bg-white p-6 rounded-xl border border-slate-200 flex items-center gap-5">
-                <div class="w-14 h-14 rounded-full bg-blue-50 text-blue-600 border border-blue-100 flex items-center justify-center text-xl font-bold shadow-sm shrink-0">
-                    {{ substr($siswa->user->name, 0, 1) }}
-                </div>
                 <div>
                     <div class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">Riwayat Laporan Siswa</div>
                     <h2 class="text-xl font-bold text-slate-900 font-display">
@@ -29,8 +25,6 @@
                     </div>
                 </div>
             </div>
-
-            <!-- List Table for Daily Reports -->
             <div class="bg-white overflow-hidden sm:rounded-xl border border-slate-200">
                 <div class="overflow-x-auto">
                     <table class="w-full text-left border-collapse">
@@ -63,7 +57,7 @@
                                             <a
                                                 href="{{ asset('storage/' . $harian->bukti_foto) }}"
                                                 target="_blank"
-                                                class="mx-auto block w-20 h-20 rounded-lg overflow-hidden border border-slate-200 hover:border-blue-500 transition-colors"
+                                                class="mx-auto block w-20 h-20 rounded-lg overflow-hidden border border-slate-200 hover:border-slate-300 transition-colors"
                                             >
                                                 <img
                                                     src="{{ asset('storage/' . $harian->bukti_foto) }}"

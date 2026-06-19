@@ -1,19 +1,16 @@
 @extends ('layouts.app')
-
 @section ('content')
     <div class="max-w-4xl mx-auto py-8">
         <div class="mb-8">
             <h2 class="text-2xl font-bold text-slate-900">Tambah Guru Pembimbing</h2>
             <p class="text-slate-500 text-sm mt-1">Buat akun dan lengkapi profil guru pembimbing baru.</p>
         </div>
-
         <form
             action="{{ route('admin.guru-pembimbing.store') }}"
             method="POST"
             class="bg-white p-8 rounded-xl  border border-slate-200"
         >
             @csrf
-
             <h3 class="text-lg font-bold text-slate-800 mb-4 border-b pb-2">Informasi Akun (Login)</h3>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
                 <div>
@@ -23,7 +20,7 @@
                         name="name"
                         value="{{ old('name') }}"
                         required
-                        class="w-full px-4 py-2 border border-slate-300 rounded-xl focus:ring-blue-700 focus:border-blue-700"
+                        class="w-full px-4 py-2 border border-slate-300 rounded-xl focus:border-slate-300"
                         placeholder="Masukkan nama lengkap"
                     />
                     @error ('name')
@@ -37,7 +34,7 @@
                         name="email"
                         value="{{ old('email') }}"
                         required
-                        class="w-full px-4 py-2 border border-slate-300 rounded-xl focus:ring-blue-700 focus:border-blue-700"
+                        class="w-full px-4 py-2 border border-slate-300 rounded-xl focus:border-slate-300"
                         placeholder="guru@pkl.com"
                     />
                     @error ('email')
@@ -51,7 +48,7 @@
                             :type="show ? 'text' : 'password'"
                             name="password"
                             required
-                            class="w-full px-4 py-2 border border-slate-300 rounded-xl focus:ring-blue-700 focus:border-blue-700 pr-10"
+                            class="w-full px-4 py-2 border border-slate-300 rounded-xl focus:border-slate-300 pr-10"
                             placeholder="Minimal 8 karakter"
                         />
                         <button type="button" @click="show = !show" class="absolute inset-y-0 right-0 pr-3 flex items-center text-slate-400 hover:text-slate-600 focus:outline-none">
@@ -70,7 +67,7 @@
                             :type="show ? 'text' : 'password'"
                             name="password_confirmation"
                             required
-                            class="w-full px-4 py-2 border border-slate-300 rounded-xl focus:ring-blue-700 focus:border-blue-700 pr-10"
+                            class="w-full px-4 py-2 border border-slate-300 rounded-xl focus:border-slate-300 pr-10"
                             placeholder="Ulangi password"
                         />
                         <button type="button" @click="show = !show" class="absolute inset-y-0 right-0 pr-3 flex items-center text-slate-400 hover:text-slate-600 focus:outline-none">
@@ -80,7 +77,6 @@
                     </div>
                 </div>
             </div>
-
             <h3 class="text-lg font-bold text-slate-800 mb-4 border-b pb-2">Data Profil Guru</h3>
             <div class="grid grid-cols-1 gap-6 mb-8">
                 <div>
@@ -92,7 +88,7 @@
                         name="nip"
                         value="{{ old('nip') }}"
                         required
-                        class="w-full px-4 py-2 border border-slate-300 rounded-xl focus:ring-blue-700 focus:border-blue-700"
+                        class="w-full px-4 py-2 border border-slate-300 rounded-xl focus:border-slate-300"
                         placeholder="Masukkan NIP"
                     />
                     @error ('nip')
@@ -100,7 +96,6 @@
                     @enderror
                 </div>
             </div>
-
             <div class="flex items-center justify-end gap-4 mt-8 pt-4 border-t border-slate-100">
                 <a
                     href="{{ route('admin.guru-pembimbing.index') }}"
@@ -109,7 +104,7 @@
                 >
                 <button
                     type="submit"
-                    class="bg-blue-700 hover:bg-blue-800 text-white px-6 py-2.5 rounded-xl text-sm font-bold "
+                    class="bg-slate-900 hover:bg-slate-800 text-white px-6 py-2.5 rounded-xl text-sm font-bold "
                 >
                     Simpan Guru Pembimbing
                 </button>

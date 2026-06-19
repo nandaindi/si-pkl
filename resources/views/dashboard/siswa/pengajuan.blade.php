@@ -1,5 +1,4 @@
 @extends ('layouts.app')
-
 @section ('content')
     @section ('header')
         <h2 class="font-semibold text-xl text-slate-800 leading-tight">{{ __('Mengajukan PKL') }}</h2>
@@ -14,20 +13,16 @@
                 @if (!$has_approved && !$pengajuans->contains('status', 'pending'))
                     <a
                         href="{{ route('siswa.pengajuan.create') }}"
-                        class="bg-blue-700 hover:bg-blue-800 text-white px-5 py-2.5 rounded-xl text-sm font-bold flex items-center gap-2 "
+                        class="bg-slate-900 hover:bg-slate-800 text-white px-5 py-2.5 rounded-xl text-sm font-bold flex items-center gap-2 "
                     >
                         <i class="fa-solid fa-plus text-xs"></i>
                         Ajukan Tempat Baru
                     </a>
                 @endif
             </div>
-
-            <!-- Tata Letak Kartu -->
             <div class="grid grid-cols-1 gap-6">
                 @forelse ($pengajuans as $pengajuan)
                     <div class="bg-white border {{ $pengajuan->status === 'disetujui' ? 'border-green-200 shadow-green-100/50' : ($pengajuan->status === 'ditolak' ? 'border-rose-200' : 'border-slate-200') }} rounded-3xl p-8 min-h-[260px] flex flex-col shadow-sm relative overflow-hidden group hover:shadow-md transition-all">
-                        
-                        <!-- Lencana Status Kanan Atas -->
                         <div class="absolute top-8 right-8">
                             @if ($pengajuan->status === 'disetujui')
                                 <span class="px-3 py-1.5 bg-green-50 text-green-700 text-[10px] uppercase font-black tracking-widest rounded-lg border border-green-200/50">Disetujui</span>
@@ -37,8 +32,6 @@
                                 <span class="px-3 py-1.5 bg-amber-50 text-amber-700 text-[10px] uppercase font-black tracking-widest rounded-lg border border-amber-200/50">Menunggu</span>
                             @endif
                         </div>
-
-                        <!-- Konten -->
                         <div class="pr-24">
                             <h3 class="text-xl font-bold text-slate-900 font-display mb-1">{{ $pengajuan->tempatPkl->nama_instansi }}</h3>
                             <div class="flex items-start gap-2.5 text-sm text-slate-500 mb-8 mt-4">
@@ -46,16 +39,12 @@
                                 <span class="leading-relaxed">{{ $pengajuan->tempatPkl->alamat }}</span>
                             </div>
                         </div>
-
-                        <!-- Alasan Penolakan jika ditolak -->
                         @if ($pengajuan->status === 'ditolak' && $pengajuan->alasan_ditolak)
                             <div class="mb-4 bg-rose-50 rounded-xl p-3.5 border border-rose-100/50 text-xs text-rose-700 leading-relaxed">
                                 <strong class="block mb-1 font-bold text-rose-800">Alasan Penolakan:</strong>
                                 {{ $pengajuan->alasan_ditolak }}
                             </div>
                         @endif
-
-                        <!-- Footer -->
                         <div class="pt-6 border-t border-slate-100 flex items-center justify-between mt-auto">
                             <div class="flex items-center gap-2 text-xs text-slate-400 font-medium">
                                 <i class="fa-regular fa-clock"></i>
@@ -72,8 +61,6 @@
                                 </form>
                             @endif
                         </div>
-                        
-                        <!-- Elemen dekoratif untuk status disetujui -->
                         @if ($pengajuan->status === 'disetujui')
                             <div class="absolute -right-8 -bottom-8 w-32 h-32 bg-green-50 rounded-full opacity-50 group-hover:scale-110 transition-transform duration-500 pointer-events-none"></div>
                             <i class="fa-solid fa-circle-check absolute bottom-6 right-6 text-green-500 text-4xl opacity-10 pointer-events-none"></i>

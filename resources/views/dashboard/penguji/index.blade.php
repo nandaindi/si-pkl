@@ -1,14 +1,11 @@
 @extends ('layouts.app')
-
 @section ('content')
     @section ('header')
         <h2 class="font-semibold text-xl text-slate-800 leading-tight">{{ __('Dashboard Guru Penguji') }}</h2>
     @endsection
     <div class="py-6">
         <div class="max-w-7xl mx-auto">
-            <!-- Bento Grid Layout -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <!-- Welcome Banner (Col Span 2) -->
                 <div
                     class="md:col-span-2 bg-white border border-slate-300 rounded-xl p-6 flex flex-col justify-between relative overflow-hidden"
                 >
@@ -16,7 +13,6 @@
                         <h2 class="text-3xl font-extrabold text-slate-900 mb-4 tracking-tight font-display">
                             Halo, {{ Auth::user()->name }}
                         </h2>
-
                         @if ($guru)
                             <div class="mt-6 border-t border-slate-100 pt-6">
                                 <div class="inline-flex flex-col bg-slate-50/70 border border-slate-200/60 rounded-xl px-4 py-3">
@@ -29,8 +25,6 @@
                         @endif
                     </div>
                 </div>
-
-                <!-- Total Scheduled Exams (Col Span 1) -->
                 <div
                     class="bg-white border border-slate-300 rounded-xl p-6 flex flex-col justify-between relative overflow-hidden"
                 >
@@ -44,14 +38,10 @@
                         <p class="text-slate-500 text-xs mt-2 font-medium text-justify">Jumlah siswa yang dijadwalkan untuk diuji oleh Anda pada sidang laporan akhir PKL.</p>
                     </div>
                 </div>
-
-                <!-- Bento Row 2 -->
-                <!-- 1. Upcoming Exams List (Col Span 2) -->
                 <div class="md:col-span-2 bg-white border border-slate-300 rounded-xl p-6 relative overflow-hidden">
                     <span class="text-[11px] font-bold text-slate-400 uppercase tracking-widest block mb-4"
                         >DAFTAR SISWA YANG DIUJI</span
                     >
-
                     <div class="overflow-x-auto">
                         <table class="w-full text-left border-collapse text-xs font-sans">
                             <thead>
@@ -87,8 +77,6 @@
                         </table>
                     </div>
                 </div>
-
-                <!-- 2. Evaluation guide card (Col Span 1) -->
                 <div
                     class="bg-white border border-slate-300 rounded-xl p-6 flex flex-col justify-between relative overflow-hidden"
                 >

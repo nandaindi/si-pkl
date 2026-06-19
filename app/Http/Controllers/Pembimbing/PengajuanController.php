@@ -12,7 +12,10 @@ class PengajuanController extends Controller
     public function index(Request $request)
     {
         $search = $request->input('search');
-        $pengajuans = PengajuanPkl::with(['siswa.user', 'tempatPkl'])
+        $pengajuans = PengajuanPkl::whereHas('siswa', function ($q) {
+                $q->where('pembimbing_id', auth()->user()->guru->id);
+            })
+            ->with(['siswa.user', 'tempatPkl'])
             ->when($search, function ($query, $search) {
                 $query->whereHas('siswa.user', function ($q) use ($search) {
                     $q->where('name', 'like', "%{$search}%");
@@ -55,6 +58,20 @@ class PengajuanController extends Controller
                     'status' => $status,
                     'alasan_ditolak' => $status === 'ditolak' ? $request->alasan_ditolak : null,
                 ]);
+
+                if ($pengajuan->siswa && $pengajuan->siswa->user) {
+                    $msg = $status === 'disetujui' 
+                           ? "Pengajuan PKL di {$tempat->nama_instansi} telah DISETUJUI." 
+                           : "Pengajuan PKL di {$tempat->nama_instansi} DITOLAK.";
+                    $icon = $status === 'disetujui' ? 'check-circle' : 'x-circle';
+                    
+                    $pengajuan->siswa->user->notify(new \App\Notifications\PklNotification(
+                        'Status Pengajuan PKL',
+                        $msg,
+                        route('siswa.pengajuan.index'),
+                        $icon
+                    ));
+                }
             });
         } catch (\Exception $e) {
             return redirect()->route('pembimbing.pengajuan.index')->with('error', $e->getMessage());

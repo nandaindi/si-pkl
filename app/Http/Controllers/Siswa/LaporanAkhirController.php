@@ -65,6 +65,27 @@ class LaporanAkhirController extends Controller
             ]
         );
 
+        // Notify Admins
+        $admins = \App\Models\User::role('admin')->get();
+        foreach ($admins as $admin) {
+            $admin->notify(new \App\Notifications\PklNotification(
+                'Laporan Akhir Diunggah',
+                "{$siswa->user->name} telah mengunggah Laporan Akhir.",
+                route('admin.siswa.index'), // Assuming admin manages it here or just generic link
+                'file-text'
+            ));
+        }
+
+        // Notify Pembimbing
+        if ($siswa->pembimbing && $siswa->pembimbing->user) {
+            $siswa->pembimbing->user->notify(new \App\Notifications\PklNotification(
+                'Laporan Akhir Diunggah',
+                "{$siswa->user->name} telah mengunggah Laporan Akhir menunggu verifikasi.",
+                route('pembimbing.laporan.index'),
+                'file-text'
+            ));
+        }
+
         return redirect()->route('siswa.laporan-akhir.index')->with('success', 'Berkas Laporan Akhir berhasil diunggah. Menunggu persetujuan pembimbing.');
     }
 }
