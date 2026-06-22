@@ -9,7 +9,7 @@
             action="{{ route('admin.tempat-pkl.store') }}"
             method="POST"
             enctype="multipart/form-data"
-            class="bg-white p-8 rounded-xl  border border-slate-200"
+            class="bg-white p-8 rounded-xl  border-2 border-slate-200"
         >
             @csrf
             <h3 class="text-lg font-bold text-slate-800 mb-4 border-b pb-2">Informasi Instansi</h3>
@@ -21,7 +21,7 @@
                         name="nama_instansi"
                         value="{{ old('nama_instansi') }}"
                         required
-                        class="w-full px-4 py-2 border border-slate-300 rounded-xl focus:border-slate-300"
+                        class="w-full px-4 py-2 border border-slate-100 rounded-xl focus:border-slate-300"
                         placeholder="Contoh: PT. Teknologi Nusantara"
                     />
                     @error ('nama_instansi')
@@ -34,7 +34,7 @@
                         name="alamat"
                         rows="3"
                         required
-                        class="w-full px-4 py-2 border border-slate-300 rounded-xl focus:border-slate-300"
+                        class="w-full px-4 py-2 border border-slate-100 rounded-xl focus:border-slate-300"
                         placeholder="Masukkan alamat lengkap instansi"
                         >{{ old('alamat') }}</textarea
                     >
@@ -51,7 +51,7 @@
                         name="gambar"
                         accept="image/*"
                         required
-                        class="w-full px-4 py-2 border border-slate-300 rounded-xl focus:border-slate-300 text-sm file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-slate-50 file:text-slate-900 hover:file:bg-slate-100"
+                        class="w-full px-4 py-2 border border-slate-100 rounded-xl focus:border-slate-300 text-sm file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-slate-50 file:text-slate-900 hover:file:bg-slate-100"
                     />
                     @error ('gambar')
                         <span class="text-red-500 text-xs mt-1">{{ $message }}</span>
@@ -65,7 +65,7 @@
                         value="{{ old('kuota', 0) }}"
                         min="0"
                         required
-                        class="w-full px-4 py-2 border border-slate-300 rounded-xl focus:border-slate-300"
+                        class="w-full px-4 py-2 border border-slate-100 rounded-xl focus:border-slate-300"
                         placeholder="Contoh: 5"
                     />
                     @error ('kuota')

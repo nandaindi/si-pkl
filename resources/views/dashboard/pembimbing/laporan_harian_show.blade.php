@@ -8,13 +8,13 @@
             <div class="mb-6">
                 <a
                     href="{{ route('pembimbing.laporan-harian.index') }}"
-                    class="inline-flex items-center gap-2 text-sm font-bold text-slate-600 hover:text-slate-900 bg-white border border-slate-200 hover:bg-slate-50 px-4 py-2 rounded-xl transition-all shadow-sm"
+                    class="inline-flex items-center gap-2 text-sm font-bold text-slate-600 hover:text-slate-900 bg-white border-2 border-slate-200 hover:bg-slate-50 px-4 py-2 rounded-xl transition-all shadow-sm"
                 >
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
                     Kembali ke Daftar
                 </a>
             </div>
-            <div class="mb-8 bg-white p-6 rounded-xl border border-slate-200 flex items-center gap-5">
+            <div class="mb-8 bg-white p-6 rounded-xl border-2 border-slate-200 flex items-center gap-5">
                 <div>
                     <div class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">Riwayat Laporan Siswa</div>
                     <h2 class="text-xl font-bold text-slate-900 font-display">
@@ -25,7 +25,7 @@
                     </div>
                 </div>
             </div>
-            <div class="bg-white overflow-hidden sm:rounded-xl border border-slate-200">
+            <div class="bg-white overflow-hidden sm:rounded-xl border-2 border-slate-200">
                 <div class="overflow-x-auto">
                     <table class="w-full text-left border-collapse">
                         <thead>
@@ -57,7 +57,7 @@
                                             <a
                                                 href="{{ asset('storage/' . $harian->bukti_foto) }}"
                                                 target="_blank"
-                                                class="mx-auto block w-20 h-20 rounded-lg overflow-hidden border border-slate-200 hover:border-slate-300 transition-colors"
+                                                class="mx-auto block w-20 h-20 rounded-lg overflow-hidden border-2 border-slate-200 hover:border-slate-300 transition-colors"
                                             >
                                                 <img
                                                     src="{{ asset('storage/' . $harian->bukti_foto) }}"

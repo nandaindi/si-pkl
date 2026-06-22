@@ -16,13 +16,14 @@ class NilaiController extends Controller
         $search = $request->input('search');
         $jadwals = $guru
             ? JadwalSidang::where('pembimbing_id', $guru->id)
+                ->whereDoesntHave('siswa.sertifikat')
                 ->when($search, function ($query, $search) {
                     $query->whereHas('siswa.user', function ($q) use ($search) {
                         $q->where('name', 'like', "%{$search}%");
                     });
                 })
                 ->with(['siswa.user', 'siswa.nilaiPkls'])
-                ->get()
+                ->paginate(10)
             : collect();
 
         return view('dashboard.pembimbing.nilai', compact('jadwals'));

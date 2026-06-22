@@ -8,7 +8,7 @@
         <form
             action="{{ route('admin.guru-penguji.store') }}"
             method="POST"
-            class="bg-white p-8 rounded-xl  border border-slate-200"
+            class="bg-white p-8 rounded-xl  border-2 border-slate-200"
         >
             @csrf
             <h3 class="text-lg font-bold text-slate-800 mb-4 border-b pb-2">Informasi Akun (Login)</h3>
@@ -20,7 +20,7 @@
                         name="name"
                         value="{{ old('name') }}"
                         required
-                        class="w-full px-4 py-2 border border-slate-300 rounded-xl focus:border-slate-300"
+                        class="w-full px-4 py-2 border border-slate-100 rounded-xl focus:border-slate-300"
                         placeholder="Masukkan nama lengkap"
                     />
                     @error ('name')
@@ -34,7 +34,7 @@
                         name="email"
                         value="{{ old('email') }}"
                         required
-                        class="w-full px-4 py-2 border border-slate-300 rounded-xl focus:border-slate-300"
+                        class="w-full px-4 py-2 border border-slate-100 rounded-xl focus:border-slate-300"
                         placeholder="penguji@pkl.com"
                     />
                     @error ('email')
@@ -48,7 +48,7 @@
                             :type="show ? 'text' : 'password'"
                             name="password"
                             required
-                            class="w-full px-4 py-2 border border-slate-300 rounded-xl focus:border-slate-300 pr-10"
+                            class="w-full px-4 py-2 border border-slate-100 rounded-xl focus:border-slate-300 pr-10"
                             placeholder="Minimal 8 karakter"
                         />
                         <button type="button" @click="show = !show" class="absolute inset-y-0 right-0 pr-3 flex items-center text-slate-400 hover:text-slate-600 focus:outline-none">
@@ -67,7 +67,7 @@
                             :type="show ? 'text' : 'password'"
                             name="password_confirmation"
                             required
-                            class="w-full px-4 py-2 border border-slate-300 rounded-xl focus:border-slate-300 pr-10"
+                            class="w-full px-4 py-2 border border-slate-100 rounded-xl focus:border-slate-300 pr-10"
                             placeholder="Ulangi password"
                         />
                         <button type="button" @click="show = !show" class="absolute inset-y-0 right-0 pr-3 flex items-center text-slate-400 hover:text-slate-600 focus:outline-none">
@@ -88,7 +88,7 @@
                         name="nip"
                         value="{{ old('nip') }}"
                         required
-                        class="w-full px-4 py-2 border border-slate-300 rounded-xl focus:border-slate-300"
+                        class="w-full px-4 py-2 border border-slate-100 rounded-xl focus:border-slate-300"
                         placeholder="Masukkan NIP"
                     />
                     @error ('nip')

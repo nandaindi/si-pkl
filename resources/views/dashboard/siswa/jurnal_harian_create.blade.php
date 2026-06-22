@@ -2,7 +2,7 @@
 @section ('content')
     @section ('header')
         <div class="flex items-center gap-4">
-            <a href="{{ route('siswa.jurnal-harian.index') }}" class="w-10 h-10 bg-white border border-slate-200 rounded-full flex items-center justify-center text-slate-500 hover:text-slate-900 hover:border-slate-300 hover:bg-slate-50 transition-colors shadow-sm">
+            <a href="{{ route('siswa.jurnal-harian.index') }}" class="w-10 h-10 bg-white border-2 border-slate-200 rounded-full flex items-center justify-center text-slate-500 hover:text-slate-900 hover:border-slate-300 hover:bg-slate-50 transition-colors shadow-sm">
                 <i class="fa-solid fa-arrow-left"></i>
             </a>
             <h2 class="font-semibold text-xl text-slate-800 leading-tight">{{ __('Catat Aktivitas PKL') }}</h2>
@@ -19,7 +19,7 @@
                     @csrf
                     <div>
                         <label class="block text-xs font-bold text-slate-500 mb-2 uppercase tracking-wider font-label">Tanggal Laporan</label>
-                        <div class="w-full px-4 py-3 text-sm bg-slate-50 text-slate-700 rounded-xl border border-slate-200 cursor-not-allowed font-bold flex items-center gap-3">
+                        <div class="w-full px-4 py-3 text-sm bg-slate-50 text-slate-700 rounded-xl border-2 border-slate-200 cursor-not-allowed font-bold flex items-center gap-3">
                             <i class="fa-regular fa-calendar text-slate-400"></i>
                             {{ \Carbon\Carbon::today()->locale('id')->isoFormat('dddd, D MMMM Y') }}
                         </div>
@@ -43,7 +43,7 @@
                         <label class="block text-xs font-bold text-slate-500 mb-2 uppercase tracking-wider font-label">Bukti Foto Kegiatan <span class="text-red-500">*</span></label>
                         <div class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-slate-200 border-dashed rounded-xl bg-slate-50 hover:bg-slate-100 transition-colors relative group">
                             <div class="space-y-2 text-center relative z-10">
-                                <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center mx-auto shadow-sm border border-slate-200 group-hover:border-slate-300 group-hover:text-slate-900 transition-colors">
+                                <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center mx-auto shadow-sm border-2 border-slate-200 group-hover:border-slate-300 group-hover:text-slate-900 transition-colors">
                                     <i class="fa-solid fa-cloud-arrow-up text-xl text-slate-400 group-hover:text-slate-900"></i>
                                 </div>
                                 <div class="flex text-sm text-slate-600 justify-center">
@@ -57,7 +57,7 @@
                                 <p id="file-name" class="text-[11px] font-bold text-slate-900 mt-3 hidden bg-slate-50 px-3 py-1.5 rounded-full border border-blue-100 inline-block"></p>
                                 
                                 <div id="image-preview-container" class="mt-4 hidden">
-                                    <img id="image-preview" class="max-h-48 rounded-lg mx-auto shadow-sm border border-slate-200 object-contain" src="" alt="Preview Gambar">
+                                    <img id="image-preview" class="max-h-48 rounded-lg mx-auto shadow-sm border-2 border-slate-200 object-contain" src="" alt="Preview Gambar">
                                 </div>
                             </div>
                         </div>

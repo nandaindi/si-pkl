@@ -8,7 +8,7 @@
         <form
             action="{{ route('admin.guru-pembimbing.update', $guru->id) }}"
             method="POST"
-            class="bg-white p-8 rounded-xl  border border-slate-200"
+            class="bg-white p-8 rounded-xl  border-2 border-slate-200"
         >
             @csrf
             @method ('PUT')
@@ -21,7 +21,7 @@
                         name="name"
                         value="{{ old('name', $guru->user->name) }}"
                         required
-                        class="w-full px-4 py-2 border border-slate-300 rounded-xl focus:border-slate-300"
+                        class="w-full px-4 py-2 border border-slate-100 rounded-xl focus:border-slate-300"
                     />
                     @error ('name')
                         <span class="text-red-500 text-xs mt-1">{{ $message }}</span>
@@ -34,7 +34,7 @@
                         name="email"
                         value="{{ old('email', $guru->user->email) }}"
                         required
-                        class="w-full px-4 py-2 border border-slate-300 rounded-xl focus:border-slate-300"
+                        class="w-full px-4 py-2 border border-slate-100 rounded-xl focus:border-slate-300"
                     />
                     @error ('email')
                         <span class="text-red-500 text-xs mt-1">{{ $message }}</span>
@@ -51,7 +51,7 @@
                         <input
                             :type="show ? 'text' : 'password'"
                             name="password"
-                            class="w-full px-4 py-2 border border-slate-300 rounded-xl focus:border-slate-300 pr-10"
+                            class="w-full px-4 py-2 border border-slate-100 rounded-xl focus:border-slate-300 pr-10"
                             placeholder="Minimal 8 karakter"
                         />
                         <button type="button" @click="show = !show" class="absolute inset-y-0 right-0 pr-3 flex items-center text-slate-400 hover:text-slate-600 focus:outline-none">
@@ -69,7 +69,7 @@
                         <input
                             :type="show ? 'text' : 'password'"
                             name="password_confirmation"
-                            class="w-full px-4 py-2 border border-slate-300 rounded-xl focus:border-slate-300 pr-10"
+                            class="w-full px-4 py-2 border border-slate-100 rounded-xl focus:border-slate-300 pr-10"
                             placeholder="Ulangi password"
                         />
                         <button type="button" @click="show = !show" class="absolute inset-y-0 right-0 pr-3 flex items-center text-slate-400 hover:text-slate-600 focus:outline-none">
@@ -90,7 +90,7 @@
                         name="nip"
                         value="{{ old('nip', $guru->nip) }}"
                         required
-                        class="w-full px-4 py-2 border border-slate-300 rounded-xl focus:border-slate-300"
+                        class="w-full px-4 py-2 border border-slate-100 rounded-xl focus:border-slate-300"
                         placeholder="Masukkan NIP"
                     />
                     @error ('nip')

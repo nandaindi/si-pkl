@@ -376,7 +376,7 @@
             if (logoElement.tagName === 'IMG') {
                 selectedLogoContainer.innerHTML = `<img src="${logoElement.src}" class="w-full h-full object-cover rounded-lg" />`;
                 selectedLogoContainer.className =
-                    'w-10 h-10 rounded-lg flex-shrink-0 bg-white overflow-hidden border border-slate-200 shadow-sm';
+                    'w-10 h-10 rounded-lg flex-shrink-0 bg-white overflow-hidden border-2 border-slate-200 shadow-sm';
             } else {
                 selectedLogoContainer.innerHTML = `<span class="company-logo-badge w-full h-full flex items-center justify-center text-xs font-bold leading-none">${logoElement.textContent.trim()}</span>`;
                 selectedLogoContainer.className =

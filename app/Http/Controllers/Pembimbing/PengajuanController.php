@@ -23,7 +23,7 @@ class PengajuanController extends Controller
                     $q->where('nama_instansi', 'like', "%{$search}%");
                 });
             })
-            ->latest()->get();
+            ->latest()->paginate(10);
         return view('dashboard.pembimbing.pengajuan', compact('pengajuans'));
     }
 

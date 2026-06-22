@@ -7,17 +7,27 @@
         <div class="max-w-7xl mx-auto">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div
-                    class="md:col-span-2 bg-white border border-slate-300 rounded-xl p-6 flex flex-col justify-between relative overflow-hidden"
+                    class="md:col-span-2 bg-white border border-slate-100 rounded-xl p-6 flex flex-col justify-center relative overflow-hidden"
                 >
                     <div class="relative z-10 w-full">
-                        <h2 class="text-3xl font-extrabold text-slate-900 mb-4 tracking-tight font-display">
+                        <h2 class="text-3xl font-extrabold text-slate-900 tracking-tight font-display">
                             Halo, {{ Auth::user()->name }}
                         </h2>
-                        <p class="text-slate-500 text-sm leading-relaxed mb-8 text-justify">Selamat datang di portal manajemen PKL SMK Mandiri 01 Panongan. Kelola siswa, pembimbing, penguji, dan tempat PKL dengan mudah melalui sistem bento terpusat ini.</p>
+                        <p class="text-slate-500 text-sm mt-2">Selamat datang di Panel Admin.</p>
                     </div>
                 </div>
                 <div
-                    class="bg-white border border-slate-300 rounded-xl p-6 flex flex-col justify-between relative overflow-hidden"
+                    class="bg-white border border-slate-100 rounded-xl p-6 flex flex-col justify-center relative overflow-hidden"
+                >
+                    <div class="relative z-10 w-full">
+                        <span class="text-[11px] font-bold text-slate-400 uppercase tracking-widest block mb-3"
+                            >Manajemen PKL</span
+                        >
+                        <p class="text-slate-600 text-sm leading-relaxed text-justify">Kelola siswa, pembimbing, penguji, dan tempat PKL dengan mudah melalui sistem bento terpusat ini.</p>
+                    </div>
+                </div>
+                <div
+                    class="bg-white border border-slate-100 rounded-xl p-6 flex flex-col justify-between relative overflow-hidden"
                 >
                     <div>
                         <span class="text-[11px] font-bold text-slate-400 uppercase tracking-widest block mb-2"
@@ -31,7 +41,7 @@
                 </div>
                 <a
                     href="{{ route('admin.siswa.index') }}"
-                    class="group bg-white hover:bg-slate-50 transition-colors border border-slate-300 rounded-xl p-6 flex flex-col justify-between relative overflow-hidden"
+                    class="group bg-white hover:bg-slate-50 transition-colors border border-slate-100 rounded-xl p-6 flex flex-col justify-between relative overflow-hidden"
                 >
                     <div class="mt-8">
                         <span class="text-[11px] font-bold text-slate-400 uppercase tracking-widest block mb-1"
@@ -45,7 +55,7 @@
                 </a>
                 <a
                     href="{{ route('admin.guru-pembimbing.index') }}"
-                    class="group bg-white hover:bg-slate-50 transition-colors border border-slate-300 rounded-xl p-6 flex flex-col justify-between relative overflow-hidden"
+                    class="group bg-white hover:bg-slate-50 transition-colors border border-slate-100 rounded-xl p-6 flex flex-col justify-between relative overflow-hidden"
                 >
                     <div class="mt-8">
                         <span class="text-[11px] font-bold text-slate-400 uppercase tracking-widest block mb-1"
@@ -59,7 +69,7 @@
                 </a>
                 <a
                     href="{{ route('admin.guru-penguji.index') }}"
-                    class="group bg-white hover:bg-slate-50 transition-colors border border-slate-300 rounded-xl p-6 flex flex-col justify-between relative overflow-hidden"
+                    class="group bg-white hover:bg-slate-50 transition-colors border border-slate-100 rounded-xl p-6 flex flex-col justify-between relative overflow-hidden"
                 >
                     <div class="mt-8">
                         <span class="text-[11px] font-bold text-slate-400 uppercase tracking-widest block mb-1"
@@ -73,7 +83,7 @@
                 </a>
                 <a
                     href="{{ route('admin.tempat-pkl.index') }}"
-                    class="group bg-white hover:bg-slate-50 transition-colors border border-slate-300 rounded-xl p-6 flex flex-col justify-between relative overflow-hidden md:col-span-3 lg:col-span-1"
+                    class="group bg-white hover:bg-slate-50 transition-colors border border-slate-100 rounded-xl p-6 flex flex-col justify-between relative overflow-hidden md:col-span-3 lg:col-span-1"
                 >
                     <div class="mt-8">
                         <span class="text-[11px] font-bold text-slate-400 uppercase tracking-widest block mb-1"

@@ -33,7 +33,7 @@
                     @if ($laporan_akhir_exists)
                         <div class="bg-white border-2 border-slate-200 p-8 rounded-3xl text-center py-12 shadow-sm">
                             <div
-                                class="w-14 h-14 rounded-full bg-slate-50 flex items-center justify-center mx-auto mb-4 text-slate-400 border border-slate-200"
+                                class="w-14 h-14 rounded-full bg-slate-50 flex items-center justify-center mx-auto mb-4 text-slate-400 border-2 border-slate-200"
                             >
                                 <i class="fa-solid fa-lock text-slate-400 text-xl"></i>
                             </div>
@@ -167,7 +167,7 @@
                         </div>
                         @elseif ($tab == 'riwayat')
                             <div class="space-y-6">
-                                <div class="bg-white p-4 rounded-2xl border-2 border-slate-200 flex flex-col sm:flex-row justify-between items-center gap-4 shadow-sm">
+                                <div class="flex flex-col sm:flex-row justify-between items-center gap-4 mb-6">
                                     <form action="{{ route('siswa.jurnal-harian.index') }}" method="GET" class="relative w-full max-w-md">
                                         <input type="hidden" name="tab" value="riwayat">
                                         <input
@@ -175,13 +175,18 @@
                                             name="search"
                                             value="{{ request('search') }}"
                                             placeholder="Cari kegiatan atau tanggal..."
-                                            class="w-full pl-10 pr-4 py-2.5 text-sm bg-slate-50 border border-slate-200 rounded-xl focus:border-slate-300"
+                                            class="w-full pl-10 pr-4 py-2 border border-slate-100 rounded-xl focus:border-slate-300 text-sm bg-white shadow-sm"
                                         />
                                         <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
                                             <i class="fa-solid fa-magnifying-glass text-slate-400"></i>
                                         </div>
                                     </form>
-                                    <span class="text-xs font-semibold text-slate-500">{{ $laporans->total() ?? 0 }} Laporan Terkirim</span>
+                                    <div class="flex items-center gap-4">
+                                        <span class="text-xs font-semibold text-slate-500">{{ $laporans->total() ?? 0 }} Laporan Terkirim</span>
+                                        <a href="{{ route('siswa.jurnal-harian.export') }}" class="px-4 py-2 bg-slate-900 hover:bg-slate-800 text-white rounded-xl text-sm font-bold transition-colors shadow-sm inline-flex items-center gap-2">
+                                            <i class="fa-solid fa-file-pdf"></i> Export PDF
+                                        </a>
+                                    </div>
                                 </div>
                                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                                     @forelse ($laporans as $log)
@@ -195,7 +200,7 @@
                                                 <div class="text-sm text-slate-600 mb-6 whitespace-pre-wrap">{{ $log->kegiatan }}</div>
                                             </div>
                                             @if ($log->bukti_foto)
-                                                <div class="mb-4 rounded-2xl overflow-hidden border border-slate-200 bg-slate-50">
+                                                <div class="mb-4 rounded-2xl overflow-hidden border-2 border-slate-200 bg-slate-50">
                                                     <a href="{{ Storage::url($log->bukti_foto) }}" target="_blank" class="block">
                                                         <img
                                                             src="{{ Storage::url($log->bukti_foto) }}"

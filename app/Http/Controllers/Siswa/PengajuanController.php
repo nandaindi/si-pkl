@@ -17,8 +17,8 @@ class PengajuanController extends Controller
             return redirect()->route('dashboard')->with('error', 'Profil siswa belum dibuat oleh admin.');
         }
 
-        $pengajuans = PengajuanPkl::where('siswa_id', $siswa->id)->with('tempatPkl')->latest()->get();
-        $has_approved = $pengajuans->contains('status', 'disetujui');
+        $pengajuans = PengajuanPkl::where('siswa_id', $siswa->id)->with('tempatPkl')->latest()->paginate(10);
+        $has_approved = PengajuanPkl::where('siswa_id', $siswa->id)->where('status', 'disetujui')->exists();
 
         return view('dashboard.siswa.pengajuan', compact('pengajuans', 'has_approved'));
     }

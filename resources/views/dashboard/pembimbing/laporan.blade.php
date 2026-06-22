@@ -10,37 +10,34 @@
                 <p class="text-slate-500 text-base mt-2">Verifikasi dokumen laporan akhir PKL (bukan laporan harian) yang diunggah oleh siswa bimbingan Anda.</p>
             </div>
             <div class="flex items-center gap-4 border-b border-slate-200 mb-6">
-                <a href="{{ route('pembimbing.laporan-harian.index') }}" class="px-4 py-3 text-sm font-bold text-slate-500 hover:text-slate-900 border-b-2 border-transparent hover:border-slate-300 transition-all flex items-center gap-2">
+                <a
+                    href="{{ route('pembimbing.laporan-harian.index') }}"
+                    class="px-4 py-3 text-sm font-bold text-slate-500 hover:text-slate-900 border-b-2 border-transparent hover:border-slate-300 transition-all flex items-center gap-2"
+                >
                     Laporan Harian
                 </a>
-                <a href="{{ route('pembimbing.laporan.index') }}" class="px-4 py-3 text-sm font-bold text-slate-900 border-b-2 border-slate-900 transition-all">Laporan Akhir</a>
+                <a
+                    href="{{ route('pembimbing.laporan.index') }}"
+                    class="px-4 py-3 text-sm font-bold text-slate-900 border-b-2 border-slate-900 transition-all"
+                    >Laporan Akhir</a
+                >
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-                @php
-                    $total = $laporan_akhirs->count();
-                @endphp
-                <div class="bg-white rounded-xl p-6 border border-slate-200  flex items-center gap-5">
-                    <div>
-                        <div class="text-sm font-bold text-slate-500 uppercase tracking-wider mb-1">
-                            Total Laporan Akhir
-                        </div>
-                        <div class="text-3xl font-black text-slate-900">{{ $total }}</div>
-                    </div>
+
+            <form action="{{ route('pembimbing.laporan.index') }}" method="GET" class="relative w-96 mb-6">
+                <input
+                    type="text"
+                    name="search"
+                    value="{{ request('search') }}"
+                    placeholder="Cari nama siswa..."
+                    class="w-full pl-10 pr-4 py-2 border border-slate-100 rounded-xl focus:border-slate-300 text-sm bg-white shadow-sm"
+                />
+                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
                 </div>
-            </div>
-            <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm flex flex-col sm:flex-row justify-between items-center gap-4 mb-6">
-                <form action="{{ route('pembimbing.laporan.index') }}" method="GET" class="relative w-full sm:w-96">
-                    <input type="text" name="search" value="{{ request('search') }}" placeholder="Cari nama siswa..." class="w-full pl-10 pr-4 py-2 border border-slate-300 rounded-lg focus:border-slate-300 text-sm" />
-                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                        <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-                    </div>
-                </form>
-            </div>
-            <div class="bg-white overflow-hidden rounded-2xl border border-slate-200 shadow-sm">
+            </form>
+            <div class="bg-white overflow-hidden rounded-2xl border-2 border-slate-200 shadow-sm">
                 <div class="px-6 py-5 border-b border-slate-100 flex items-center justify-between bg-slate-50/50">
-                    <h3 class="font-bold text-slate-800 text-lg flex items-center gap-2">
-                        Daftar Laporan Akhir
-                    </h3>
+                    <h3 class="font-bold text-slate-800 text-lg flex items-center gap-2">Daftar Laporan Akhir</h3>
                 </div>
                 <div class="overflow-x-auto">
                     <table class="w-full text-left border-collapse">
@@ -50,7 +47,7 @@
                             >
                                 <th class="px-6 py-4 whitespace-nowrap">Siswa</th>
                                 <th class="px-6 py-4 whitespace-nowrap">Dokumen PDF</th>
-                                <th class="px-6 py-4 text-right whitespace-nowrap">Aksi</th>
+                                <th class="px-6 py-4 text-center whitespace-nowrap">Status</th>
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-slate-50">
@@ -60,9 +57,7 @@
                                         <div class="text-sm text-slate-900 font-bold">
                                             {{ $akhir->siswa->user->name }}
                                         </div>
-                                        <div class="text-xs text-slate-500 mt-1">
-                                            NISN: {{ $akhir->siswa->nisn }}
-                                        </div>
+                                        <div class="text-xs text-slate-500 mt-1">NISN: {{ $akhir->siswa->nisn }}</div>
                                     </td>
                                     <td class="px-6 py-4">
                                         <a
@@ -74,14 +69,13 @@
                                             Lihat Dokumen
                                         </a>
                                     </td>
-                                    <td class="px-6 py-4 text-right">
-                                        <a
-                                            href="{{ route('pembimbing.laporan-harian.show', $akhir->siswa->id) }}"
-                                            class="inline-flex items-center gap-2 px-4 py-2 bg-slate-50 hover:bg-slate-100 text-slate-900 border border-blue-200 font-bold text-xs rounded-xl transition-colors"
+                                    <td class="px-6 py-4 text-center">
+                                        <span
+                                            class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-emerald-50 text-emerald-600 font-bold text-[11px] rounded-lg"
                                         >
-                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
-                                            Lengkap
-                                        </a>
+                                            <i class="fa-solid fa-circle-check"></i>
+                                            Selesai Diunggah
+                                        </span>
                                     </td>
                                 </tr>
                             @empty
@@ -96,6 +90,9 @@
                             @endforelse
                         </tbody>
                     </table>
+                </div>
+                <div class="p-4 border-t border-slate-200">
+                    {{ $laporan_akhirs->appends(request()->query())->links() }}
                 </div>
             </div>
         </div>

@@ -15,21 +15,13 @@
                     Tambah Tempat PKL
                 </a>
             </div>
-            <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm flex flex-col sm:flex-row justify-between items-center gap-4 mb-6">
-                <form action="{{ route('admin.tempat-pkl.index') }}" method="GET" class="relative w-full sm:w-96">
-                    <input
-                        type="text"
-                        name="search"
-                        value="{{ request('search') }}"
-                        placeholder="Cari nama instansi atau alamat..."
-                        class="w-full pl-10 pr-4 py-2 border border-slate-300 rounded-lg focus:border-slate-300 text-sm"
-                    />
-                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                        <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-                    </div>
-                </form>
-            </div>
-            <div class="bg-white overflow-hidden rounded-2xl border border-slate-200 shadow-sm">
+            <form action="{{ route('admin.tempat-pkl.index') }}" method="GET" class="relative w-96 mb-6">
+                <input type="text" name="search" value="{{ request('search') }}" placeholder="Cari nama instansi atau alamat..." class="w-full pl-10 pr-4 py-2 border border-slate-100 rounded-xl focus:border-slate-300 text-sm bg-white shadow-sm" />
+                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                </div>
+            </form>
+            <div class="bg-white overflow-hidden rounded-2xl border-2 border-slate-200 shadow-sm">
                 <div class="overflow-x-auto">
                     <table class="w-full text-left border-collapse">
                         <thead>
@@ -40,7 +32,7 @@
                                 <th class="px-6 py-4 font-semibold whitespace-nowrap">Nama Instansi</th>
                                 <th class="px-6 py-4 font-semibold whitespace-nowrap">Alamat Lengkap</th>
                                 <th class="px-6 py-4 font-semibold whitespace-nowrap">Kuota Tersedia</th>
-                                <th class="px-6 py-4 font-semibold text-right whitespace-nowrap">Aksi</th>
+                                <th class="px-6 py-4 font-semibold text-center whitespace-nowrap">Aksi</th>
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-slate-200">
@@ -48,7 +40,7 @@
                                 <tr class="hover:bg-slate-50 transition-colors">
                                     <td class="px-6 py-4 text-sm">
                                         @if ($tempat->gambar)
-                                            <a href="{{ asset('storage/' . $tempat->gambar) }}" target="_blank" class="block w-32 h-20 rounded-xl overflow-hidden shadow-sm border border-slate-200 hover:shadow-md transition-all hover:scale-105" title="Klik untuk perbesar">
+                                            <a href="{{ asset('storage/' . $tempat->gambar) }}" target="_blank" class="block w-32 h-20 rounded-xl overflow-hidden shadow-sm border-2 border-slate-200 hover:shadow-md transition-all hover:scale-105" title="Klik untuk perbesar">
                                                 <img
                                                     src="{{ asset('storage/' . $tempat->gambar) }}"
                                                     alt="{{ $tempat->nama_instansi }}"
@@ -56,7 +48,7 @@
                                                 />
                                             </a>
                                         @else
-                                            <div class="w-32 h-20 rounded-xl bg-slate-50 border border-slate-200 flex flex-col items-center justify-center text-slate-300">
+                                            <div class="w-32 h-20 rounded-xl bg-slate-50 border-2 border-slate-200 flex flex-col items-center justify-center text-slate-300">
                                                 <i class="fa-regular fa-image text-xl mb-1"></i>
                                                 <span class="text-[9px] font-bold uppercase tracking-wider">Tanpa Foto</span>
                                             </div>
@@ -72,8 +64,8 @@
                                             >{{ $tempat->kuota }} Siswa</span
                                         >
                                     </td>
-                                    <td class="px-6 py-4 text-sm text-right">
-                                        <div class="flex items-center justify-end gap-2">
+                                    <td class="px-6 py-4 text-sm text-center">
+                                        <div class="flex items-center justify-center gap-2">
                                             <a
                                                 href="{{ route('admin.tempat-pkl.edit', $tempat->id) }}"
                                                 class="p-1.5 bg-slate-50 text-slate-900 hover:bg-slate-200 hover:text-slate-900 rounded-lg transition-colors "
@@ -111,6 +103,9 @@
                             @endforelse
                         </tbody>
                     </table>
+                </div>
+                <div class="p-4 border-t border-slate-200">
+                    {{ $tempat_pkls->appends(request()->query())->links() }}
                 </div>
             </div>
         </div>

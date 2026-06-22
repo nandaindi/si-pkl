@@ -57,13 +57,16 @@
         }
         /* Form Inputs (Tactile Inset Shadow) */
         .input-academic {
-            background: var(--color-paper);
-            border: 2px solid var(--color-border);
+            background: var(--color-paper-2);
+            border: 1px solid var(--color-border);
             color: var(--color-ink);
             border-radius: var(--radius-input);
             outline: none;
             transition: all 250ms ease-out;
-            box-shadow: inset 2px 2px 4px oklch(20% 0.012 250 / 0.05);
+            box-shadow: none;
+        }
+        .input-academic::placeholder {
+            color: #94a3b8;
         }
         .input-academic:focus {
             border-color: var(--color-border);

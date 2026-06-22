@@ -23,7 +23,7 @@ class GuruPembimbingController extends Controller
                     $q->where('name', 'like', "%{$search}%");
                 });
         })
-        ->with('user')->get();
+        ->with('user')->paginate(10);
         return view('dashboard.admin.gurupembimbing', compact('gurus'));
     }
 

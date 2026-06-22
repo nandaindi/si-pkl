@@ -22,37 +22,9 @@ class LaporanController extends Controller
                     $q->where('name', 'like', "%{$search}%");
                 });
             })
-            ->latest()->get();
+            ->latest()->paginate(10);
 
         return view('dashboard.pembimbing.laporan', compact('laporan_akhirs'));
     }
 
-    public function verifikasi(Request $request, LaporanAkhir $laporan)
-    {
-        $request->validate([
-            'status_verifikasi' => 'required|in:disetujui,revisi',
-            'catatan_pembimbing' => 'required|string',
-        ]);
-
-        $laporan->update([
-            'status_verifikasi' => $request->status_verifikasi,
-            'catatan_pembimbing' => $request->catatan_pembimbing,
-        ]);
-
-        if ($laporan->siswa && $laporan->siswa->user) {
-            $msg = $request->status_verifikasi === 'disetujui' 
-                   ? "Laporan Akhir Anda telah DISETUJUI." 
-                   : "Laporan Akhir Anda perlu DIREVISI. Cek catatan pembimbing.";
-            $icon = $request->status_verifikasi === 'disetujui' ? 'check-circle' : 'alert-circle';
-            
-            $laporan->siswa->user->notify(new \App\Notifications\PklNotification(
-                'Verifikasi Laporan Akhir',
-                $msg,
-                route('siswa.laporan-akhir.index'),
-                $icon
-            ));
-        }
-
-        return redirect()->route('pembimbing.laporan.index')->with('success', 'Status laporan akhir siswa berhasil diperbarui.');
-    }
 }

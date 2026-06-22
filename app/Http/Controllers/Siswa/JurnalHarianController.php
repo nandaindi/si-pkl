@@ -200,4 +200,18 @@ class JurnalHarianController extends Controller
 
         return redirect()->route('siswa.jurnal-harian.index', ['tab' => 'riwayat'])->with('success', 'Jurnal harian berhasil dihapus.');
     }
+
+    public function export()
+    {
+        $siswa = Auth::user()->siswa;
+        if (!$siswa) {
+            abort(403, 'Akses ditolak.');
+        }
+
+        $laporans = LaporanHarian::where('siswa_id', $siswa->id)->orderBy('tanggal', 'asc')->get();
+        $pdf = \Barryvdh\DomPDF\Facade\Pdf::loadView('dashboard.siswa.jurnal_harian_pdf', compact('siswa', 'laporans'))
+            ->setPaper('a4', 'portrait');
+
+        return $pdf->download('Laporan_Harian_' . str_replace(' ', '_', $siswa->user->name) . '.pdf');
+    }
 }

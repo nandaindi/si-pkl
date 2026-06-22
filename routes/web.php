@@ -53,7 +53,6 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
 Route::middleware(['auth', 'role:pembimbing'])->prefix('pembimbing')->name('pembimbing.')->group(function () {
     Route::get('/', [\App\Http\Controllers\Pembimbing\HomeController::class, 'index'])->name('dashboard');
     Route::patch('pengajuan/{pengajuan}/verifikasi', [\App\Http\Controllers\Pembimbing\PengajuanController::class, 'verifikasi'])->name('pengajuan.verifikasi');
-    Route::patch('laporan/{laporan}/verifikasi', [\App\Http\Controllers\Pembimbing\LaporanController::class, 'verifikasi'])->name('laporan.verifikasi');
     Route::get('laporan-harian', [\App\Http\Controllers\Pembimbing\LaporanHarianController::class, 'index'])->name('laporan-harian.index');
     Route::get('laporan-harian/{siswa}', [\App\Http\Controllers\Pembimbing\LaporanHarianController::class, 'show'])->name('laporan-harian.show');
     Route::patch('laporan-harian/{laporan}/verifikasi', [\App\Http\Controllers\Pembimbing\LaporanHarianController::class, 'verifikasi'])->name('laporan-harian.verifikasi');
@@ -75,6 +74,7 @@ Route::middleware(['auth', 'role:siswa'])->prefix('siswa')->name('siswa.')->grou
     Route::get('/', [\App\Http\Controllers\Siswa\HomeController::class, 'index'])->name('dashboard');
     Route::resource('pengajuan', \App\Http\Controllers\Siswa\PengajuanController::class);
     Route::resource('jurnal-harian', \App\Http\Controllers\Siswa\JurnalHarianController::class);
+    Route::get('jurnal-harian-export', [\App\Http\Controllers\Siswa\JurnalHarianController::class, 'export'])->name('jurnal-harian.export');
     Route::get('laporan-akhir', [\App\Http\Controllers\Siswa\LaporanAkhirController::class, 'index'])->name('laporan-akhir.index');
     Route::post('laporan-akhir', [\App\Http\Controllers\Siswa\LaporanAkhirController::class, 'store'])->name('laporan-akhir.store');
     Route::get('jadwal-sidang', [\App\Http\Controllers\Siswa\JadwalSidangController::class, 'index'])->name('jadwal-sidang.index');

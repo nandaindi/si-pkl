@@ -38,7 +38,7 @@
                         <p class="text-slate-500 text-sm mt-2 max-w-md mx-auto leading-relaxed">
                             Anda harus mengisi minimal <strong>{{ $minDailyJournals }} hari</strong> laporan harian sebelum diperkenankan mengunggah laporan akhir.
                         </p>
-                        <div class="mt-6 bg-white border border-slate-200 p-5 rounded-2xl max-w-sm mx-auto shadow-sm">
+                        <div class="mt-6 bg-white border-2 border-slate-200 p-5 rounded-2xl max-w-sm mx-auto shadow-sm">
                             <div class="flex justify-between text-xs font-bold text-slate-700 mb-1.5 font-label">
                                 <span>Progress Laporan Harian</span>
                                 <span>{{ $dailyJournalCount }} / {{ $minDailyJournals }} Hari</span>
@@ -74,7 +74,7 @@
                                     </div>
                                     <h4 class="font-extrabold text-slate-800 text-sm">Laporan Selesai</h4>
                                     <p class="text-xs text-slate-500 mt-2 leading-relaxed">
-                                        Laporan akhir Anda telah disetujui secara resmi oleh pembimbing. Terima kasih atas partisipasi Anda.
+                                        Laporan akhir Anda telah terkumpul. Terima kasih atas partisipasi Anda.
                                     </p>
                                 </div>
                             @endif
@@ -84,34 +84,16 @@
                                 <div class="bg-white rounded-3xl border-2 border-slate-200 p-6 shadow-sm space-y-6">
                                     <h3 class="text-lg font-black text-slate-900 border-b border-slate-100 pb-3 font-display">Status Verifikasi</h3>
                                     <div class="flex items-start gap-4">
-                                        @if ($laporan_akhir->status_verifikasi === 'disetujui')
-                                            <div class="w-12 h-12 rounded-2xl bg-emerald-50 border border-emerald-200/60 flex items-center justify-center shrink-0">
-                                                <i class="fa-solid fa-check text-emerald-500 text-xl"></i>
-                                            </div>
-                                            <div>
-                                                <h4 class="font-bold text-slate-900 text-base">Disetujui</h4>
-                                                <p class="text-xs text-slate-500 mt-1 leading-relaxed">Laporan Anda telah berhasil divalidasi dan disetujui oleh pembimbing.</p>
-                                            </div>
-                                        @elseif ($laporan_akhir->status_verifikasi === 'revisi')
-                                            <div class="w-12 h-12 rounded-2xl bg-rose-50 border border-rose-200/60 flex items-center justify-center shrink-0">
-                                                <i class="fa-solid fa-triangle-exclamation text-rose-500 text-xl"></i>
-                                            </div>
-                                            <div>
-                                                <h4 class="font-bold text-slate-900 text-base">Revisi Diperlukan</h4>
-                                                <p class="text-xs text-slate-500 mt-1 leading-relaxed">Silakan perbaiki bagian laporan sesuai catatan dari pembimbing dan unggah kembali.</p>
-                                            </div>
-                                        @else
-                                            <div class="w-12 h-12 rounded-2xl bg-amber-50 border border-amber-200/60 flex items-center justify-center shrink-0">
-                                                <i class="fa-solid fa-clock text-amber-500 text-xl animate-pulse"></i>
-                                            </div>
-                                            <div>
-                                                <h4 class="font-bold text-slate-900 text-base">Menunggu Verifikasi</h4>
-                                                <p class="text-xs text-slate-500 mt-1 leading-relaxed">Berkas telah diterima dan sedang dalam tahap peninjauan oleh pembimbing Anda.</p>
-                                            </div>
-                                        @endif
+                                        <div class="w-12 h-12 rounded-2xl bg-emerald-50 border border-emerald-200/60 flex items-center justify-center shrink-0">
+                                            <i class="fa-solid fa-check text-emerald-500 text-xl"></i>
+                                        </div>
+                                        <div>
+                                            <h4 class="font-bold text-slate-900 text-base">Terkumpul & Siap Sidang</h4>
+                                            <p class="text-xs text-slate-500 mt-1 leading-relaxed">Laporan Akhir Anda telah terkirim. Anda kini siap untuk dijadwalkan sidang oleh pembimbing.</p>
+                                        </div>
                                     </div>
                                     @if ($laporan_akhir->catatan_pembimbing)
-                                        <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200 text-xs leading-relaxed text-slate-600 space-y-1">
+                                        <div class="p-4 bg-slate-50 rounded-2xl border-2 border-slate-200 text-xs leading-relaxed text-slate-600 space-y-1">
                                             <span class="font-bold text-slate-800 font-label block">CATATAN PEMBIMBING:</span>
                                             <p class="italic">"{{ $laporan_akhir->catatan_pembimbing }}"</p>
                                         </div>

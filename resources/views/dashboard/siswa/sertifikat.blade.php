@@ -11,7 +11,7 @@
             </div>
             @if ($sertifikat)
                 <div
-                    class="bg-white p-8 rounded-xl border border-slate-200 relative overflow-hidden text-center"
+                    class="bg-white p-8 rounded-xl border-2 border-slate-200 relative overflow-hidden text-center"
                 >
                     <i class="fa-solid fa-medal text-amber-500 text-5xl mb-4 block"></i>
                     <h3 class="text-xl font-extrabold text-slate-900 font-display">
@@ -35,7 +35,7 @@
                 </div>
             @else
                 <div
-                    class="bg-white p-8 rounded-xl border border-slate-200 relative overflow-hidden text-center"
+                    class="bg-white p-8 rounded-xl border-2 border-slate-200 relative overflow-hidden text-center"
                 >
                     <i class="fa-solid fa-award text-slate-300 text-5xl mb-4 block"></i>
                     <h3 class="text-xl font-extrabold text-slate-400 font-display">Sertifikat Belum Diterbitkan</h3>

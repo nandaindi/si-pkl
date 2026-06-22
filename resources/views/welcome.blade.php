@@ -158,14 +158,7 @@
         }
         /* Bento Grid (F1 Bento Grid) */
         .bento-shell {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding-inline: 1.5rem;
-        padding-bottom: 6rem;
-        }
-        /* Bento Grid (F1 Bento Grid) */
-        .bento-shell {
-        max-width: 1200px;
+        max-width: 80rem; /* matches max-w-7xl */
         margin: 0 auto;
         padding-inline: 1.5rem;
         padding-bottom: 6rem;
@@ -203,6 +196,7 @@
         border-color: var(--color-border);
         }
         /* Asymmetric spans */
+        .span-4x1 { grid-column: span 4; }
         .span-2x2 { grid-column: span 2; grid-row: span 2; }
         .span-2x1 { grid-column: span 2; }
         .span-1x2 { grid-row: span 2; }
@@ -211,6 +205,7 @@
         .bento-grid {
         grid-template-columns: repeat(2, 1fr);
         }
+        .span-4x1 { grid-column: span 2; }
         .span-2x2 { grid-column: span 2; grid-row: span 2; }
         .span-2x1 { grid-column: span 2; }
         .span-1x2 { grid-row: span 2; }
@@ -544,8 +539,6 @@
                    display: flex;
                    width: 100%;
                    position: relative;
-                   mask-image: linear-gradient(to right, transparent, white 15%, white 85%, transparent);
-                   -webkit-mask-image: linear-gradient(to right, transparent, white 15%, white 85%, transparent);
                    padding-block: 0.5rem;
                }
                .marquee-logo-track {
@@ -553,9 +546,6 @@
                    gap: 1.25rem;
                    width: max-content;
                    animation: marquee-scroll 25s linear infinite;
-               }
-               .marquee-logo-track:hover {
-                   animation-play-state: paused;
                }
         @keyframes
         marquee-scroll {
@@ -601,7 +591,7 @@
                     @auth
                         <a href="{{ url('/dashboard') }}" class="btn btn--soft btn--sm">Masuk Dasbor</a>
                     @else
-                        <a href="{{ route('login') }}" class="btn btn--sm">Login Portal</a>
+                        <a href="{{ route('login') }}" class="btn btn--sm">Login</a>
                     @endauth
                 </div>
             </nav>
@@ -716,23 +706,36 @@
                             </h2>
                             <div class="space-y-4">
                                 @forelse ($laporan_terbaru as $laporan)
-                                <div class="card-glass p-3.5 rounded-xl flex flex-col gap-2">
-                                    <div class="flex justify-between items-center">
-                                        <span class="mono-label text-[9px]">{{ $laporan->siswa->user->name ?? '-' }}</span>
-                                        <span class="px-2 py-0.5 bg-emerald-500/10 text-emerald-800 text-[9px] font-bold rounded-full border border-emerald-500/20">Disetujui</span>
+                                    <div class="card-glass p-3.5 rounded-xl flex flex-col gap-2">
+                                        <div class="flex justify-between items-center">
+                                            <span
+                                                class="mono-label text-[9px]"
+                                                >{{ $laporan->siswa->user->name ?? '-' }}</span
+                                            >
+                                            <span
+                                                class="px-2 py-0.5 bg-emerald-500/10 text-emerald-800 text-[9px] font-bold rounded-full border border-emerald-500/20"
+                                                >Disetujui</span
+                                            >
+                                        </div>
+                                        <p class="text-xs font-semibold text-slate-700 leading-normal">{{ \Illuminate\Support\Str::limit($laporan->kegiatan, 60) }}</p>
                                     </div>
-                                    <p class="text-xs font-semibold text-slate-700 leading-normal">{{ \Illuminate\Support\Str::limit($laporan->kegiatan, 60) }}</p>
-                                </div>
                                 @empty
-                                <div class="card-glass p-3.5 rounded-xl flex flex-col gap-2 border-dashed border-sky-400">
-                                    <div class="flex justify-between items-center">
-                                        <span class="mono-label text-[9px] text-sky-700 font-bold">LOG SISWA / LIVE DEMO</span>
-                                        <span class="px-2 py-0.5 bg-sky-500/10 text-sky-800 text-[9px] font-bold rounded-full border border-sky-500/20 animate-pulse">Proses</span>
+                                    <div
+                                        class="card-glass p-3.5 rounded-xl flex flex-col gap-2 border-dashed border-sky-400"
+                                    >
+                                        <div class="flex justify-between items-center">
+                                            <span class="mono-label text-[9px] text-sky-700 font-bold"
+                                                >LOG SISWA / LIVE DEMO</span
+                                            >
+                                            <span
+                                                class="px-2 py-0.5 bg-sky-500/10 text-sky-800 text-[9px] font-bold rounded-full border border-sky-500/20 animate-pulse"
+                                                >Proses</span
+                                            >
+                                        </div>
+                                        <p class="text-xs font-semibold text-slate-700 leading-normal">
+                                            <span id="autotyping-log"></span><span class="typing-cursor"></span>
+                                        </p>
                                     </div>
-                                    <p class="text-xs font-semibold text-slate-700 leading-normal">
-                                        <span id="autotyping-log"></span><span class="typing-cursor"></span>
-                                    </p>
-                                </div>
                                 @endforelse
                             </div>
                         </div>
@@ -816,10 +819,18 @@
                             >
                                 <div class="flex flex-col gap-0.5">
                                     <span id="swipe-student-name" class="text-xs font-bold text-slate-800">
-                                        {{ $laporan_terbaru->first()?->siswa?->user?->name ?? 'Nama Siswa' }}
+                                        {{
+                                            $laporan_terbaru->first()?->siswa?->user?->name ??
+                                                'Nama Siswa'
+                                        }}
                                     </span>
                                     <span id="swipe-student-log" class="text-[10px] text-slate-500 font-medium">
-                                        {{ \Illuminate\Support\Str::limit($laporan_terbaru->first()?->kegiatan ?? 'Kegiatan PKL', 55) }}
+                                        {{
+                                            \Illuminate\Support\Str::limit(
+                                                $laporan_terbaru->first()?->kegiatan ?? 'Kegiatan PKL',
+                                                55,
+                                            )
+                                        }}
                                     </span>
                                 </div>
                                 <div class="flex gap-1.5 relative z-30">
@@ -845,34 +856,52 @@
                             <h3 class="text-slate-800 font-bold text-sm">Sidang Laporan</h3>
                         </div>
                         @if (isset($jadwal_sidang_terbaru) && $jadwal_sidang_terbaru)
-                        <div
-                            class="bg-white/80 p-2.5 rounded-xl border border-slate-200 shadow-sm my-auto flex gap-3 items-center"
-                        >
                             <div
-                                class="bg-rose-500 text-white p-1.5 rounded-lg flex flex-col items-center justify-center min-w-[36px] min-h-[36px] shadow-sm"
+                                class="bg-white/80 p-2.5 rounded-xl border border-slate-200 shadow-sm my-auto flex gap-3 items-center"
                             >
-                                <span class="text-[8px] font-bold uppercase leading-none">{{ \Carbon\Carbon::parse($jadwal_sidang_terbaru->waktu)->locale('id')->isoFormat('MMM') }}</span>
-                                <span class="text-base font-extrabold leading-none">{{ \Carbon\Carbon::parse($jadwal_sidang_terbaru->waktu)->format('d') }}</span>
-                            </div>
-                            <div class="space-y-0.5">
-                                <div id="sidang-room" class="text-[11px] font-extrabold text-slate-800 leading-none">
-                                    {{ $jadwal_sidang_terbaru->ruangan }}
+                                <div
+                                    class="bg-rose-500 text-white p-1.5 rounded-lg flex flex-col items-center justify-center min-w-[36px] min-h-[36px] shadow-sm"
+                                >
+                                    <span class="text-[8px] font-bold uppercase leading-none">{{
+                                        \Carbon\Carbon::parse($jadwal_sidang_terbaru->waktu)
+                                            ->locale('id')
+                                            ->isoFormat('MMM')
+                                    }}</span>
+                                    <span class="text-base font-extrabold leading-none">{{
+                                        \Carbon\Carbon::parse($jadwal_sidang_terbaru->waktu)->format(
+                                            'd',
+                                        )
+                                    }}</span>
                                 </div>
-                                <div id="sidang-time" class="text-[9px] font-bold text-slate-500">
-                                    {{ \Carbon\Carbon::parse($jadwal_sidang_terbaru->waktu)->locale('id')->isoFormat('D MMM') }} · Pukul: {{ \Carbon\Carbon::parse($jadwal_sidang_terbaru->waktu)->format('H:i') }} WIB
+                                <div class="space-y-0.5">
+                                    <div
+                                        id="sidang-room"
+                                        class="text-[11px] font-extrabold text-slate-800 leading-none"
+                                    >
+                                        {{ $jadwal_sidang_terbaru->ruangan }}
+                                    </div>
+                                    <div id="sidang-time" class="text-[9px] font-bold text-slate-500">
+                                        {{
+                                            \Carbon\Carbon::parse($jadwal_sidang_terbaru->waktu)
+                                                ->locale('id')
+                                                ->isoFormat('D MMM')
+                                        }} · Pukul: {{ \Carbon\Carbon::parse($jadwal_sidang_terbaru->waktu)->format('H:i') }} WIB
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="flex items-center justify-between">
-                            <span class="text-[10px] font-bold text-slate-400">{{ $jadwal_sidang_terbaru->penguji->user->name ?? 'Guru Penguji' }}</span>
-                        </div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-[10px] font-bold text-slate-400">{{
+                                    $jadwal_sidang_terbaru->penguji->user->name ??
+                                        'Guru Penguji'
+                                }}</span>
+                            </div>
                         @else
-                        <div class="my-auto text-center">
-                            <span class="text-[11px] text-slate-400 font-medium">Belum ada jadwal sidang</span>
-                        </div>
-                        <div class="flex items-center justify-between">
-                            <span class="text-[10px] font-bold text-slate-400">Guru Penguji</span>
-                        </div>
+                            <div class="my-auto text-center">
+                                <span class="text-[11px] text-slate-400 font-medium">Belum ada jadwal sidang</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-[10px] font-bold text-slate-400">Guru Penguji</span>
+                            </div>
                         @endif
                     </article>
                     <article class="card-bento span-1x1 tint-coral gsap-reveal flex flex-col justify-between">
@@ -902,7 +931,7 @@
                         </div>
                     </article>
                     <article
-                        class="card-bento span-2x1 gsap-reveal flex flex-col justify-between"
+                        class="card-bento span-4x1 gsap-reveal flex flex-col justify-between"
                         id="portal-mitra"
                         style="box-shadow: var(--shadow-clay)"
                     >
@@ -914,14 +943,48 @@
                         <div class="marquee-logo-container">
                             <div class="marquee-logo-track animate-marquee">
                                 @foreach ($mitra_list as $mitra)
-                                <div class="bg-white/80 py-2 px-3.5 rounded-xl border border-slate-200/80 shadow-sm text-center font-bold text-[9px] text-slate-700">
-                                    {{ $mitra->nama_instansi }}
-                                </div>
+                                    <div
+                                        class="bg-white/80 rounded-2xl border border-slate-200/80 shadow-sm flex flex-col w-56 flex-shrink-0 overflow-hidden group hover:border-slate-300 transition-colors"
+                                    >
+                                        @if ($mitra->gambar)
+                                            <div class="w-full h-32 overflow-hidden bg-slate-50 relative">
+                                                <img
+                                                    src="{{ asset('storage/' . $mitra->gambar) }}"
+                                                    alt="{{ $mitra->nama_instansi }}"
+                                                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                                                />
+                                            </div>
+                                        @endif
+                                        <div class="p-3 text-center flex-grow flex items-center justify-center">
+                                            <span
+                                                class="font-bold text-[11px] text-slate-700 leading-snug w-full line-clamp-2"
+                                                title="{{ $mitra->nama_instansi }}"
+                                                >{{ $mitra->nama_instansi }}</span
+                                            >
+                                        </div>
+                                    </div>
                                 @endforeach
                                 @foreach ($mitra_list as $mitra)
-                                <div class="bg-white/80 py-2 px-3.5 rounded-xl border border-slate-200/80 shadow-sm text-center font-bold text-[9px] text-slate-700">
-                                    {{ $mitra->nama_instansi }}
-                                </div>
+                                    <div
+                                        class="bg-white/80 rounded-2xl border border-slate-200/80 shadow-sm flex flex-col w-56 flex-shrink-0 overflow-hidden group hover:border-slate-300 transition-colors"
+                                    >
+                                        @if ($mitra->gambar)
+                                            <div class="w-full h-32 overflow-hidden bg-slate-50 relative">
+                                                <img
+                                                    src="{{ asset('storage/' . $mitra->gambar) }}"
+                                                    alt="{{ $mitra->nama_instansi }}"
+                                                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                                                />
+                                            </div>
+                                        @endif
+                                        <div class="p-3 text-center flex-grow flex items-center justify-center">
+                                            <span
+                                                class="font-bold text-[11px] text-slate-700 leading-snug w-full line-clamp-2"
+                                                title="{{ $mitra->nama_instansi }}"
+                                                >{{ $mitra->nama_instansi }}</span
+                                            >
+                                        </div>
+                                    </div>
                                 @endforeach
                             </div>
                         </div>

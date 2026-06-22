@@ -30,7 +30,7 @@
             --font-label: 'JetBrains Mono', monospace;
 
             /* Senior Developer - Clean Dashboard Theme Colors (OKLCH based) */
-            --color-paper: oklch(98.5% 0.003 240); /* extremely soft slate-50 background */
+            --color-paper: oklch(97% 0.004 240); /* soft gray background */
             --color-paper-2: #ffffff; /* crisp white for cards */
             --color-paper-3: oklch(95.5% 0.005 240); /* subtle slate-100 hover */
             --color-ink: oklch(25% 0.01 240); /* deep charcoal slate-900 text */
@@ -55,12 +55,8 @@
 
             --ease-spring: cubic-bezier(0.16, 1, 0.3, 1);
 
-            --shadow-clay:
-                0 12px 32px -12px oklch(20% 0.012 250 / 0.12), inset -6px -6px 12px oklch(20% 0.012 250 / 0.04),
-                inset 6px 6px 12px oklch(100% 0 0 / 0.85);
-            --shadow-clay-hover:
-                0 20px 40px -16px oklch(20% 0.012 250 / 0.18), inset -8px -8px 16px oklch(20% 0.012 250 / 0.06),
-                inset 8px 8px 16px oklch(100% 0 0 / 0.95);
+            --shadow-clay: 0 1px 4px oklch(20% 0.012 250 / 0.07), 0 2px 8px oklch(20% 0.012 250 / 0.05);
+            --shadow-clay-hover: 0 4px 16px oklch(20% 0.012 250 / 0.10), 0 2px 6px oklch(20% 0.012 250 / 0.06);
         }
 
         body {
@@ -129,9 +125,10 @@
         .bg-white.border-2.border-slate-200.rounded-3xl,
         .bg-white.border-2.border-slate-200,
         .bg-white.border.border-slate-200,
+        .bg-white.border.border-slate-100,
         .bg-white.rounded-3xl.border-2.border-slate-200 {
             background-color: var(--color-paper-2) !important;
-            border: 2px solid var(--color-border) !important;
+            border: 1px solid var(--color-border) !important;
             border-radius: var(--radius-card) !important;
             box-shadow: var(--shadow-clay) !important;
             transition:
@@ -144,6 +141,7 @@
         a.bg-white.border-2.border-slate-200.rounded-3xl:hover,
         a.bg-white.border-2.border-slate-200:hover,
         a.bg-white.border.border-slate-200:hover,
+        a.bg-white.border.border-slate-100:hover,
         a.bg-white.rounded-3xl.border-2.border-slate-200:hover {
             border-color: var(--color-border) !important;
             box-shadow: var(--shadow-clay-hover) !important;
@@ -209,9 +207,9 @@
                 0 2px 6px -2px oklch(60% 0.16 150 / 0.1) !important;
         }
 
-        /* Apply paper background to white elements to maintain theme */
+        /* Apply crisp white to white elements */
         .bg-white {
-            background-color: var(--color-paper) !important;
+            background-color: var(--color-paper-2) !important;
         }
 
         /* Form Controls overriding */
@@ -222,13 +220,19 @@
         input[type='number'],
         select,
         textarea {
-            background-color: var(--color-paper) !important;
-            border: 2px solid var(--color-border) !important;
+            background-color: var(--color-paper-2) !important;
+            border: 1px solid var(--color-border) !important; /* Thinner border */
             border-radius: var(--radius-input) !important;
             color: var(--color-ink) !important;
             outline: none !important;
-            box-shadow: inset 2px 2px 4px oklch(20% 0.012 250 / 0.05) !important;
+            box-shadow: none !important; /* No shadow */
             transition: all 250ms var(--ease-spring) !important;
+        }
+
+        /* Make placeholders a solid gray */
+        input::placeholder,
+        textarea::placeholder {
+            color: #94a3b8 !important; /* Tailwind slate-400 */
         }
         input[type='text']:focus,
         input[type='email']:focus,
@@ -267,8 +271,7 @@
         }
     </style>
 
-    <!-- SweetAlert2 -->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- SweetAlert2 (Loaded via NPM in app.js) -->
 </head>
 <body
     class="font-sans antialiased selection:bg-slate-900 selection:text-white relative min-h-screen overflow-hidden flex"
@@ -285,7 +288,7 @@
                         >SISTEM INFORMASI PKL</span
                     >
                     <span
-                        class="font-label text-[9.5px] text-slate-500 font-bold tracking-[0.08em] leading-none uppercase truncate mt-0.5"
+                        class="font-display text-[9.5px] text-slate-500 font-bold tracking-[0.08em] leading-none uppercase truncate mt-0.5"
                         >SMK Mandiri 01 Panongan</span
                     >
                 </div>
@@ -299,9 +302,8 @@
             <a href="/dashboard"
                         class="group flex items-center gap-3 px-4 py-3.5 rounded-xl {{ request()->routeIs('dashboard', '*.dashboard') ? 'bg-blue-50 text-blue-600 font-bold' : 'text-slate-500 hover:bg-blue-50 hover:text-blue-600 font-medium' }} transition-all"
             >
-                <svg class="w-5 h-5 {{ request()->routeIs('dashboard', '*.dashboard') ? 'text-blue-600' : 'text-slate-400 group-hover:text-blue-600' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
-                Dashboard
-            </a>
+                <i class="fa-solid fa-fw fa-house text-[1.1rem] {{ request()->routeIs('dashboard', '*.dashboard') ? 'text-blue-600' : 'text-slate-400 group-hover:text-blue-600' }}"></i>
+                        Dashboard</a>
 
             @if (Auth::check())
                 @hasrole ('admin')
@@ -312,30 +314,26 @@
                         class="group flex items-center gap-3 px-4 py-3.5 rounded-xl {{ request()->routeIs('admin.siswa.*') ? 'bg-blue-50 text-blue-600 font-bold' : 'text-slate-500 hover:bg-blue-50 hover:text-blue-600 font-medium' }} transition-all"
                     >
                         <!-- Ikon Pengguna -->
-                        <svg class="w-5 h-5 {{ request()->routeIs('admin.siswa.*') ? 'text-blue-600' : 'text-slate-400 group-hover:text-blue-600' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
-                        Kelola Data Siswa
-                    </a>
+                        <i class="fa-solid fa-fw fa-users text-[1.1rem] {{ request()->routeIs('admin.siswa.*') ? 'text-blue-600' : 'text-slate-400 group-hover:text-blue-600' }}"></i>
+                        Kelola Data Siswa</a>
                     <a href="{{ route('admin.guru-pembimbing.index') }}"
                         class="group flex items-center gap-3 px-4 py-3.5 rounded-xl {{ request()->routeIs('admin.guru-pembimbing.*') ? 'bg-blue-50 text-blue-600 font-bold' : 'text-slate-500 hover:bg-blue-50 hover:text-blue-600 font-medium' }} transition-all"
                     >
                         <!-- Ikon Koper -->
-                        <svg class="w-5 h-5 {{ request()->routeIs('admin.guru-pembimbing.*') ? 'text-blue-600' : 'text-slate-400 group-hover:text-blue-600' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
-                        Kelola Data Guru Pembimbing
-                    </a>
+                        <i class="fa-solid fa-fw fa-chalkboard-user text-[1.1rem] {{ request()->routeIs('admin.guru-pembimbing.*') ? 'text-blue-600' : 'text-slate-400 group-hover:text-blue-600' }}"></i>
+                        Kelola Data Guru Pembimbing</a>
                     <a href="{{ route('admin.guru-penguji.index') }}"
                         class="group flex items-center gap-3 px-4 py-3.5 rounded-xl {{ request()->routeIs('admin.guru-penguji.*') ? 'bg-blue-50 text-blue-600 font-bold' : 'text-slate-500 hover:bg-blue-50 hover:text-blue-600 font-medium' }} transition-all"
                     >
                         <!-- Icon Book Open (for Penguji/Academic) -->
-                        <svg class="w-5 h-5 {{ request()->routeIs('admin.guru-penguji.*') ? 'text-blue-600' : 'text-slate-400 group-hover:text-blue-600' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
-                        Kelola Data Guru Penguji
-                    </a>
+                        <i class="fa-solid fa-fw fa-chalkboard-user text-[1.1rem] {{ request()->routeIs('admin.guru-penguji.*') ? 'text-blue-600' : 'text-slate-400 group-hover:text-blue-600' }}"></i>
+                        Kelola Data Guru Penguji</a>
                     <a href="{{ route('admin.tempat-pkl.index') }}"
                         class="group flex items-center gap-3 px-4 py-3.5 rounded-xl {{ request()->routeIs('admin.tempat-pkl.*') ? 'bg-blue-50 text-blue-600 font-bold' : 'text-slate-500 hover:bg-blue-50 hover:text-blue-600 font-medium' }} transition-all"
                     >
                         <!-- Ikon Gedung Kantor -->
-                        <svg class="w-5 h-5 {{ request()->routeIs('admin.tempat-pkl.*') ? 'text-blue-600' : 'text-slate-400 group-hover:text-blue-600' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
-                        Kelola Data PKL
-                    </a>
+                        <i class="fa-solid fa-fw fa-building text-[1.1rem] {{ request()->routeIs('admin.tempat-pkl.*') ? 'text-blue-600' : 'text-slate-400 group-hover:text-blue-600' }}"></i>
+                        Kelola Data PKL</a>
                 @endhasrole
                 @hasrole ('pembimbing')
                     <div class="text-[10px] font-bold text-slate-400 uppercase tracking-[0.1em] mt-8 mb-4 px-2">
@@ -345,37 +343,32 @@
                         class="group flex items-center gap-3 px-4 py-3.5 rounded-xl {{ request()->routeIs('pembimbing.pengajuan.*') ? 'bg-blue-50 text-blue-600 font-bold' : 'text-slate-500 hover:bg-blue-50 hover:text-blue-600 font-medium' }} transition-all"
                     >
                         <!-- Ikon Lingkaran Centang -->
-                        <svg class="w-5 h-5 {{ request()->routeIs('pembimbing.pengajuan.*') ? 'text-blue-600' : 'text-slate-400 group-hover:text-blue-600' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                        Verifikasi Pengajuan PKL
-                    </a>
+                        <i class="fa-solid fa-fw fa-check-circle text-[1.1rem] {{ request()->routeIs('pembimbing.pengajuan.*') ? 'text-blue-600' : 'text-slate-400 group-hover:text-blue-600' }}"></i>
+                        Verifikasi Pengajuan PKL</a>
                     <a href="{{ route('pembimbing.laporan-harian.index') }}"
                         class="group flex items-center gap-3 px-4 py-3.5 rounded-xl {{ request()->routeIs('pembimbing.laporan.*') || request()->routeIs('pembimbing.laporan-harian.*') ? 'bg-blue-50 text-blue-600 font-bold' : 'text-slate-500 hover:bg-blue-50 hover:text-blue-600 font-medium' }} transition-all"
                     >
                         <!-- Ikon Papan Ujian Centang -->
-                        <svg class="w-5 h-5 {{ request()->routeIs('pembimbing.laporan.*') || request()->routeIs('laporan-harian.*') ? 'text-blue-600' : 'text-slate-400 group-hover:text-blue-600' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path></svg>
-                        Monitoring Laporan PKL
-                    </a>
+                        <i class="fa-solid fa-fw fa-clipboard-check text-[1.1rem] {{ request()->routeIs('pembimbing.laporan.*') || request()->routeIs('laporan-harian.*') ? 'text-blue-600' : 'text-slate-400 group-hover:text-blue-600' }}"></i>
+                        Monitoring Laporan PKL</a>
                     <a href="{{ route('pembimbing.jadwal-sidang.index') }}"
                         class="group flex items-center gap-3 px-4 py-3.5 rounded-xl {{ request()->routeIs('pembimbing.jadwal-sidang.*') ? 'bg-blue-50 text-blue-600 font-bold' : 'text-slate-500 hover:bg-blue-50 hover:text-blue-600 font-medium' }} transition-all"
                     >
                         <!-- Ikon Kalender -->
-                        <svg class="w-5 h-5 {{ request()->routeIs('pembimbing.jadwal-sidang.*') ? 'text-blue-600' : 'text-slate-400 group-hover:text-blue-600' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
-                        Kelola Jadwal Sidang
-                    </a>
+                        <i class="fa-solid fa-fw fa-calendar-alt text-[1.1rem] {{ request()->routeIs('pembimbing.jadwal-sidang.*') ? 'text-blue-600' : 'text-slate-400 group-hover:text-blue-600' }}"></i>
+                        Kelola Jadwal Sidang</a>
                     <a href="{{ route('pembimbing.nilai.index') }}"
                         class="group flex items-center gap-3 px-4 py-3.5 rounded-xl {{ request()->routeIs('pembimbing.nilai.*') ? 'bg-blue-50 text-blue-600 font-bold' : 'text-slate-500 hover:bg-blue-50 hover:text-blue-600 font-medium' }} transition-all"
                     >
                         <!-- Ikon Grafik Batang -->
-                        <svg class="w-5 h-5 {{ request()->routeIs('pembimbing.nilai.*') ? 'text-blue-600' : 'text-slate-400 group-hover:text-blue-600' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
-                        Rekap Nilai PKL
-                    </a>
+                        <i class="fa-solid fa-fw fa-chart-bar text-[1.1rem] {{ request()->routeIs('pembimbing.nilai.*') ? 'text-blue-600' : 'text-slate-400 group-hover:text-blue-600' }}"></i>
+                        Rekap Nilai PKL</a>
                     <a href="{{ route('pembimbing.sertifikat.index') }}"
                         class="group flex items-center gap-3 px-4 py-3.5 rounded-xl {{ request()->routeIs('pembimbing.sertifikat.*') ? 'bg-blue-50 text-blue-600 font-bold' : 'text-slate-500 hover:bg-blue-50 hover:text-blue-600 font-medium' }} transition-all"
                     >
                         <!-- Icon Badge Check (Award) -->
-                        <svg class="w-5 h-5 {{ request()->routeIs('pembimbing.sertifikat.*') ? 'text-blue-600' : 'text-slate-400 group-hover:text-blue-600' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path></svg>
-                        Kelola Sertifikat PKL
-                    </a>
+                        <i class="fa-solid fa-fw fa-award text-[1.1rem] {{ request()->routeIs('pembimbing.sertifikat.*') ? 'text-blue-600' : 'text-slate-400 group-hover:text-blue-600' }}"></i>
+                        Kelola Sertifikat PKL</a>
                 @endhasrole
                 @hasrole ('penguji')
                     <div class="text-[10px] font-bold text-slate-400 uppercase tracking-[0.1em] mt-8 mb-4 px-2">
@@ -385,15 +378,13 @@
                         class="group flex items-center gap-3 px-4 py-3.5 rounded-xl {{ request()->routeIs('penguji.jadwal-sidang.*') ? 'bg-blue-50 text-blue-600 font-bold' : 'text-slate-500 hover:bg-blue-50 hover:text-blue-600 font-medium' }} transition-all"
                     >
                         <!-- Ikon Kalender -->
-                        <svg class="w-5 h-5 {{ request()->routeIs('penguji.jadwal-sidang.*') ? 'text-blue-600' : 'text-slate-400 group-hover:text-blue-600' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
-                        Lihat Jadwal Sidang
-                    </a>
+                        <i class="fa-solid fa-fw fa-calendar-alt text-[1.1rem] {{ request()->routeIs('penguji.jadwal-sidang.*') ? 'text-blue-600' : 'text-slate-400 group-hover:text-blue-600' }}"></i>
+                        Lihat Jadwal Sidang</a>
                     <a href="{{ route('penguji.input-nilai.index') }}"
                         class="group flex items-center gap-3 px-4 py-3.5 rounded-xl {{ request()->routeIs('penguji.input-nilai.*') ? 'bg-blue-50 text-blue-600 font-bold' : 'text-slate-500 hover:bg-blue-50 hover:text-blue-600 font-medium' }} transition-all"
                     >
-                        <svg class="w-5 h-5 {{ request()->routeIs('penguji.input-nilai.*') ? 'text-blue-600' : 'text-slate-400 group-hover:text-blue-600' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg>
-                        Input Nilai Sidang
-                    </a>
+                        <i class="fa-solid fa-fw fa-pencil-alt text-[1.1rem] {{ request()->routeIs('penguji.input-nilai.*') ? 'text-blue-600' : 'text-slate-400 group-hover:text-blue-600' }}"></i>
+                        Input Nilai Sidang</a>
                 @endhasrole
                 @hasrole ('siswa')
                     <div class="text-[10px] font-bold text-slate-400 uppercase tracking-[0.1em] mt-8 mb-4 px-2">
@@ -402,59 +393,44 @@
                     <a href="{{ route('siswa.pengajuan.index') }}"
                         class="group flex items-center gap-3 px-4 py-3.5 rounded-xl {{ request()->routeIs('siswa.pengajuan.*') ? 'bg-blue-50 text-blue-600 font-bold' : 'text-slate-500 hover:bg-blue-50 hover:text-blue-600 font-medium' }} transition-all"
                     >
-                        <!-- Icon Mail (Surat) -->
-                        <svg class="w-5 h-5 {{ request()->routeIs('siswa.pengajuan.*') ? 'text-blue-600' : 'text-slate-400 group-hover:text-blue-600' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
-                        Mengajukan PKL
-                    </a>
+                        <i class="fa-solid fa-fw fa-paper-plane text-[1.1rem] {{ request()->routeIs('siswa.pengajuan.*') ? 'text-blue-600' : 'text-slate-400 group-hover:text-blue-600' }}"></i>
+                        Mengajukan PKL</a>
                     <a href="{{ route('siswa.surat-pengantar.index') }}"
                         class="group flex items-center gap-3 px-4 py-3.5 rounded-xl {{ request()->routeIs('siswa.surat-pengantar.*') ? 'bg-blue-50 text-blue-600 font-bold' : 'text-slate-500 hover:bg-blue-50 hover:text-blue-600 font-medium' }} transition-all"
                     >
-                        <!-- Icon Mail (Surat) -->
-                        <svg class="w-5 h-5 {{ request()->routeIs('siswa.surat-pengantar.*') ? 'text-blue-600' : 'text-slate-400 group-hover:text-blue-600' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
-                        Unduh Surat Pengantar PKL
-                    </a>
+                        <i class="fa-solid fa-fw fa-file-download text-[1.1rem] {{ request()->routeIs('siswa.surat-pengantar.*') ? 'text-blue-600' : 'text-slate-400 group-hover:text-blue-600' }}"></i>
+                        Unduh Surat Pengantar PKL</a>
                     <a href="{{ route('siswa.jurnal-harian.index') }}"
                         class="group flex items-center gap-3 px-4 py-3.5 rounded-xl {{ request()->routeIs('siswa.jurnal-harian.*') ? 'bg-blue-50 text-blue-600 font-bold' : 'text-slate-500 hover:bg-blue-50 hover:text-blue-600 font-medium' }} transition-all"
                     >
-                        <!-- Icon Pencil Edit (Laporan) -->
-                        <svg class="w-5 h-5 {{ request()->routeIs('siswa.jurnal-harian.*') ? 'text-blue-600' : 'text-slate-400 group-hover:text-blue-600' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
-                        Mengisi Laporan Harian PKL
-                    </a>
+                        <i class="fa-solid fa-fw fa-file-signature text-[1.1rem] {{ request()->routeIs('siswa.jurnal-harian.*') ? 'text-blue-600' : 'text-slate-400 group-hover:text-blue-600' }}"></i>
+                        Mengisi Laporan Harian PKL</a>
                     <a href="{{ route('siswa.laporan-akhir.index') }}"
                         class="group flex items-center gap-3 px-4 py-3.5 rounded-xl {{ request()->routeIs('siswa.laporan-akhir.*') ? 'bg-blue-50 text-blue-600 font-bold' : 'text-slate-500 hover:bg-blue-50 hover:text-blue-600 font-medium' }} transition-all"
                     >
-                        <!-- Ikon Papan Ujian Centang -->
-                        <svg class="w-5 h-5 {{ request()->routeIs('siswa.laporan-akhir.*') ? 'text-blue-600' : 'text-slate-400 group-hover:text-blue-600' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path></svg>
-                        Mengumpulkan Laporan Akhir PKL
-                    </a>
+                        <i class="fa-solid fa-fw fa-file-upload text-[1.1rem] {{ request()->routeIs('siswa.laporan-akhir.*') ? 'text-blue-600' : 'text-slate-400 group-hover:text-blue-600' }}"></i>
+                        Mengumpulkan Laporan Akhir PKL</a>
                     <a href="{{ route('siswa.jadwal-sidang.index') }}"
                         class="group flex items-center gap-3 px-4 py-3.5 rounded-xl {{ request()->routeIs('siswa.jadwal-sidang.*') ? 'bg-blue-50 text-blue-600 font-bold' : 'text-slate-500 hover:bg-blue-50 hover:text-blue-600 font-medium' }} transition-all"
                     >
-                        <!-- Ikon Kalender -->
-                        <svg class="w-5 h-5 {{ request()->routeIs('siswa.jadwal-sidang.*') ? 'text-blue-600' : 'text-slate-400 group-hover:text-blue-600' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
-                        Lihat Jadwal Sidang
-                    </a>
+                        <i class="fa-solid fa-fw fa-calendar-alt text-[1.1rem] {{ request()->routeIs('siswa.jadwal-sidang.*') ? 'text-blue-600' : 'text-slate-400 group-hover:text-blue-600' }}"></i>
+                        Lihat Jadwal Sidang</a>
                     <a href="{{ route('siswa.sertifikat.index') }}"
                         class="group flex items-center gap-3 px-4 py-3.5 rounded-xl {{ request()->routeIs('siswa.sertifikat.*') ? 'bg-blue-50 text-blue-600 font-bold' : 'text-slate-500 hover:bg-blue-50 hover:text-blue-600 font-medium' }} transition-all"
                     >
-                        <!-- Icon Download (Unduh) -->
-                        <svg class="w-5 h-5 {{ request()->routeIs('siswa.sertifikat.*') ? 'text-blue-600' : 'text-slate-400 group-hover:text-blue-600' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
-                        Unduh Sertifikat PKL
-                    </a>
+                        <i class="fa-solid fa-fw fa-award text-[1.1rem] {{ request()->routeIs('siswa.sertifikat.*') ? 'text-blue-600' : 'text-slate-400 group-hover:text-blue-600' }}"></i>
+                        Unduh Sertifikat PKL</a>
                 @endhasrole
             @endif
         </div>
     </aside>
 
-    <!-- Konten Utama -->
     <main class="flex-1 flex flex-col h-screen z-10 relative">
-        <!-- Bilah Atas -->
         <header class="h-24 glass-topbar flex items-center justify-end px-10 z-20">
             <div class="flex items-center gap-6">
-                <!-- Dropdown Notifikasi -->
                 <div class="relative" id="notification-dropdown-trigger">
                     <button
-                        class="p-2.5 bg-white border border-slate-200 rounded-full text-slate-500 shadow-sm relative focus:outline-none"
+                        class="p-2 text-slate-500 hover:text-slate-700 relative focus:outline-none transition-colors"
                     >
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg>
                         @if (auth()->check() && auth()->user()->unreadNotifications->count() > 0)
@@ -559,21 +535,16 @@
                                 href="{{ route('profile.edit') }}"
                                 class="w-full flex items-center gap-3 px-4 py-2.5 text-sm font-semibold text-slate-700 hover:text-slate-900 rounded-lg transition-colors text-left mb-1"
                             >
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                                </svg>
-                                Pengaturan Profil
-                            </a>
+                                <i class="fa-solid fa-fw fa-cog text-sm"></i>
+                        Pengaturan Profil</a>
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
                                 <button
                                     type="submit"
                                     class="w-full flex items-center gap-3 px-4 py-2.5 text-sm font-semibold text-red-600 hover:bg-red-50 rounded-lg transition-colors text-left"
                                 >
-                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
-                                    Keluar Sistem
-                                </button>
+                                    <i class="fa-solid fa-fw fa-sign-out-alt text-sm"></i>
+                        Keluar Sistem</button>
                             </form>
                         </div>
                     </div>
@@ -582,7 +553,7 @@
         </header>
 
         <!-- Page Content -->
-        <div class="flex-1 overflow-y-auto p-6 sm:p-10" style="background-color: #ffffff">
+        <div class="flex-1 overflow-y-auto p-6 sm:p-10" style="background-color: var(--color-paper)">
             @yield ('content')
         </div>
     </main>
@@ -728,6 +699,73 @@
                             form.submit();
                         }
                     });
+                });
+            });
+        });
+    </script>
+
+    <!-- Global Real-Time Search Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Find all search inputs across the application
+            const searchInputs = document.querySelectorAll('input[name="search"]');
+            
+            searchInputs.forEach(input => {
+                // Prevent form submission on enter for realtime search inputs
+                const form = input.closest('form');
+                if (form) {
+                    form.addEventListener('submit', function(e) {
+                        e.preventDefault();
+                    });
+                }
+
+                input.addEventListener('input', function () {
+                    const filter = this.value.toLowerCase();
+                    
+                    // ponytail: Client-side DOM filtering is used for instantaneous search. 
+                    // Ceiling: Only filters elements rendered on the current page. If pagination is used or dataset grows past 1000+ items, upgrade to AJAX backend queries.
+                    const findTargetContainer = (inputElement) => {
+                        let parent = inputElement.parentElement;
+                        while (parent && parent !== document.body) {
+                            // Look for a table or a grid container inside this parent
+                            const table = parent.querySelector('table');
+                            if (table) return { type: 'table', element: table };
+                            
+                            // Check for grid layouts (usually has class 'grid')
+                            const grid = parent.querySelector('.grid');
+                            if (grid) return { type: 'grid', element: grid };
+                            
+                            parent = parent.parentElement;
+                        }
+                        
+                        // Fallbacks
+                        const table = document.querySelector('table');
+                        if (table) return { type: 'table', element: table };
+                        
+                        const grid = document.querySelector('.grid');
+                        if (grid) return { type: 'grid', element: grid };
+                        
+                        return null;
+                    };
+
+                    const target = findTargetContainer(this);
+                    if (!target) return;
+
+                    if (target.type === 'table') {
+                        const rows = target.element.querySelectorAll('tbody tr');
+                        rows.forEach(row => {
+                            if (row.querySelector('td[colspan]')) return;
+                            const textContent = row.textContent.toLowerCase();
+                            row.style.display = textContent.includes(filter) ? '' : 'none';
+                        });
+                    } else if (target.type === 'grid') {
+                        const items = target.element.children;
+                        Array.from(items).forEach(item => {
+                            if (item.classList.contains('col-span-full')) return;
+                            const textContent = item.textContent.toLowerCase();
+                            item.style.display = textContent.includes(filter) ? '' : 'none';
+                        });
+                    }
                 });
             });
         });

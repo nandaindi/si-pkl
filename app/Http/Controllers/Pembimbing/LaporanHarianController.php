@@ -15,18 +15,18 @@ class LaporanHarianController extends Controller
         $siswas = Siswa::where('pembimbing_id', auth()->user()->guru->id)
             ->whereHas('laporanHarians')
             ->withCount('laporanHarians')
-            ->with(['user', 'laporanHarians' => function ($query) {
-                $query->latest('tanggal');
-            }])
+            ->with([
+                'user',
+                'laporanHarians' => function ($query) {
+                    $query->latest('tanggal');
+                },
+            ])
             ->when($search, function ($query, $search) {
                 $query->whereHas('user', function ($q) use ($search) {
                     $q->where('name', 'like', "%{$search}%");
                 });
             })
-            ->get()
-            ->sortByDesc(function ($siswa) {
-                return $siswa->laporanHarians->first()->tanggal ?? '';
-            });
+            ->paginate(10);
 
         return view('dashboard.pembimbing.laporan_harian_index', compact('siswas'));
     }
@@ -48,17 +48,24 @@ class LaporanHarianController extends Controller
         ]);
 
         if ($laporan->siswa && $laporan->siswa->user) {
-            $msg = $request->status === 'disetujui' 
-                   ? "Jurnal harian Anda tanggal " . \Carbon\Carbon::parse($laporan->tanggal)->format('d M Y') . " telah DISETUJUI." 
-                   : "Jurnal harian Anda tanggal " . \Carbon\Carbon::parse($laporan->tanggal)->format('d M Y') . " perlu DIREVISI.";
+            $msg =
+                $request->status === 'disetujui'
+                    ? 'Jurnal harian Anda tanggal ' .
+                        \Carbon\Carbon::parse($laporan->tanggal)->format('d M Y') .
+                        ' telah DISETUJUI.'
+                    : 'Jurnal harian Anda tanggal ' .
+                        \Carbon\Carbon::parse($laporan->tanggal)->format('d M Y') .
+                        ' perlu DIREVISI.';
             $icon = $request->status === 'disetujui' ? 'check-circle' : 'alert-circle';
-            
-            $laporan->siswa->user->notify(new \App\Notifications\PklNotification(
-                'Status Jurnal Harian',
-                $msg,
-                route('siswa.jurnal-harian.index', ['tab' => 'riwayat']),
-                $icon
-            ));
+
+            $laporan->siswa->user->notify(
+                new \App\Notifications\PklNotification(
+                    'Status Jurnal Harian',
+                    $msg,
+                    route('siswa.jurnal-harian.index', ['tab' => 'riwayat']),
+                    $icon,
+                ),
+            );
         }
 
         return redirect()->back()->with('success', 'Status laporan harian berhasil diperbarui.');

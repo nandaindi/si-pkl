@@ -12,7 +12,7 @@
                 <h2 class="text-3xl font-bold text-slate-900 font-display">Edit Laporan Harian</h2>
                 <p class="text-slate-500 text-sm mt-1">Perbarui aktivitas harian magang Anda beserta dokumentasi foto pendukung.</p>
             </div>
-            <div class="bg-white p-8 rounded-3xl border border-slate-200 shadow-sm relative overflow-hidden">
+            <div class="bg-white p-8 rounded-3xl border-2 border-slate-200 shadow-sm relative overflow-hidden">
                 <form action="{{ route('siswa.jurnal-harian.update', $jurnal_harian->id) }}" method="POST" enctype="multipart/form-data" class="space-y-6">
                     @csrf
                     @method('PUT')
@@ -23,7 +23,7 @@
                             id="tanggal"
                             name="tanggal"
                             value="{{ $jurnal_harian->tanggal }}"
-                            class="w-full bg-slate-50 rounded-xl border border-slate-200 px-4 py-3 text-slate-500 focus:outline-none cursor-not-allowed"
+                            class="w-full bg-slate-50 rounded-xl border-2 border-slate-200 px-4 py-3 text-slate-500 focus:outline-none cursor-not-allowed"
                             readonly
                             disabled
                         />
@@ -36,7 +36,7 @@
                             name="kegiatan"
                             rows="5"
                             placeholder="Ceritakan detail kegiatan magang yang Anda lakukan hari ini..."
-                            class="w-full bg-white rounded-xl border border-slate-200 px-4 py-3 text-slate-700 focus:border-slate-300 transition-all resize-y @error('kegiatan') border-rose-500 ring-rose-100 @enderror"
+                            class="w-full bg-white rounded-xl border-2 border-slate-200 px-4 py-3 text-slate-700 focus:border-slate-300 transition-all resize-y @error('kegiatan') border-rose-500 ring-rose-100 @enderror"
                             required
                         >{{ old('kegiatan', $jurnal_harian->kegiatan) }}</textarea>
                         @error ('kegiatan')
@@ -48,7 +48,7 @@
                         @if ($jurnal_harian->bukti_foto)
                             <div class="mb-4">
                                 <p class="text-xs text-slate-500 mb-2">Foto saat ini:</p>
-                                <img src="{{ asset('storage/' . $jurnal_harian->bukti_foto) }}" alt="Bukti Foto" class="h-32 rounded-xl object-cover border border-slate-200">
+                                <img src="{{ asset('storage/' . $jurnal_harian->bukti_foto) }}" alt="Bukti Foto" class="h-32 rounded-xl object-cover border-2 border-slate-200">
                             </div>
                         @endif
                         <input
@@ -56,7 +56,7 @@
                             id="bukti_foto"
                             name="bukti_foto"
                             accept="image/*"
-                            class="w-full bg-white rounded-xl border border-slate-200 px-4 py-2.5 text-slate-700 focus:border-slate-300 transition-all file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-slate-50 file:text-slate-900 hover:file:bg-slate-100 @error('bukti_foto') border-rose-500 @enderror"
+                            class="w-full bg-white rounded-xl border-2 border-slate-200 px-4 py-2.5 text-slate-700 focus:border-slate-300 transition-all file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-slate-50 file:text-slate-900 hover:file:bg-slate-100 @error('bukti_foto') border-rose-500 @enderror"
                         />
                         <p class="text-xs text-slate-500 mt-1.5">Format: JPG, PNG. Maks: 2MB. Biarkan kosong jika tidak ingin mengubah foto.</p>
                         @error ('bukti_foto')

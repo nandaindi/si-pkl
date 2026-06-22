@@ -22,7 +22,7 @@ class SertifikatController extends Controller
                     });
                 })
                 ->with(['siswa.user', 'siswa.sertifikat', 'siswa.laporanHarians', 'siswa.nilaiPkls', 'siswa.laporanAkhirs'])
-                ->get() 
+                ->paginate(10) 
             : collect();
 
         return view('dashboard.pembimbing.sertifikat', compact('jadwals'));

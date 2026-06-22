@@ -60,7 +60,7 @@ class LaporanAkhirController extends Controller
             ['siswa_id' => $siswa->id],
             [
                 'file_laporan' => $filePath,
-                'status_verifikasi' => 'pending',
+                'status_verifikasi' => 'disetujui',
                 'catatan_pembimbing' => null,
             ]
         );
@@ -80,12 +80,12 @@ class LaporanAkhirController extends Controller
         if ($siswa->pembimbing && $siswa->pembimbing->user) {
             $siswa->pembimbing->user->notify(new \App\Notifications\PklNotification(
                 'Laporan Akhir Diunggah',
-                "{$siswa->user->name} telah mengunggah Laporan Akhir menunggu verifikasi.",
-                route('pembimbing.laporan.index'),
+                "{$siswa->user->name} telah mengunggah Laporan Akhir dan siap untuk dijadwalkan sidang.",
+                route('pembimbing.jadwal-sidang.index'),
                 'file-text'
             ));
         }
 
-        return redirect()->route('siswa.laporan-akhir.index')->with('success', 'Berkas Laporan Akhir berhasil diunggah. Menunggu persetujuan pembimbing.');
+        return redirect()->route('siswa.laporan-akhir.index')->with('success', 'Berkas Laporan Akhir berhasil diunggah. Anda kini siap untuk dijadwalkan ujian sidang oleh pembimbing.');
     }
 }

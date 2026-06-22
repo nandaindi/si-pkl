@@ -143,27 +143,7 @@
             font-size: 11.5pt;
             font-weight: bold;
         }
-        /* Signature Images */
-        .sig-image-kepsek {
-            position: absolute;
-            left: 24.4%;
-            top: 81.5%;
-            height: 52px;
-            width: auto;
-            transform: translateX(-50%);
-            object-fit: contain;
-            mix-blend-mode: multiply;
-        }
-        .sig-image-panitia {
-            position: absolute;
-            left: 48.7%;
-            top: 81.5%;
-            height: 52px;
-            width: auto;
-            transform: translateX(-50%);
-            object-fit: contain;
-            mix-blend-mode: multiply;
-        }
+        /* Signature Images Removed for Manual Signing */
         @media print {
             body {
                 background-color: #ffffff;
@@ -229,8 +209,7 @@
                     ->isoFormat('D MMMM Y')
             }}
         </div>
-        <img src="{{ asset('images/ttd_kepsek.png') }}" class="sig-image-kepsek" alt="Ttd Kepala Sekolah" />
-        <img src="{{ asset('images/ttd_ketuapanitia.png') }}" class="sig-image-panitia" alt="Ttd Ketua Panitia" />
+
         <div class="cert-text field-kepsek">M. Apip Hafifi, S.Kom</div>
         <div class="cert-text field-panitia">Marno, S.Pd</div>
         <div class="cert-text field-pimpinan">&nbsp;</div>

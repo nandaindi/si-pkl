@@ -15,7 +15,7 @@ class TempatPklController extends Controller
         $tempat_pkls = TempatPkl::when($search, function ($query, $search) {
             $query->where('nama_instansi', 'like', "%{$search}%")
                   ->orWhere('alamat', 'like', "%{$search}%");
-        })->get();
+        })->paginate(10);
         return view('dashboard.admin.tempatpkl', compact('tempat_pkls'));
     }
 

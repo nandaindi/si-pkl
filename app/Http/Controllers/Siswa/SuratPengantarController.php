@@ -39,9 +39,7 @@ class SuratPengantarController extends Controller
 
         $tempat_pkl_id = $pengajuan->tempat_pkl_id;
 
-        $siswa_list = Siswa::whereHas('pengajuanPkls', function ($query) use ($tempat_pkl_id) {
-            $query->where('tempat_pkl_id', $tempat_pkl_id)->where('status', 'disetujui');
-        })->with('user')->get();
+        $siswa_list = collect([$siswa]);
 
         return view('dashboard.pembimbing.surat_pengantar_cetak', compact('pengajuan', 'siswa_list'));
     }

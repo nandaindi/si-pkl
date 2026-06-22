@@ -15,38 +15,32 @@ class UserSeeder extends Seeder
     {
         $admin = User::firstOrCreate(
             ['email' => 'admin@pkl.com'],
-            ['name' => 'Administrator', 'password' => bcrypt('password')]
+            ['name' => 'Administrator', 'password' => bcrypt('password')],
         );
         $admin->assignRole('admin');
 
         $pembimbing = User::firstOrCreate(
-            ['email' => 'pembimbing@pkl.com'],
-            ['name' => 'Guru Pembimbing', 'password' => bcrypt('password')]
+            ['email' => 'marno@smkmandiri01panongan.sch.id'],
+            ['name' => 'Marno, S.Pd., Gr', 'password' => bcrypt('password')],
         );
         $pembimbing->assignRole('pembimbing');
-        \App\Models\Guru::firstOrCreate(
-            ['user_id' => $pembimbing->id],
-            ['nip' => '198001012005011001']
-        );
+        \App\Models\Guru::firstOrCreate(['user_id' => $pembimbing->id], ['nip' => '198001012005011001']);
 
         $penguji = User::firstOrCreate(
             ['email' => 'penguji@pkl.com'],
-            ['name' => 'Guru Penguji', 'password' => bcrypt('password')]
+            ['name' => 'Guru Penguji', 'password' => bcrypt('password')],
         );
         $penguji->assignRole('penguji');
-        \App\Models\Guru::firstOrCreate(
-            ['user_id' => $penguji->id],
-            ['nip' => '198202022006021002']
-        );
+        \App\Models\Guru::firstOrCreate(['user_id' => $penguji->id], ['nip' => '198202022006021002']);
 
         $siswa = User::firstOrCreate(
             ['email' => 'siswa@pkl.com'],
-            ['name' => 'Siswa PKL', 'password' => bcrypt('password')]
+            ['name' => 'Siswa PKL', 'password' => bcrypt('password')],
         );
         $siswa->assignRole('siswa');
         \App\Models\Siswa::firstOrCreate(
             ['user_id' => $siswa->id],
-            ['nisn' => '0051234567', 'kelas' => 'XII TKJ 1', 'jurusan' => 'Teknik Komputer Jaringan']
+            ['nisn' => '0051234567', 'kelas' => '12', 'jurusan' => 'Teknik Komputer Jaringan'],
         );
     }
 }

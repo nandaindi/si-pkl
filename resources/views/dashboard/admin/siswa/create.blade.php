@@ -8,7 +8,7 @@
         <form
             action="{{ route('admin.siswa.store') }}"
             method="POST"
-            class="bg-white p-8 rounded-xl  border border-slate-200"
+            class="bg-white p-8 rounded-xl  border-2 border-slate-200"
         >
             @csrf
             <h3 class="text-lg font-bold text-slate-800 mb-4 border-b pb-2">Informasi Akun (Login)</h3>
@@ -20,7 +20,7 @@
                         name="name"
                         value="{{ old('name') }}"
                         required
-                        class="w-full px-4 py-2 border border-slate-300 rounded-xl focus:border-slate-300"
+                        class="w-full px-4 py-2 border border-slate-100 rounded-xl focus:border-slate-300"
                         placeholder="Masukkan nama lengkap"
                     />
                     @error ('name')
@@ -34,7 +34,7 @@
                         name="email"
                         value="{{ old('email') }}"
                         required
-                        class="w-full px-4 py-2 border border-slate-300 rounded-xl focus:border-slate-300"
+                        class="w-full px-4 py-2 border border-slate-100 rounded-xl focus:border-slate-300"
                         placeholder="siswa@pkl.com"
                     />
                     @error ('email')
@@ -48,7 +48,7 @@
                             :type="show ? 'text' : 'password'"
                             name="password"
                             required
-                            class="w-full px-4 py-2 border border-slate-300 rounded-xl focus:border-slate-300 pr-10"
+                            class="w-full px-4 py-2 border border-slate-100 rounded-xl focus:border-slate-300 pr-10"
                             placeholder="Minimal 8 karakter"
                         />
                         <button type="button" @click="show = !show" class="absolute inset-y-0 right-0 pr-3 flex items-center text-slate-400 hover:text-slate-600 focus:outline-none">
@@ -67,7 +67,7 @@
                             :type="show ? 'text' : 'password'"
                             name="password_confirmation"
                             required
-                            class="w-full px-4 py-2 border border-slate-300 rounded-xl focus:border-slate-300 pr-10"
+                            class="w-full px-4 py-2 border border-slate-100 rounded-xl focus:border-slate-300 pr-10"
                             placeholder="Ulangi password"
                         />
                         <button type="button" @click="show = !show" class="absolute inset-y-0 right-0 pr-3 flex items-center text-slate-400 hover:text-slate-600 focus:outline-none">
@@ -86,7 +86,7 @@
                         name="nisn"
                         value="{{ old('nisn') }}"
                         required
-                        class="w-full px-4 py-2 border border-slate-300 rounded-xl focus:border-slate-300"
+                        class="w-full px-4 py-2 border border-slate-100 rounded-xl focus:border-slate-300"
                         placeholder="Masukkan NISN siswa"
                     />
                     @error ('nisn')
@@ -97,7 +97,7 @@
                     <label class="block text-sm font-medium text-slate-700 mb-2">Guru Pembimbing</label>
                     <select
                         name="pembimbing_id"
-                        class="w-full px-4 py-2 border border-slate-300 rounded-xl focus:border-slate-300 appearance-none bg-white"
+                        class="w-full px-4 py-2 border border-slate-100 rounded-xl focus:border-slate-300 appearance-none bg-white"
                     >
                         <option value="">Belum Ditentukan</option>
                         @foreach($pembimbings as $guru)
@@ -113,12 +113,12 @@
                     <select
                         name="kelas"
                         required
-                        class="w-full px-4 py-2 border border-slate-300 rounded-xl focus:border-slate-300 appearance-none bg-white"
+                        class="w-full px-4 py-2 border border-slate-100 rounded-xl focus:border-slate-300 appearance-none bg-white"
                     >
                         <option value="" disabled {{ old('kelas') ? '' : 'selected' }}>Pilih Kelas</option>
-                        <option value="X" {{ old('kelas') == 'X' ? 'selected' : '' }}>X</option>
-                        <option value="XI" {{ old('kelas') == 'XI' ? 'selected' : '' }}>XI</option>
-                        <option value="XII" {{ old('kelas') == 'XII' ? 'selected' : '' }}>XII</option>
+                        <option value="10" {{ old('kelas') == '10' ? 'selected' : '' }}>10</option>
+                        <option value="11" {{ old('kelas') == '11' ? 'selected' : '' }}>11</option>
+                        <option value="12" {{ old('kelas') == '12' ? 'selected' : '' }}>12</option>
                     </select>
                     @error ('kelas')
                         <span class="text-red-500 text-xs mt-1">{{ $message }}</span>
@@ -129,7 +129,7 @@
                     <select
                         name="jurusan"
                         required
-                        class="w-full px-4 py-2 border border-slate-300 rounded-xl focus:border-slate-300 appearance-none bg-white"
+                        class="w-full px-4 py-2 border border-slate-100 rounded-xl focus:border-slate-300 appearance-none bg-white"
                     >
                         <option value="" disabled {{ old('jurusan') ? '' : 'selected' }}>Pilih Jurusan</option>
                         <option value="Teknik Kendaraan Ringan" {{ old('jurusan') == 'Teknik Kendaraan Ringan' ? 'selected' : '' }}>Teknik Kendaraan Ringan</option>
