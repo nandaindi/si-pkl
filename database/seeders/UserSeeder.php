@@ -24,7 +24,7 @@ class UserSeeder extends Seeder
             ['name' => 'Marno, S.Pd., Gr', 'password' => bcrypt('password')],
         );
         $pembimbing->assignRole('pembimbing');
-        \App\Models\Guru::firstOrCreate(['user_id' => $pembimbing->id], ['nip' => '198001012005011001']);
+        $pembimbingGuru = \App\Models\Guru::firstOrCreate(['user_id' => $pembimbing->id], ['nip' => '198001012005011001']);
 
         $penguji = User::firstOrCreate(
             ['email' => 'zulfikar@smkmandiri01panongan.sch.id'],
@@ -40,7 +40,7 @@ class UserSeeder extends Seeder
         $siswa->assignRole('siswa');
         \App\Models\Siswa::firstOrCreate(
             ['user_id' => $siswa->id],
-            ['nisn' => '0051234567', 'kelas' => '12', 'jurusan' => 'Teknik Komputer Jaringan'],
+            ['nisn' => '0051234567', 'kelas' => '12', 'jurusan' => 'Teknik Komputer Jaringan', 'pembimbing_id' => $pembimbingGuru->id],
         );
     }
 }
