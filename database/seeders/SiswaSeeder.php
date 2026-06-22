@@ -656,10 +656,33 @@ class SiswaSeeder extends Seeder
             ['nama_instansi' => 'PT Creativera Indonesia', 'alamat' => 'Gading Serpong, Tangerang', 'kuota' => 4],
         ];
 
+        $images = \Illuminate\Support\Facades\Storage::disk('public')->files('tempat_pkl');
+
         foreach ($mitras as $mitra) {
-            \App\Models\TempatPkl::firstOrCreate(
+            $gambar = null;
+            $normalizedMitraName = strtolower(preg_replace('/[^a-z0-9]/i', '', $mitra['nama_instansi']));
+
+            foreach ($images as $imagePath) {
+                $filename = pathinfo($imagePath, PATHINFO_FILENAME);
+                // Extract original filename in case of hashed prefix, wait these are just filenames
+                $normalizedFilename = strtolower(preg_replace('/[^a-z0-9]/i', '', $filename));
+
+                if (
+                    $normalizedFilename !== '' && $normalizedMitraName !== '' &&
+                    (str_contains($normalizedFilename, $normalizedMitraName) || str_contains($normalizedMitraName, $normalizedFilename))
+                ) {
+                    $gambar = $imagePath;
+                    break;
+                }
+            }
+            
+            \App\Models\TempatPkl::updateOrCreate(
                 ['nama_instansi' => $mitra['nama_instansi']],
-                ['alamat' => $mitra['alamat'], 'kuota' => $mitra['kuota']],
+                [
+                    'alamat' => $mitra['alamat'], 
+                    'kuota' => $mitra['kuota'],
+                    'gambar' => $gambar
+                ],
             );
         }
     }
