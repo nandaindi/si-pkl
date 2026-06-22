@@ -654,6 +654,11 @@ class SiswaSeeder extends Seeder
                 'kuota' => 5,
             ],
             ['nama_instansi' => 'PT Creativera Indonesia', 'alamat' => 'Gading Serpong, Tangerang', 'kuota' => 4],
+            [
+                'nama_instansi' => 'PT Indofood',
+                'alamat' => 'Jl. Sudirman Plaza, Indofood Tower, Jakarta',
+                'kuota' => 10,
+            ],
         ];
 
         $images = \Illuminate\Support\Facades\Storage::disk('public')->files('tempat_pkl');

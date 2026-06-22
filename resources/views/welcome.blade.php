@@ -938,7 +938,7 @@
                         <div>
                             <span class="mono-label block mb-2">08 · MITRA INDUSTRI</span>
                             <h2 class="font-bold text-lg tracking-tight leading-snug mb-1">Kemitraan Aktif PKL</h2>
-                            <p class="text-slate-500 text-xs leading-relaxed max-w-md">Kemitraan resmi dengan dunia usaha & industri (DUDI) untuk seluruh kompetensi keahlian.</p>
+                            <p class="text-slate-500 text-xs leading-relaxed">Kemitraan resmi dengan dunia usaha & industri (DUDI) untuk seluruh kompetensi keahlian.</p>
                         </div>
                         <div class="marquee-logo-container">
                             <div class="marquee-logo-track animate-marquee">
