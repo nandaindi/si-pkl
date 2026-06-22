@@ -14,7 +14,7 @@ class UserSeeder extends Seeder
     public function run(): void
     {
         $admin = User::firstOrCreate(
-            ['email' => 'admin@pkl.com'],
+            ['email' => 'admin@smkmandiri01panongan.sch.id'],
             ['name' => 'Administrator', 'password' => bcrypt('password')],
         );
         $admin->assignRole('admin');
@@ -27,14 +27,14 @@ class UserSeeder extends Seeder
         \App\Models\Guru::firstOrCreate(['user_id' => $pembimbing->id], ['nip' => '198001012005011001']);
 
         $penguji = User::firstOrCreate(
-            ['email' => 'penguji@pkl.com'],
-            ['name' => 'Guru Penguji', 'password' => bcrypt('password')],
+            ['email' => 'zulfikar@smkmandiri01panongan.sch.id'],
+            ['name' => 'Zulfikar, S.Pd., Gr, ', 'password' => bcrypt('password')],
         );
         $penguji->assignRole('penguji');
         \App\Models\Guru::firstOrCreate(['user_id' => $penguji->id], ['nip' => '198202022006021002']);
 
         $siswa = User::firstOrCreate(
-            ['email' => 'siswa@pkl.com'],
+            ['email' => 'siswa@smkmandiri01panongan.sch.id'],
             ['name' => 'Siswa PKL', 'password' => bcrypt('password')],
         );
         $siswa->assignRole('siswa');
