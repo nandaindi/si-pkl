@@ -22,6 +22,7 @@ class SiswaController extends Controller
                         $q->where('name', 'like', "%{$search}%");
                     });
             })
+            ->latest()
             ->paginate(10);
         return view('dashboard.admin.siswa', compact('siswas'));
     }

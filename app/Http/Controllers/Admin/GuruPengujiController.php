@@ -22,7 +22,7 @@ class GuruPengujiController extends Controller
                 ->orWhereHas('user', function ($q) use ($search) {
                     $q->where('name', 'like', "%{$search}%");
                 });
-        })
+        })->latest()
         ->with('user')->paginate(10);
         return view('dashboard.admin.gurupenguji', compact('gurus'));
     }
