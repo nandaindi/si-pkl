@@ -29,6 +29,22 @@
                     @enderror
                 </div>
                 <div class="md:col-span-2">
+                    <label class="block text-sm font-medium text-slate-700 mb-2">Jurusan (Opsional - Jika khusus jurusan tertentu)</label>
+                    <select
+                        name="jurusan"
+                        class="w-full px-4 py-2 border border-slate-100 rounded-xl focus:border-slate-300 bg-white"
+                    >
+                        <option value="" {{ old('jurusan') ? '' : 'selected' }}>Semua Jurusan</option>
+                        <option value="Teknik Kendaraan Ringan" {{ old('jurusan') == 'Teknik Kendaraan Ringan' ? 'selected' : '' }}>Teknik Kendaraan Ringan</option>
+                        <option value="Manajemen Perkantoran" {{ old('jurusan') == 'Manajemen Perkantoran' ? 'selected' : '' }}>Manajemen Perkantoran</option>
+                        <option value="Desain Komunikasi Visual" {{ old('jurusan') == 'Desain Komunikasi Visual' ? 'selected' : '' }}>Desain Komunikasi Visual</option>
+                        <option value="Teknik Komputer Jaringan" {{ old('jurusan') == 'Teknik Komputer Jaringan' ? 'selected' : '' }}>Teknik Komputer Jaringan</option>
+                    </select>
+                    @error ('jurusan')
+                        <span class="text-red-500 text-xs mt-1">{{ $message }}</span>
+                    @enderror
+                </div>
+                <div class="md:col-span-2">
                     <label class="block text-sm font-medium text-slate-700 mb-2">Alamat Lengkap</label>
                     <textarea
                         name="alamat"

@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class TempatPkl extends Model
 {
-    protected $fillable = ['nama_instansi', 'alamat', 'kuota', 'gambar'];
+    protected $fillable = ['nama_instansi', 'jurusan', 'alamat', 'kuota', 'gambar'];
 
     public function getNamaInstansiAttribute($value)
     {

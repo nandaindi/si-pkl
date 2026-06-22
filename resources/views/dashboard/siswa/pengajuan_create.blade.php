@@ -143,16 +143,27 @@
                 <h2 class="text-2xl font-bold text-slate-900 font-display">Ajukan Instansi PKL Baru</h2>
                 <p class="text-slate-500 text-sm mt-1">Pilih mitra perusahaan dan lampirkan surat pengantar resmi dari sekolah.</p>
             </div>
-            <div class="w-full md:w-80 relative">
-                <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
-                    <i class="fa-solid fa-magnifying-glass text-xs"></i>
-                </span>
-                <input
-                    type="text"
-                    id="search-instansi"
-                    placeholder="Cari berdasarkan nama atau alamat..."
-                    class="w-full pl-10 pr-4 py-2.5 search-input text-sm"
-                />
+            <div class="w-full md:w-auto flex flex-col sm:flex-row gap-3">
+                <div class="relative w-full sm:w-64">
+                    <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+                        <i class="fa-solid fa-magnifying-glass text-xs"></i>
+                    </span>
+                    <input
+                        type="text"
+                        id="search-instansi"
+                        placeholder="Cari berdasarkan nama atau alamat..."
+                        class="w-full pl-10 pr-4 py-2.5 search-input text-sm"
+                    />
+                </div>
+                <div class="w-full sm:w-56">
+                    <select id="filter-jurusan" class="w-full px-4 py-2.5 search-input text-sm bg-white cursor-pointer hover:bg-slate-50">
+                        <option value="">Semua Jurusan</option>
+                        <option value="Teknik Kendaraan Ringan">Teknik Kendaraan Ringan</option>
+                        <option value="Manajemen Perkantoran">Manajemen Perkantoran</option>
+                        <option value="Desain Komunikasi Visual">Desain Komunikasi Visual</option>
+                        <option value="Teknik Komputer Jaringan">Teknik Komputer Jaringan</option>
+                    </select>
+                </div>
             </div>
         </div>
         <form
@@ -204,6 +215,7 @@
                                 data-id="{{ $tempat->id }}"
                                 data-name="{{ strtolower($tempat->nama_instansi) }}"
                                 data-address="{{ strtolower($tempat->alamat) }}"
+                                data-jurusan="{{ $tempat->jurusan ?? '' }}"
                                 onclick="selectCompany(this)"
                             >
                                 <div class="active-indicator shadow-md">
@@ -229,10 +241,16 @@
                                         <h4 class="font-bold text-base text-slate-800 tracking-tight leading-tight line-clamp-1">
                                             {{ $tempat->nama_instansi }}
                                         </h4>
-                                        <p class="text-xs text-slate-500 flex items-start gap-1.5 leading-normal">
-                                            <i class="fa-solid fa-location-dot text-slate-400 text-xs mt-0.5 flex-shrink-0"></i>
-                                            <span class="flex-1 text-justify leading-relaxed text-slate-500">{{ $tempat->alamat }}</span>
-                                        </p>
+                                        <div class="space-y-1 mt-1.5">
+                                            <p class="text-xs text-slate-500 flex items-center gap-1.5 leading-normal">
+                                                <i class="fa-solid fa-graduation-cap text-slate-400 text-xs w-3 text-center flex-shrink-0"></i>
+                                                <span class="flex-1 truncate">{{ $tempat->jurusan ?: 'Semua Jurusan' }}</span>
+                                            </p>
+                                            <p class="text-xs text-slate-500 flex items-start gap-1.5 leading-normal">
+                                                <i class="fa-solid fa-location-dot text-slate-400 text-xs mt-0.5 w-3 text-center flex-shrink-0"></i>
+                                                <span class="flex-1 text-justify leading-relaxed text-slate-500">{{ $tempat->alamat }}</span>
+                                            </p>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="flex items-center justify-between border-t border-slate-100 pt-3 mt-1">
@@ -334,22 +352,32 @@
     </div>
     <script>
         const searchInput = document.getElementById('search-instansi');
+        const filterJurusan = document.getElementById('filter-jurusan');
         const instansiGrid = document.getElementById('instansi-grid');
         const noResultsMessage = document.getElementById('no-results-message');
         const cards = document.querySelectorAll('.company-card');
-        searchInput.addEventListener('input', function () {
-            const query = this.value.trim().toLowerCase();
+
+        function filterCards() {
+            const query = searchInput.value.trim().toLowerCase();
+            const selectedJurusan = filterJurusan.value;
             let matches = 0;
+            
             cards.forEach((card) => {
                 const name = card.getAttribute('data-name');
                 const address = card.getAttribute('data-address');
-                if (name.includes(query) || address.includes(query)) {
+                const jurusan = card.getAttribute('data-jurusan');
+                
+                const matchesSearch = name.includes(query) || address.includes(query);
+                const matchesJurusan = selectedJurusan === "" || jurusan === selectedJurusan || jurusan === "";
+                
+                if (matchesSearch && matchesJurusan) {
                     card.style.display = 'flex';
                     matches++;
                 } else {
                     card.style.display = 'none';
                 }
             });
+            
             if (matches === 0) {
                 noResultsMessage.classList.remove('hidden');
                 instansiGrid.classList.add('hidden');
@@ -357,7 +385,10 @@
                 noResultsMessage.classList.add('hidden');
                 instansiGrid.classList.remove('hidden');
             }
-        });
+        }
+
+        searchInput.addEventListener('input', filterCards);
+        filterJurusan.addEventListener('change', filterCards);
         function selectCompany(cardElement) {
             cards.forEach((c) => c.classList.remove('is-active'));
             cardElement.classList.add('is-active');

@@ -12,10 +12,18 @@ class TempatPklController extends Controller
     public function index(Request $request)
     {
         $search = $request->input('search');
+        $jurusan = $request->input('jurusan');
+        
         $tempat_pkls = TempatPkl::when($search, function ($query, $search) {
-            $query->where('nama_instansi', 'like', "%{$search}%")
+            $query->where(function($q) use ($search) {
+                $q->where('nama_instansi', 'like', "%{$search}%")
                   ->orWhere('alamat', 'like', "%{$search}%");
-        })->latest()->paginate(10);
+            });
+        })
+        ->when($jurusan, function ($query, $jurusan) {
+            $query->where('jurusan', $jurusan);
+        })
+        ->latest()->paginate(10);
         return view('dashboard.admin.tempatpkl', compact('tempat_pkls'));
     }
 
@@ -28,6 +36,7 @@ class TempatPklController extends Controller
     {
         $request->validate([
             'nama_instansi' => 'required|string|max:255|unique:tempat_pkls,nama_instansi',
+            'jurusan' => 'nullable|string|max:255',
             'alamat' => 'required|string',
             'kuota' => 'required|integer|min:0',
             'gambar' => 'required|image|mimes:jpg,jpeg,png|max:2048',
@@ -53,6 +62,7 @@ class TempatPklController extends Controller
     {
         $request->validate([
             'nama_instansi' => 'required|string|max:255|unique:tempat_pkls,nama_instansi,' . $tempat_pkl->id,
+            'jurusan' => 'nullable|string|max:255',
             'alamat' => 'required|string',
             'kuota' => 'required|integer|min:0',
             'gambar' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',

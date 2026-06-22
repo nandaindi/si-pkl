@@ -534,54 +534,64 @@ class SiswaSeeder extends Seeder
                 'nama_instansi' => 'PT Astra International Tbk - Auto2000',
                 'alamat' => 'Jl. Gaya Motor III No.3, Sunter II, Jakarta Utara',
                 'kuota' => 5,
+                'jurusan' => 'Teknik Kendaraan Ringan',
             ],
             [
                 'nama_instansi' => 'PT Astra Daihatsu Motor',
                 'alamat' => 'Jl. Gaya Motor III No.5, Sunter II, Jakarta Utara',
                 'kuota' => 6,
+                'jurusan' => 'Teknik Kendaraan Ringan',
             ],
             [
                 'nama_instansi' => 'PT Honda Prospect Motor',
                 'alamat' => 'Jl. Gaya Motor I No.2, Sunter II, Jakarta Utara',
                 'kuota' => 4,
+                'jurusan' => 'Teknik Kendaraan Ringan',
             ],
             [
                 'nama_instansi' => 'PT Yamaha Indonesia Motor Mfg.',
                 'alamat' => 'Jl. Laksana I, Sentul, Cibinong, Bogor',
                 'kuota' => 8,
+                'jurusan' => 'Teknik Kendaraan Ringan',
             ],
             [
                 'nama_instansi' => 'PT Nusa Karya Artha (NKA) - NISSAN Datsun',
                 'alamat' => 'Jl. H.R. Rasuna Said, Jakarta Selatan',
                 'kuota' => 4,
+                'jurusan' => 'Teknik Kendaraan Ringan',
             ],
             [
                 'nama_instansi' => 'PT Mitra Pinasthika Mulia (Bosch Car Service)',
                 'alamat' => 'Jl. Jend. Basuki Rachmad, Surabaya',
                 'kuota' => 5,
+                'jurusan' => 'Teknik Kendaraan Ringan',
             ],
             // OTKP
             [
                 'nama_instansi' => 'PT Mayora Indah Tbk',
                 'alamat' => 'Jl. Tomang Raya No.21-23, Jakarta Barat',
                 'kuota' => 10,
+                'jurusan' => 'Manajemen Perkantoran',
             ],
             [
                 'nama_instansi' => 'PT Unilever Indonesia Tbk',
                 'alamat' => 'BSD Green Office Park, Kavling 3, Tangerang',
                 'kuota' => 8,
+                'jurusan' => 'Manajemen Perkantoran',
             ],
-            ['nama_instansi' => 'PT Sinar Sosro', 'alamat' => 'Jl. Raya Sultan Agung KM 28, Bekasi', 'kuota' => 6],
+            ['nama_instansi' => 'PT Sinar Sosro', 'alamat' => 'Jl. Raya Sultan Agung KM 28, Bekasi', 'kuota' => 6, 'jurusan' => 'Manajemen Perkantoran'],
             [
                 'nama_instansi' => 'PT Gramedia Asri Media',
                 'alamat' => 'Jl. Palmerah Barat No.29-37, Jakarta Pusat',
                 'kuota' => 10,
+                'jurusan' => 'Manajemen Perkantoran',
             ],
-            ['nama_instansi' => 'PT JNE Express', 'alamat' => 'Jl. Tomang Raya No.11, Jakarta Barat', 'kuota' => 12],
+            ['nama_instansi' => 'PT JNE Express', 'alamat' => 'Jl. Tomang Raya No.11, Jakarta Barat', 'kuota' => 12, 'jurusan' => 'Manajemen Perkantoran'],
             [
                 'nama_instansi' => 'PT BFI Finance Indonesia Tbk',
                 'alamat' => 'BFI Tower, Sunburst BSD, Tangerang',
                 'kuota' => 5,
+                'jurusan' => 'Manajemen Perkantoran',
             ],
             // AKL
             [
@@ -611,53 +621,63 @@ class SiswaSeeder extends Seeder
                 'nama_instansi' => 'PT Telkom Indonesia (Persero) Tbk',
                 'alamat' => 'Telkom Landmark Tower, Jl. Jend. Gatot Subroto, Jakarta Pusat',
                 'kuota' => 10,
+                'jurusan' => 'Teknik Komputer Jaringan',
             ],
             [
                 'nama_instansi' => 'PT Indosat Tbk',
                 'alamat' => 'Jl. Medan Merdeka Barat No.21, Jakarta Pusat',
                 'kuota' => 8,
+                'jurusan' => 'Teknik Komputer Jaringan',
             ],
             [
                 'nama_instansi' => 'PT NTT Indonesia (Nusantara Data Center)',
                 'alamat' => 'Jl. Kuningan Barat, Jakarta Selatan',
                 'kuota' => 6,
+                'jurusan' => 'Teknik Komputer Jaringan',
             ],
             [
                 'nama_instansi' => 'PT Solusi Tunas Pratama (STP)',
                 'alamat' => 'Menara Karya, Jl. HR Rasuna Said, Jakarta Selatan',
                 'kuota' => 5,
+                'jurusan' => 'Teknik Komputer Jaringan',
             ],
             [
                 'nama_instansi' => 'PT XL Axiata Tbk',
                 'alamat' => 'XL Axiata Tower, Jl. H.R. Rasuna Said, Jakarta Selatan',
                 'kuota' => 8,
+                'jurusan' => 'Teknik Komputer Jaringan',
             ],
             [
                 'nama_instansi' => 'PT Biznet Gio Nusantara',
                 'alamat' => 'MidPlaza 2, Jl. Jend. Sudirman, Jakarta Pusat',
                 'kuota' => 5,
+                'jurusan' => 'Teknik Komputer Jaringan',
             ],
             // MM
             [
                 'nama_instansi' => 'PT Dwi Inti Selaras (DIGITAL PRINTING)',
                 'alamat' => 'Ruko Panongan, Tangerang',
                 'kuota' => 4,
+                'jurusan' => 'Desain Komunikasi Visual',
             ],
             [
                 'nama_instansi' => 'PT MNC Digital Entertainment Tbk',
                 'alamat' => 'MNC Studios, Jl. Raya Pejuangan, Jakarta Barat',
                 'kuota' => 6,
+                'jurusan' => 'Desain Komunikasi Visual',
             ],
             [
                 'nama_instansi' => 'PT Visinema Pictures',
                 'alamat' => 'Jl. Cilandak Tengah No.3, Jakarta Selatan',
                 'kuota' => 5,
+                'jurusan' => 'Desain Komunikasi Visual',
             ],
-            ['nama_instansi' => 'PT Creativera Indonesia', 'alamat' => 'Gading Serpong, Tangerang', 'kuota' => 4],
+            ['nama_instansi' => 'PT Creativera Indonesia', 'alamat' => 'Gading Serpong, Tangerang', 'kuota' => 4, 'jurusan' => 'Desain Komunikasi Visual'],
             [
                 'nama_instansi' => 'PT Indofood',
                 'alamat' => 'Jl. Sudirman Plaza, Indofood Tower, Jakarta',
                 'kuota' => 10,
+                'jurusan' => 'Desain Komunikasi Visual',
             ],
         ];
 
@@ -686,8 +706,9 @@ class SiswaSeeder extends Seeder
                 [
                     'alamat' => $mitra['alamat'], 
                     'kuota' => $mitra['kuota'],
-                    'gambar' => $gambar
-                ],
+                    'gambar' => $gambar,
+                    'jurusan' => $mitra['jurusan'] ?? null
+                ]
             );
         }
     }
