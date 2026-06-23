@@ -407,8 +407,7 @@
                                     id="remember_me"
                                     type="checkbox"
                                     name="remember"
-                                    class="w-4 h-4 rounded border-slate-300 text-ink cursor-pointer transition-colors"
-                                    style="background-color: var(--color-paper)"
+                                    class="w-4 h-4 rounded border-slate-300 text-slate-800 focus:ring-slate-800 cursor-pointer"
                                 />
                                 <span
                                     class="ml-2 text-xs text-slate-500 font-semibold group-hover:text-slate-900 transition-colors"

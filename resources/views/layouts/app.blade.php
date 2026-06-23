@@ -585,9 +585,11 @@
                             >
                         </div>
                         @php
-                            $name = Auth::check() ? Auth::user()->name : 'guest';
-                            $urlName = urlencode($name);
-                            $avatarUrl = "https://ui-avatars.com/api/?name={$urlName}&background=random&color=fff&bold=true";
+                            if (Auth::check() && Auth::user()->avatar) {
+                                $avatarUrl = \Illuminate\Support\Facades\Storage::url(Auth::user()->avatar);
+                            } else {
+                                $avatarUrl = asset('images/default-profile.png');
+                            }
                         @endphp
                         <div
                             class="w-11 h-11 rounded-full bg-slate-100 border-2 border-white shadow-sm flex items-center justify-center overflow-hidden"

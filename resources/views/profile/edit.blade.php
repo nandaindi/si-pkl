@@ -11,18 +11,29 @@
                 <h2 class="text-2xl font-bold text-slate-900 font-display">Pengaturan Profil</h2>
                 <p class="text-slate-500 text-sm mt-1">Perbarui informasi profil dan alamat email akun Anda.</p>
             </div>
-            @if (session('status') === 'profile-updated')
-                <div class="mb-6 bg-green-50 border border-green-200 text-green-700 px-6 py-4 rounded-xl flex items-center gap-3">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                    <span class="text-sm font-bold">Profil berhasil diperbarui.</span>
-                </div>
-            @endif
+
             <div class="bg-white p-8 rounded-xl border border-slate-200">
                 <h3 class="text-lg font-bold text-slate-900 mb-1 font-display">Informasi Profil</h3>
                 <p class="text-slate-500 text-sm mb-6">Perbarui nama dan email Anda.</p>
-                <form method="post" action="{{ route('profile.update') }}" class="space-y-6">
+                <form method="post" action="{{ route('profile.update') }}" enctype="multipart/form-data" class="space-y-6">
                     @csrf
                     @method('patch')
+                    <div class="max-w-xl flex items-center gap-6">
+                        <div class="shrink-0">
+                            @if ($user->avatar)
+                                <img class="h-20 w-20 object-cover rounded-full border-2 border-slate-200" src="{{ Storage::url($user->avatar) }}" alt="{{ $user->name }}" />
+                            @else
+                                <img class="h-20 w-20 object-cover rounded-full border-2 border-slate-200" src="{{ asset('images/default-profile.png') }}" alt="{{ $user->name }}" />
+                            @endif
+                        </div>
+                        <div class="flex-1">
+                            <label class="block text-xs font-bold text-slate-700 mb-2 uppercase tracking-wider">Foto Profil (Opsional)</label>
+                            <input type="file" name="avatar" accept="image/jpeg, image/png, image/jpg" class="block w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-sm file:font-semibold file:bg-slate-50 file:text-slate-700 hover:file:bg-slate-100">
+                            @error('avatar')
+                                <span class="text-red-500 text-xs mt-1 block">{{ $message }}</span>
+                            @enderror
+                        </div>
+                    </div>
                     <div class="max-w-xl">
                         <label class="block text-xs font-bold text-slate-700 mb-2 uppercase tracking-wider">Nama Lengkap</label>
                         <input type="text" name="name" value="{{ old('name', $user->name) }}" required autofocus autocomplete="name" class="w-full px-4 py-3 border border-slate-300 rounded-xl focus:border-slate-300 text-sm">

@@ -6,16 +6,7 @@
         <p class="text-gray-500 mt-2 text-lg">Temukan dan pilih perusahaan terbaik untuk melaksanakan Praktik Kerja Lapangan (PKL) Anda.</p>
     </div>
 
-    @if (session('error'))
-        <div class="bg-red-50 border-l-4 border-red-500 p-4 mb-6 rounded-r-md">
-            <div class="flex">
-                <i class="fa-solid fa-circle-exclamation text-red-500 mt-0.5"></i>
-                <div class="ml-3">
-                    <p class="text-sm text-red-700 font-medium">{{ session('error') }}</p>
-                </div>
-            </div>
-        </div>
-    @endif
+
 
     <form action="{{ route('siswa.pengajuan.store') }}" method="POST" id="form-pengajuan">
         @csrf
@@ -99,8 +90,8 @@
                         <!-- Card Footer -->
                         <div class="pt-4 border-t border-gray-100 flex items-center justify-between mt-auto">
                             <span class="text-sm font-medium text-gray-500">Sisa Kuota:</span>
-                            <span class="text-sm font-extrabold {{ $tempat->kuota > 3 ? 'text-emerald-600' : 'text-orange-600' }}">
-                                {{ $tempat->kuota }} Posisi
+                            <span class="text-sm font-extrabold {{ $tempat->sisa_kuota > 3 ? 'text-emerald-600' : 'text-orange-600' }}">
+                                {{ $tempat->sisa_kuota }} Posisi
                             </span>
                         </div>
                         </div>

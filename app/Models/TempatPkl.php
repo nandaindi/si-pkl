@@ -45,6 +45,11 @@ class TempatPkl extends Model
 
     public function pengajuanPkls()
     {
-        return $this->hasMany(PengajuanPkl::class);
+        return $this->hasMany(PengajuanPkl::class, 'tempat_pkl_id');
+    }
+
+    public function getSisaKuotaAttribute()
+    {
+        return $this->kuota - $this->pengajuanPkls()->where('status', 'disetujui')->count();
     }
 }

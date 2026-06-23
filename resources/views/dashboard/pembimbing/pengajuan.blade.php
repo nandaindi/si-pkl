@@ -60,8 +60,8 @@
                                 <div class="text-[11px] text-slate-500 font-medium">
                                     Kuota Sisa:
                                     <span
-                                        class="{{ $pengajuan->tempatPkl->kuota > 0 ? 'text-green-600' : 'text-red-600' }} font-bold"
-                                        >{{ $pengajuan->tempatPkl->kuota }}</span
+                                        class="{{ $pengajuan->tempatPkl->sisa_kuota > 0 ? 'text-green-600' : 'text-red-600' }} font-bold"
+                                        >{{ $pengajuan->tempatPkl->sisa_kuota }}</span
                                     >
                                     Siswa
                                 </div>

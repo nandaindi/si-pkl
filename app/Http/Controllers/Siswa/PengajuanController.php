@@ -17,8 +17,15 @@ class PengajuanController extends Controller
             return redirect()->route('dashboard')->with('error', 'Profil siswa belum dibuat oleh admin.');
         }
 
-        $pengajuans = PengajuanPkl::where('siswa_id', $siswa->id)->with('tempatPkl')->latest()->paginate(10);
         $has_approved = PengajuanPkl::where('siswa_id', $siswa->id)->where('status', 'disetujui')->exists();
+
+        $query = PengajuanPkl::where('siswa_id', $siswa->id)->with('tempatPkl')->latest();
+        
+        if ($has_approved) {
+            $query->where('status', 'disetujui');
+        }
+        
+        $pengajuans = $query->paginate(10);
 
         return view('dashboard.siswa.pengajuan', compact('pengajuans', 'has_approved'));
     }
@@ -38,7 +45,9 @@ class PengajuanController extends Controller
             return redirect()->route('siswa.pengajuan.index')->with('error', 'Anda sudah memiliki pengajuan yang aktif atau disetujui.');
         }
 
-        $tempat_pkls = TempatPkl::where('kuota', '>', 0)->get();
+        $tempat_pkls = TempatPkl::withCount(['pengajuanPkls' => function ($q) {
+            $q->where('status', 'disetujui');
+        }])->havingRaw('kuota > pengajuan_pkls_count')->get();
         return view('dashboard.siswa.pengajuan_create', compact('tempat_pkls'));
     }
 

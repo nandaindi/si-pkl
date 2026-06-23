@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Riwayat Laporan Harian - {{ $siswa->user->name }}</title>
     <style>
         body {
@@ -49,7 +49,8 @@
             border-collapse: collapse;
             margin-top: 20px;
         }
-        .laporan-table th, .laporan-table td {
+        .laporan-table th,
+        .laporan-table td {
             border: 1px solid #999;
             padding: 8px;
         }
@@ -107,12 +108,12 @@
             @php
                 $pengajuan = \App\Models\PengajuanPkl::where('siswa_id', $siswa->id)->where('status', 'disetujui')->first();
             @endphp
-            @if($pengajuan && $pengajuan->tempatPkl)
-            <tr>
-                <td class="label">Tempat PKL</td>
-                <td class="colon">:</td>
-                <td>{{ $pengajuan->tempatPkl->nama_instansi }}</td>
-            </tr>
+            @if ($pengajuan && $pengajuan->tempatPkl)
+                <tr>
+                    <td class="label">Tempat PKL</td>
+                    <td class="colon">:</td>
+                    <td>{{ $pengajuan->tempatPkl->nama_instansi }}</td>
+                </tr>
             @endif
             <tr>
                 <td class="label">Guru Pembimbing</td>
@@ -125,21 +126,27 @@
     <table class="laporan-table">
         <thead>
             <tr>
-                <th style="width: 5%;">No</th>
-                <th style="width: 15%;">Tanggal</th>
-                <th style="width: 80%;">Uraian Kegiatan</th>
+                <th style="width: 5%">No</th>
+                <th style="width: 15%">Tanggal</th>
+                <th style="width: 80%">Uraian Kegiatan</th>
             </tr>
         </thead>
         <tbody>
             @forelse ($laporans as $index => $laporan)
                 <tr>
-                    <td style="text-align: center;">{{ $index + 1 }}</td>
-                    <td>{{ \Carbon\Carbon::parse($laporan->tanggal)->translatedFormat('d F Y') }}</td>
+                    <td style="text-align: center">{{ $index + 1 }}</td>
+                    <td>
+                        {{
+                            \Carbon\Carbon::parse($laporan->tanggal)->translatedFormat(
+                                'd F Y',
+                            )
+                        }}
+                    </td>
                     <td>{{ $laporan->kegiatan }}</td>
                 </tr>
             @empty
                 <tr>
-                    <td colspan="3" style="text-align: center;">Tidak ada data laporan harian.</td>
+                    <td colspan="3" style="text-align: center">Tidak ada data laporan harian.</td>
                 </tr>
             @endforelse
         </tbody>
@@ -150,7 +157,10 @@
         <p>Mengetahui,</p>
         <p>Guru Pembimbing</p>
         <div class="signature-space"></div>
-        <p><strong><u>{{ $siswa->pembimbing->user->name ?? '.....................................' }}</u></strong></p>
+        <p><strong><u>{{
+                $siswa->pembimbing->user->name ??
+                    '.....................................'
+            }}</u></strong></p>
     </div>
 </body>
 </html>

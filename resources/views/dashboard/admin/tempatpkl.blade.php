@@ -77,8 +77,7 @@
                                     <td class="px-6 py-4 text-sm text-slate-500">
                                         <span
                                             class="px-3 py-1 bg-slate-50 text-slate-900 rounded-full font-bold text-xs font-label"
-                                            >{{ $tempat->kuota }} Siswa</span
-                                        >
+                                            >{{ $tempat->sisa_kuota }} Siswa</span>
                                     </td>
                                     <td class="px-6 py-4 text-sm text-center">
                                         <div class="flex items-center justify-center gap-2">

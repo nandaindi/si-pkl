@@ -43,14 +43,9 @@ class PengajuanController extends Controller
 
                 if ($status === 'disetujui') {
                     if ($oldStatus !== 'disetujui') {
-                        if ($tempat->kuota <= 0) {
+                        if ($tempat->sisa_kuota <= 0) {
                             throw new \Exception('Kuota perusahaan ini sudah penuh.');
                         }
-                        $tempat->decrement('kuota');
-                    }
-                } elseif ($status === 'ditolak') {
-                    if ($oldStatus === 'disetujui') {
-                        $tempat->increment('kuota');
                     }
                 }
 

@@ -9,13 +9,7 @@
                 <h2 class="text-3xl font-bold text-slate-900 font-display">Penerbitan Sertifikat PKL</h2>
                 <p class="text-slate-500 text-base mt-2">Terbitkan sertifikat otomatis untuk siswa bimbingan Anda yang telah menyelesaikan sidang PKL.</p>
             </div>
-            @if (session('success'))
-                <div
-                    class="mb-6 bg-emerald-50 border border-emerald-200 text-emerald-700 text-sm font-bold px-4 py-3 rounded-xl"
-                >
-                    {{ session('success') }}
-                </div>
-            @endif
+
             <form action="{{ route('pembimbing.sertifikat.index') }}" method="GET" class="relative w-96 mb-6">
                 <input type="text" name="search" value="{{ request('search') }}" placeholder="Cari nama siswa..." class="w-full pl-10 pr-4 py-2 border border-slate-100 rounded-xl focus:border-slate-300 text-sm bg-white shadow-sm" />
                 <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
