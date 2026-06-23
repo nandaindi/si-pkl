@@ -47,7 +47,9 @@ class PengajuanController extends Controller
 
         $tempat_pkls = TempatPkl::withCount(['pengajuanPkls' => function ($q) {
             $q->where('status', 'disetujui');
-        }])->havingRaw('kuota > pengajuan_pkls_count')->get();
+        }])->get()->filter(function ($tempat) {
+            return $tempat->kuota > $tempat->pengajuan_pkls_count;
+        });
         return view('dashboard.siswa.pengajuan_create', compact('tempat_pkls'));
     }
 
