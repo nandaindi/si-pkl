@@ -12,7 +12,9 @@ export default {
     theme: {
         extend: {
             fontFamily: {
-                sans: ['"DM Sans"', ...defaultTheme.fontFamily.sans],
+                sans: ['Poppins'],
+                serif: ['Poppins'],
+                mono: ['Poppins'],
             },
             colors: {
                 primary: '#DB2777',

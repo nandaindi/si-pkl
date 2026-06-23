@@ -6,13 +6,13 @@
     <meta name="csrf-token" content="{{ csrf_token() }}" />
 
     <title>{{ config('app.name', 'SIPKL') }}</title>
-    <link rel="icon" type="image/png" href="{{ asset('images/logosmk.png') }}">
+    <link rel="icon" type="image/png" href="{{ asset('images/logosmk.png') }}" />
 
     <!-- Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Poppins:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
         rel="stylesheet"
     />
 
@@ -26,9 +26,9 @@
 
     <style>
         :root {
-            --font-body: 'Plus Jakarta Sans', sans-serif;
-            --font-display: 'Poppins', sans-serif;
-            --font-label: 'JetBrains Mono', monospace;
+            --font-body: 'Poppins';
+            --font-display: 'Poppins';
+            --font-label: 'Poppins';
 
             /* Senior Developer - Clean Dashboard Theme Colors (OKLCH based) */
             --color-paper: oklch(97% 0.004 240); /* soft gray background */
@@ -57,7 +57,7 @@
             --ease-spring: cubic-bezier(0.16, 1, 0.3, 1);
 
             --shadow-clay: 0 1px 4px oklch(20% 0.012 250 / 0.07), 0 2px 8px oklch(20% 0.012 250 / 0.05);
-            --shadow-clay-hover: 0 4px 16px oklch(20% 0.012 250 / 0.10), 0 2px 6px oklch(20% 0.012 250 / 0.06);
+            --shadow-clay-hover: 0 4px 16px oklch(20% 0.012 250 / 0.1), 0 2px 6px oklch(20% 0.012 250 / 0.06);
         }
 
         body {
@@ -300,127 +300,199 @@
         <div class="flex-1 overflow-y-auto py-8 px-6 space-y-2 nav-items">
             <div class="text-[10px] font-bold text-slate-400 uppercase tracking-[0.1em] mb-4 px-2">Menu Utama</div>
 
-            <a href="/dashboard"
-                        class="group flex items-center gap-3 px-4 py-3.5 rounded-xl {{ request()->routeIs('dashboard', '*.dashboard') ? 'bg-blue-50 text-blue-600 font-bold' : 'text-slate-500 hover:bg-blue-50 hover:text-blue-600 font-medium' }} transition-all"
+            <a
+                href="/dashboard"
+                class="group flex items-center gap-3 px-4 py-3.5 rounded-xl {{ request()->routeIs('dashboard', '*.dashboard') ? 'bg-blue-50 text-blue-600 font-bold' : 'text-slate-500 hover:bg-blue-50 hover:text-blue-600 font-medium' }} transition-all"
             >
-                <i class="fa-solid fa-fw fa-house text-[1.1rem] {{ request()->routeIs('dashboard', '*.dashboard') ? 'text-blue-600' : 'text-slate-400 group-hover:text-blue-600' }}"></i>
-                        Dashboard</a>
+                <i
+                    class="fa-solid fa-fw fa-house text-[1.1rem] {{ request()->routeIs('dashboard', '*.dashboard') ? 'text-blue-600' : 'text-slate-400 group-hover:text-blue-600' }}"
+                ></i>
+                Dashboard</a
+            >
 
             @if (Auth::check())
                 @hasrole ('admin')
                     <div class="text-[10px] font-bold text-slate-400 uppercase tracking-[0.1em] mt-8 mb-4 px-2">
                         Admin Panel
                     </div>
-                    <a href="{{ route('admin.siswa.index') }}"
+                    <a
+                        href="{{ route('admin.siswa.index') }}"
                         class="group flex items-center gap-3 px-4 py-3.5 rounded-xl {{ request()->routeIs('admin.siswa.*') ? 'bg-blue-50 text-blue-600 font-bold' : 'text-slate-500 hover:bg-blue-50 hover:text-blue-600 font-medium' }} transition-all"
                     >
                         <!-- Ikon Pengguna -->
-                        <i class="fa-solid fa-fw fa-users text-[1.1rem] {{ request()->routeIs('admin.siswa.*') ? 'text-blue-600' : 'text-slate-400 group-hover:text-blue-600' }}"></i>
-                        Kelola Data Siswa</a>
-                    <a href="{{ route('admin.guru-pembimbing.index') }}"
+                        <i
+                            class="fa-solid fa-fw fa-users text-[1.1rem] {{ request()->routeIs('admin.siswa.*') ? 'text-blue-600' : 'text-slate-400 group-hover:text-blue-600' }}"
+                        ></i>
+                        Kelola Data Siswa</a
+                    >
+                    <a
+                        href="{{ route('admin.guru-pembimbing.index') }}"
                         class="group flex items-center gap-3 px-4 py-3.5 rounded-xl {{ request()->routeIs('admin.guru-pembimbing.*') ? 'bg-blue-50 text-blue-600 font-bold' : 'text-slate-500 hover:bg-blue-50 hover:text-blue-600 font-medium' }} transition-all"
                     >
                         <!-- Ikon Koper -->
-                        <i class="fa-solid fa-fw fa-chalkboard-user text-[1.1rem] {{ request()->routeIs('admin.guru-pembimbing.*') ? 'text-blue-600' : 'text-slate-400 group-hover:text-blue-600' }}"></i>
-                        Kelola Data Guru Pembimbing</a>
-                    <a href="{{ route('admin.guru-penguji.index') }}"
+                        <i
+                            class="fa-solid fa-fw fa-chalkboard-user text-[1.1rem] {{ request()->routeIs('admin.guru-pembimbing.*') ? 'text-blue-600' : 'text-slate-400 group-hover:text-blue-600' }}"
+                        ></i>
+                        Kelola Data Guru Pembimbing</a
+                    >
+                    <a
+                        href="{{ route('admin.guru-penguji.index') }}"
                         class="group flex items-center gap-3 px-4 py-3.5 rounded-xl {{ request()->routeIs('admin.guru-penguji.*') ? 'bg-blue-50 text-blue-600 font-bold' : 'text-slate-500 hover:bg-blue-50 hover:text-blue-600 font-medium' }} transition-all"
                     >
                         <!-- Icon Book Open (for Penguji/Academic) -->
-                        <i class="fa-solid fa-fw fa-chalkboard-user text-[1.1rem] {{ request()->routeIs('admin.guru-penguji.*') ? 'text-blue-600' : 'text-slate-400 group-hover:text-blue-600' }}"></i>
-                        Kelola Data Guru Penguji</a>
-                    <a href="{{ route('admin.tempat-pkl.index') }}"
+                        <i
+                            class="fa-solid fa-fw fa-chalkboard-user text-[1.1rem] {{ request()->routeIs('admin.guru-penguji.*') ? 'text-blue-600' : 'text-slate-400 group-hover:text-blue-600' }}"
+                        ></i>
+                        Kelola Data Guru Penguji</a
+                    >
+                    <a
+                        href="{{ route('admin.tempat-pkl.index') }}"
                         class="group flex items-center gap-3 px-4 py-3.5 rounded-xl {{ request()->routeIs('admin.tempat-pkl.*') ? 'bg-blue-50 text-blue-600 font-bold' : 'text-slate-500 hover:bg-blue-50 hover:text-blue-600 font-medium' }} transition-all"
                     >
                         <!-- Ikon Gedung Kantor -->
-                        <i class="fa-solid fa-fw fa-building text-[1.1rem] {{ request()->routeIs('admin.tempat-pkl.*') ? 'text-blue-600' : 'text-slate-400 group-hover:text-blue-600' }}"></i>
-                        Kelola Data PKL</a>
+                        <i
+                            class="fa-solid fa-fw fa-building text-[1.1rem] {{ request()->routeIs('admin.tempat-pkl.*') ? 'text-blue-600' : 'text-slate-400 group-hover:text-blue-600' }}"
+                        ></i>
+                        Kelola Data PKL</a
+                    >
                 @endhasrole
                 @hasrole ('pembimbing')
                     <div class="text-[10px] font-bold text-slate-400 uppercase tracking-[0.1em] mt-8 mb-4 px-2">
                         Bimbingan
                     </div>
-                    <a href="{{ route('pembimbing.pengajuan.index') }}"
+                    <a
+                        href="{{ route('pembimbing.pengajuan.index') }}"
                         class="group flex items-center gap-3 px-4 py-3.5 rounded-xl {{ request()->routeIs('pembimbing.pengajuan.*') ? 'bg-blue-50 text-blue-600 font-bold' : 'text-slate-500 hover:bg-blue-50 hover:text-blue-600 font-medium' }} transition-all"
                     >
                         <!-- Ikon Lingkaran Centang -->
-                        <i class="fa-solid fa-fw fa-check-circle text-[1.1rem] {{ request()->routeIs('pembimbing.pengajuan.*') ? 'text-blue-600' : 'text-slate-400 group-hover:text-blue-600' }}"></i>
-                        Verifikasi Pengajuan PKL</a>
-                    <a href="{{ route('pembimbing.laporan-harian.index') }}"
+                        <i
+                            class="fa-solid fa-fw fa-check-circle text-[1.1rem] {{ request()->routeIs('pembimbing.pengajuan.*') ? 'text-blue-600' : 'text-slate-400 group-hover:text-blue-600' }}"
+                        ></i>
+                        Verifikasi Pengajuan PKL</a
+                    >
+                    <a
+                        href="{{ route('pembimbing.laporan-harian.index') }}"
                         class="group flex items-center gap-3 px-4 py-3.5 rounded-xl {{ request()->routeIs('pembimbing.laporan.*') || request()->routeIs('pembimbing.laporan-harian.*') ? 'bg-blue-50 text-blue-600 font-bold' : 'text-slate-500 hover:bg-blue-50 hover:text-blue-600 font-medium' }} transition-all"
                     >
                         <!-- Ikon Papan Ujian Centang -->
-                        <i class="fa-solid fa-fw fa-clipboard-check text-[1.1rem] {{ request()->routeIs('pembimbing.laporan.*') || request()->routeIs('laporan-harian.*') ? 'text-blue-600' : 'text-slate-400 group-hover:text-blue-600' }}"></i>
-                        Monitoring Laporan PKL</a>
-                    <a href="{{ route('pembimbing.jadwal-sidang.index') }}"
+                        <i
+                            class="fa-solid fa-fw fa-clipboard-check text-[1.1rem] {{ request()->routeIs('pembimbing.laporan.*') || request()->routeIs('laporan-harian.*') ? 'text-blue-600' : 'text-slate-400 group-hover:text-blue-600' }}"
+                        ></i>
+                        Monitoring Laporan PKL</a
+                    >
+                    <a
+                        href="{{ route('pembimbing.jadwal-sidang.index') }}"
                         class="group flex items-center gap-3 px-4 py-3.5 rounded-xl {{ request()->routeIs('pembimbing.jadwal-sidang.*') ? 'bg-blue-50 text-blue-600 font-bold' : 'text-slate-500 hover:bg-blue-50 hover:text-blue-600 font-medium' }} transition-all"
                     >
                         <!-- Ikon Kalender -->
-                        <i class="fa-solid fa-fw fa-calendar-alt text-[1.1rem] {{ request()->routeIs('pembimbing.jadwal-sidang.*') ? 'text-blue-600' : 'text-slate-400 group-hover:text-blue-600' }}"></i>
-                        Kelola Jadwal Sidang</a>
-                    <a href="{{ route('pembimbing.nilai.index') }}"
+                        <i
+                            class="fa-solid fa-fw fa-calendar-alt text-[1.1rem] {{ request()->routeIs('pembimbing.jadwal-sidang.*') ? 'text-blue-600' : 'text-slate-400 group-hover:text-blue-600' }}"
+                        ></i>
+                        Kelola Jadwal Sidang</a
+                    >
+                    <a
+                        href="{{ route('pembimbing.nilai.index') }}"
                         class="group flex items-center gap-3 px-4 py-3.5 rounded-xl {{ request()->routeIs('pembimbing.nilai.*') ? 'bg-blue-50 text-blue-600 font-bold' : 'text-slate-500 hover:bg-blue-50 hover:text-blue-600 font-medium' }} transition-all"
                     >
                         <!-- Ikon Grafik Batang -->
-                        <i class="fa-solid fa-fw fa-chart-bar text-[1.1rem] {{ request()->routeIs('pembimbing.nilai.*') ? 'text-blue-600' : 'text-slate-400 group-hover:text-blue-600' }}"></i>
-                        Rekap Nilai PKL</a>
-                    <a href="{{ route('pembimbing.sertifikat.index') }}"
+                        <i
+                            class="fa-solid fa-fw fa-chart-bar text-[1.1rem] {{ request()->routeIs('pembimbing.nilai.*') ? 'text-blue-600' : 'text-slate-400 group-hover:text-blue-600' }}"
+                        ></i>
+                        Rekap Nilai PKL</a
+                    >
+                    <a
+                        href="{{ route('pembimbing.sertifikat.index') }}"
                         class="group flex items-center gap-3 px-4 py-3.5 rounded-xl {{ request()->routeIs('pembimbing.sertifikat.*') ? 'bg-blue-50 text-blue-600 font-bold' : 'text-slate-500 hover:bg-blue-50 hover:text-blue-600 font-medium' }} transition-all"
                     >
                         <!-- Icon Badge Check (Award) -->
-                        <i class="fa-solid fa-fw fa-award text-[1.1rem] {{ request()->routeIs('pembimbing.sertifikat.*') ? 'text-blue-600' : 'text-slate-400 group-hover:text-blue-600' }}"></i>
-                        Kelola Sertifikat PKL</a>
+                        <i
+                            class="fa-solid fa-fw fa-award text-[1.1rem] {{ request()->routeIs('pembimbing.sertifikat.*') ? 'text-blue-600' : 'text-slate-400 group-hover:text-blue-600' }}"
+                        ></i>
+                        Kelola Sertifikat PKL</a
+                    >
                 @endhasrole
                 @hasrole ('penguji')
                     <div class="text-[10px] font-bold text-slate-400 uppercase tracking-[0.1em] mt-8 mb-4 px-2">
                         Pengujian
                     </div>
-                    <a href="{{ route('penguji.jadwal-sidang.index') }}"
+                    <a
+                        href="{{ route('penguji.jadwal-sidang.index') }}"
                         class="group flex items-center gap-3 px-4 py-3.5 rounded-xl {{ request()->routeIs('penguji.jadwal-sidang.*') ? 'bg-blue-50 text-blue-600 font-bold' : 'text-slate-500 hover:bg-blue-50 hover:text-blue-600 font-medium' }} transition-all"
                     >
                         <!-- Ikon Kalender -->
-                        <i class="fa-solid fa-fw fa-calendar-alt text-[1.1rem] {{ request()->routeIs('penguji.jadwal-sidang.*') ? 'text-blue-600' : 'text-slate-400 group-hover:text-blue-600' }}"></i>
-                        Lihat Jadwal Sidang</a>
-                    <a href="{{ route('penguji.input-nilai.index') }}"
+                        <i
+                            class="fa-solid fa-fw fa-calendar-alt text-[1.1rem] {{ request()->routeIs('penguji.jadwal-sidang.*') ? 'text-blue-600' : 'text-slate-400 group-hover:text-blue-600' }}"
+                        ></i>
+                        Lihat Jadwal Sidang</a
+                    >
+                    <a
+                        href="{{ route('penguji.input-nilai.index') }}"
                         class="group flex items-center gap-3 px-4 py-3.5 rounded-xl {{ request()->routeIs('penguji.input-nilai.*') ? 'bg-blue-50 text-blue-600 font-bold' : 'text-slate-500 hover:bg-blue-50 hover:text-blue-600 font-medium' }} transition-all"
                     >
-                        <i class="fa-solid fa-fw fa-pencil-alt text-[1.1rem] {{ request()->routeIs('penguji.input-nilai.*') ? 'text-blue-600' : 'text-slate-400 group-hover:text-blue-600' }}"></i>
-                        Input Nilai Sidang</a>
+                        <i
+                            class="fa-solid fa-fw fa-pencil-alt text-[1.1rem] {{ request()->routeIs('penguji.input-nilai.*') ? 'text-blue-600' : 'text-slate-400 group-hover:text-blue-600' }}"
+                        ></i>
+                        Input Nilai Sidang</a
+                    >
                 @endhasrole
                 @hasrole ('siswa')
                     <div class="text-[10px] font-bold text-slate-400 uppercase tracking-[0.1em] mt-8 mb-4 px-2">
                         Aktivitas PKL
                     </div>
-                    <a href="{{ route('siswa.pengajuan.index') }}"
+                    <a
+                        href="{{ route('siswa.pengajuan.index') }}"
                         class="group flex items-center gap-3 px-4 py-3.5 rounded-xl {{ request()->routeIs('siswa.pengajuan.*') ? 'bg-blue-50 text-blue-600 font-bold' : 'text-slate-500 hover:bg-blue-50 hover:text-blue-600 font-medium' }} transition-all"
                     >
-                        <i class="fa-solid fa-fw fa-paper-plane text-[1.1rem] {{ request()->routeIs('siswa.pengajuan.*') ? 'text-blue-600' : 'text-slate-400 group-hover:text-blue-600' }}"></i>
-                        Mengajukan PKL</a>
-                    <a href="{{ route('siswa.surat-pengantar.index') }}"
+                        <i
+                            class="fa-solid fa-fw fa-paper-plane text-[1.1rem] {{ request()->routeIs('siswa.pengajuan.*') ? 'text-blue-600' : 'text-slate-400 group-hover:text-blue-600' }}"
+                        ></i>
+                        Mengajukan PKL</a
+                    >
+                    <a
+                        href="{{ route('siswa.surat-pengantar.index') }}"
                         class="group flex items-center gap-3 px-4 py-3.5 rounded-xl {{ request()->routeIs('siswa.surat-pengantar.*') ? 'bg-blue-50 text-blue-600 font-bold' : 'text-slate-500 hover:bg-blue-50 hover:text-blue-600 font-medium' }} transition-all"
                     >
-                        <i class="fa-solid fa-fw fa-file-download text-[1.1rem] {{ request()->routeIs('siswa.surat-pengantar.*') ? 'text-blue-600' : 'text-slate-400 group-hover:text-blue-600' }}"></i>
-                        Unduh Surat Pengantar PKL</a>
-                    <a href="{{ route('siswa.jurnal-harian.index') }}"
+                        <i
+                            class="fa-solid fa-fw fa-file-download text-[1.1rem] {{ request()->routeIs('siswa.surat-pengantar.*') ? 'text-blue-600' : 'text-slate-400 group-hover:text-blue-600' }}"
+                        ></i>
+                        Unduh Surat Pengantar PKL</a
+                    >
+                    <a
+                        href="{{ route('siswa.jurnal-harian.index') }}"
                         class="group flex items-center gap-3 px-4 py-3.5 rounded-xl {{ request()->routeIs('siswa.jurnal-harian.*') ? 'bg-blue-50 text-blue-600 font-bold' : 'text-slate-500 hover:bg-blue-50 hover:text-blue-600 font-medium' }} transition-all"
                     >
-                        <i class="fa-solid fa-fw fa-file-signature text-[1.1rem] {{ request()->routeIs('siswa.jurnal-harian.*') ? 'text-blue-600' : 'text-slate-400 group-hover:text-blue-600' }}"></i>
-                        Mengisi Laporan Harian PKL</a>
-                    <a href="{{ route('siswa.laporan-akhir.index') }}"
+                        <i
+                            class="fa-solid fa-fw fa-file-signature text-[1.1rem] {{ request()->routeIs('siswa.jurnal-harian.*') ? 'text-blue-600' : 'text-slate-400 group-hover:text-blue-600' }}"
+                        ></i>
+                        Mengisi Laporan Harian PKL</a
+                    >
+                    <a
+                        href="{{ route('siswa.laporan-akhir.index') }}"
                         class="group flex items-center gap-3 px-4 py-3.5 rounded-xl {{ request()->routeIs('siswa.laporan-akhir.*') ? 'bg-blue-50 text-blue-600 font-bold' : 'text-slate-500 hover:bg-blue-50 hover:text-blue-600 font-medium' }} transition-all"
                     >
-                        <i class="fa-solid fa-fw fa-file-upload text-[1.1rem] {{ request()->routeIs('siswa.laporan-akhir.*') ? 'text-blue-600' : 'text-slate-400 group-hover:text-blue-600' }}"></i>
-                        Mengumpulkan Laporan Akhir PKL</a>
-                    <a href="{{ route('siswa.jadwal-sidang.index') }}"
+                        <i
+                            class="fa-solid fa-fw fa-file-upload text-[1.1rem] {{ request()->routeIs('siswa.laporan-akhir.*') ? 'text-blue-600' : 'text-slate-400 group-hover:text-blue-600' }}"
+                        ></i>
+                        Mengumpulkan Laporan Akhir PKL</a
+                    >
+                    <a
+                        href="{{ route('siswa.jadwal-sidang.index') }}"
                         class="group flex items-center gap-3 px-4 py-3.5 rounded-xl {{ request()->routeIs('siswa.jadwal-sidang.*') ? 'bg-blue-50 text-blue-600 font-bold' : 'text-slate-500 hover:bg-blue-50 hover:text-blue-600 font-medium' }} transition-all"
                     >
-                        <i class="fa-solid fa-fw fa-calendar-alt text-[1.1rem] {{ request()->routeIs('siswa.jadwal-sidang.*') ? 'text-blue-600' : 'text-slate-400 group-hover:text-blue-600' }}"></i>
-                        Lihat Jadwal Sidang</a>
-                    <a href="{{ route('siswa.sertifikat.index') }}"
+                        <i
+                            class="fa-solid fa-fw fa-calendar-alt text-[1.1rem] {{ request()->routeIs('siswa.jadwal-sidang.*') ? 'text-blue-600' : 'text-slate-400 group-hover:text-blue-600' }}"
+                        ></i>
+                        Lihat Jadwal Sidang</a
+                    >
+                    <a
+                        href="{{ route('siswa.sertifikat.index') }}"
                         class="group flex items-center gap-3 px-4 py-3.5 rounded-xl {{ request()->routeIs('siswa.sertifikat.*') ? 'bg-blue-50 text-blue-600 font-bold' : 'text-slate-500 hover:bg-blue-50 hover:text-blue-600 font-medium' }} transition-all"
                     >
-                        <i class="fa-solid fa-fw fa-award text-[1.1rem] {{ request()->routeIs('siswa.sertifikat.*') ? 'text-blue-600' : 'text-slate-400 group-hover:text-blue-600' }}"></i>
-                        Unduh Sertifikat PKL</a>
+                        <i
+                            class="fa-solid fa-fw fa-award text-[1.1rem] {{ request()->routeIs('siswa.sertifikat.*') ? 'text-blue-600' : 'text-slate-400 group-hover:text-blue-600' }}"
+                        ></i>
+                        Unduh Sertifikat PKL</a
+                    >
                 @endhasrole
             @endif
         </div>
@@ -537,7 +609,8 @@
                                 class="w-full flex items-center gap-3 px-4 py-2.5 text-sm font-semibold text-slate-700 hover:text-slate-900 rounded-lg transition-colors text-left mb-1"
                             >
                                 <i class="fa-solid fa-fw fa-cog text-sm"></i>
-                        Pengaturan Profil</a>
+                                Pengaturan Profil</a
+                            >
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
                                 <button
@@ -545,7 +618,8 @@
                                     class="w-full flex items-center gap-3 px-4 py-2.5 text-sm font-semibold text-red-600 hover:bg-red-50 rounded-lg transition-colors text-left"
                                 >
                                     <i class="fa-solid fa-fw fa-sign-out-alt text-sm"></i>
-                        Keluar Sistem</button>
+                                    Keluar Sistem
+                                </button>
                             </form>
                         </div>
                     </div>
@@ -710,20 +784,20 @@
         document.addEventListener('DOMContentLoaded', function () {
             // Find all search inputs across the application
             const searchInputs = document.querySelectorAll('input[name="search"]');
-            
-            searchInputs.forEach(input => {
+
+            searchInputs.forEach((input) => {
                 // Prevent form submission on enter for realtime search inputs
                 const form = input.closest('form');
                 if (form) {
-                    form.addEventListener('submit', function(e) {
+                    form.addEventListener('submit', function (e) {
                         e.preventDefault();
                     });
                 }
 
                 input.addEventListener('input', function () {
                     const filter = this.value.toLowerCase();
-                    
-                    // ponytail: Client-side DOM filtering is used for instantaneous search. 
+
+                    // ponytail: Client-side DOM filtering is used for instantaneous search.
                     // Ceiling: Only filters elements rendered on the current page. If pagination is used or dataset grows past 1000+ items, upgrade to AJAX backend queries.
                     const findTargetContainer = (inputElement) => {
                         let parent = inputElement.parentElement;
@@ -731,21 +805,21 @@
                             // Look for a table or a grid container inside this parent
                             const table = parent.querySelector('table');
                             if (table) return { type: 'table', element: table };
-                            
+
                             // Check for grid layouts (usually has class 'grid')
                             const grid = parent.querySelector('.grid');
                             if (grid) return { type: 'grid', element: grid };
-                            
+
                             parent = parent.parentElement;
                         }
-                        
+
                         // Fallbacks
                         const table = document.querySelector('table');
                         if (table) return { type: 'table', element: table };
-                        
+
                         const grid = document.querySelector('.grid');
                         if (grid) return { type: 'grid', element: grid };
-                        
+
                         return null;
                     };
 
@@ -754,14 +828,14 @@
 
                     if (target.type === 'table') {
                         const rows = target.element.querySelectorAll('tbody tr');
-                        rows.forEach(row => {
+                        rows.forEach((row) => {
                             if (row.querySelector('td[colspan]')) return;
                             const textContent = row.textContent.toLowerCase();
                             row.style.display = textContent.includes(filter) ? '' : 'none';
                         });
                     } else if (target.type === 'grid') {
                         const items = target.element.children;
-                        Array.from(items).forEach(item => {
+                        Array.from(items).forEach((item) => {
                             if (item.classList.contains('col-span-full')) return;
                             const textContent = item.textContent.toLowerCase();
                             item.style.display = textContent.includes(filter) ? '' : 'none';

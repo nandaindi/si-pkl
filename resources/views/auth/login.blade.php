@@ -2,9 +2,9 @@
 @section ('styles')
     <style>
         :root {
-            --font-body: 'Plus Jakarta Sans', sans-serif;
-            --font-display: 'Poppins', sans-serif;
-            --font-label: 'JetBrains Mono', monospace;
+            --font-body: 'Poppins';
+            --font-display: 'Poppins';
+            --font-label: 'Poppins';
             /* Clean Slate Theme Colors (OKLCH based) */
             --color-paper: oklch(98.5% 0.003 240); /* extremely soft slate-50 background */
             --color-paper-2: #ffffff; /* crisp white for cards */

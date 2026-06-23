@@ -584,7 +584,7 @@ class SiswaSeeder extends Seeder
                 'nama_instansi' => 'PT Gramedia Asri Media',
                 'alamat' => 'Jl. Palmerah Barat No.29-37, Jakarta Pusat',
                 'kuota' => 10,
-                'jurusan' => 'Manajemen Perkantoran',
+                'jurusan' => null, // Berlaku untuk OTKP dan MM
             ],
             ['nama_instansi' => 'PT JNE Express', 'alamat' => 'Jl. Tomang Raya No.11, Jakarta Barat', 'kuota' => 12, 'jurusan' => 'Manajemen Perkantoran'],
             [

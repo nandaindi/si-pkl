@@ -34,8 +34,8 @@ class UserSeeder extends Seeder
         \App\Models\Guru::firstOrCreate(['user_id' => $penguji->id], ['nip' => '198202022006021002']);
 
         $siswa = User::firstOrCreate(
-            ['email' => 'siswa@smkmandiri01panongan.sch.id'],
-            ['name' => 'Siswa PKL', 'password' => bcrypt('password')],
+            ['email' => 'nova@smkmandiri01panongan.sch.id'],
+            ['name' => 'Nova', 'password' => bcrypt('password')],
         );
         $siswa->assignRole('siswa');
         \App\Models\Siswa::firstOrCreate(

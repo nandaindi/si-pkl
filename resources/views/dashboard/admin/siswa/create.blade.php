@@ -8,7 +8,7 @@
         <form
             action="{{ route('admin.siswa.store') }}"
             method="POST"
-            class="bg-white p-8 rounded-xl  border-2 border-slate-200"
+            class="bg-white p-8 rounded-xl border-2 border-slate-200"
         >
             @csrf
             <h3 class="text-lg font-bold text-slate-800 mb-4 border-b pb-2">Informasi Akun (Login)</h3>
@@ -35,7 +35,7 @@
                         value="{{ old('email') }}"
                         required
                         class="w-full px-4 py-2 border border-slate-100 rounded-xl focus:border-slate-300"
-                        placeholder="siswa@pkl.com"
+                        placeholder="siswa@example.com"
                     />
                     @error ('email')
                         <span class="text-red-500 text-xs mt-1">{{ $message }}</span>
@@ -51,9 +51,13 @@
                             class="w-full px-4 py-2 border border-slate-100 rounded-xl focus:border-slate-300 pr-10"
                             placeholder="Minimal 8 karakter"
                         />
-                        <button type="button" @click="show = !show" class="absolute inset-y-0 right-0 pr-3 flex items-center text-slate-400 hover:text-slate-600 focus:outline-none">
+                        <button
+                            type="button"
+                            @click="show = !show"
+                            class="absolute inset-y-0 right-0 pr-3 flex items-center text-slate-400 hover:text-slate-600 focus:outline-none"
+                        >
                             <i class="fa-regular fa-eye" x-show="!show"></i>
-                            <i class="fa-regular fa-eye-slash" x-show="show" x-cloak style="display: none;"></i>
+                            <i class="fa-regular fa-eye-slash" x-show="show" x-cloak style="display: none"></i>
                         </button>
                     </div>
                     @error ('password')
@@ -70,9 +74,13 @@
                             class="w-full px-4 py-2 border border-slate-100 rounded-xl focus:border-slate-300 pr-10"
                             placeholder="Ulangi password"
                         />
-                        <button type="button" @click="show = !show" class="absolute inset-y-0 right-0 pr-3 flex items-center text-slate-400 hover:text-slate-600 focus:outline-none">
+                        <button
+                            type="button"
+                            @click="show = !show"
+                            class="absolute inset-y-0 right-0 pr-3 flex items-center text-slate-400 hover:text-slate-600 focus:outline-none"
+                        >
                             <i class="fa-regular fa-eye" x-show="!show"></i>
-                            <i class="fa-regular fa-eye-slash" x-show="show" x-cloak style="display: none;"></i>
+                            <i class="fa-regular fa-eye-slash" x-show="show" x-cloak style="display: none"></i>
                         </button>
                     </div>
                 </div>
@@ -100,8 +108,10 @@
                         class="w-full px-4 py-2 border border-slate-100 rounded-xl focus:border-slate-300 appearance-none bg-white"
                     >
                         <option value="">Belum Ditentukan</option>
-                        @foreach($pembimbings as $guru)
-                            <option value="{{ $guru->id }}" {{ old('pembimbing_id') == $guru->id ? 'selected' : '' }}>{{ $guru->user->name }}</option>
+                        @foreach ($pembimbings as $guru)
+                            <option value="{{ $guru->id }}" {{ old('pembimbing_id') == $guru->id ? 'selected' : '' }}
+                                >{{ $guru->user->name }}
+                            </option>
                         @endforeach
                     </select>
                     @error ('pembimbing_id')
@@ -132,10 +142,42 @@
                         class="w-full px-4 py-2 border border-slate-100 rounded-xl focus:border-slate-300 appearance-none bg-white"
                     >
                         <option value="" disabled {{ old('jurusan') ? '' : 'selected' }}>Pilih Jurusan</option>
-                        <option value="Teknik Kendaraan Ringan" {{ old('jurusan') == 'Teknik Kendaraan Ringan' ? 'selected' : '' }}>Teknik Kendaraan Ringan</option>
-                        <option value="Manajemen Perkantoran" {{ old('jurusan') == 'Manajemen Perkantoran' ? 'selected' : '' }}>Manajemen Perkantoran</option>
-                        <option value="Desain Komunikasi Visual" {{ old('jurusan') == 'Desain Komunikasi Visual' ? 'selected' : '' }}>Desain Komunikasi Visual</option>
-                        <option value="Teknik Komputer Jaringan" {{ old('jurusan') == 'Teknik Komputer Jaringan' ? 'selected' : '' }}>Teknik Komputer Jaringan</option>
+                        <option
+                            value="Teknik Kendaraan Ringan"
+                            {{
+                                old('jurusan') == 'Teknik Kendaraan Ringan'
+                                    ? 'selected'
+                                    : ''
+                            }}
+                            >Teknik Kendaraan Ringan
+                        </option>
+                        <option
+                            value="Manajemen Perkantoran"
+                            {{
+                                old('jurusan') == 'Manajemen Perkantoran'
+                                    ? 'selected'
+                                    : ''
+                            }}
+                            >Manajemen Perkantoran
+                        </option>
+                        <option
+                            value="Desain Komunikasi Visual"
+                            {{
+                                old('jurusan') == 'Desain Komunikasi Visual'
+                                    ? 'selected'
+                                    : ''
+                            }}
+                            >Desain Komunikasi Visual
+                        </option>
+                        <option
+                            value="Teknik Komputer Jaringan"
+                            {{
+                                old('jurusan') == 'Teknik Komputer Jaringan'
+                                    ? 'selected'
+                                    : ''
+                            }}
+                            >Teknik Komputer Jaringan
+                        </option>
                     </select>
                     @error ('jurusan')
                         <span class="text-red-500 text-xs mt-1">{{ $message }}</span>
@@ -150,7 +192,7 @@
                 >
                 <button
                     type="submit"
-                    class="bg-slate-900 hover:bg-slate-800 text-white px-6 py-2.5 rounded-xl text-sm font-bold "
+                    class="bg-slate-900 hover:bg-slate-800 text-white px-6 py-2.5 rounded-xl text-sm font-bold"
                 >
                     Simpan Data Siswa
                 </button>

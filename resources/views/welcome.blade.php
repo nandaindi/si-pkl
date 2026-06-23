@@ -3,9 +3,9 @@
     <style>
         /* Hallmark · genre: playful · macrostructure: Bento Grid · theme: Hum · enrichment: none · nav: N1b · footer: Ft8 */
         :root {
-        --font-body: 'Plus Jakarta Sans', sans-serif;
-        --font-display: 'Poppins', sans-serif;
-        --font-label: 'JetBrains Mono', monospace;
+        --font-body: 'Poppins';
+        --font-display: 'Poppins';
+        --font-label: 'Poppins';
         /* Senior Developer - Clean Theme Colors (OKLCH based) */
         --color-paper: oklch(98.5% 0.003 240); /* extremely soft slate-50 background */
         --color-paper-2: #ffffff; /* crisp white for cards */
