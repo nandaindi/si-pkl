@@ -278,7 +278,7 @@
     class="font-sans antialiased selection:bg-slate-900 selection:text-white relative min-h-screen overflow-hidden flex"
 >
     <!-- Bilah Samping -->
-    <aside class="w-72 glass-sidebar flex flex-col z-20 shadow-sm">
+    <aside class="w-72 h-screen glass-sidebar flex flex-col z-20 shadow-sm">
         <!-- Logo -->
         <div class="h-24 flex items-center px-8 border-b border-slate-200">
             <div class="flex items-center gap-3 cursor-default">
