@@ -65,7 +65,7 @@
                     @if ($tempat_pkl->gambar)
                         <div class="mb-3">
                             <img
-                                src="{{ asset('storage/' . $tempat_pkl->gambar) }}"
+                                src="{{ asset('images/' . $tempat_pkl->gambar) }}"
                                 alt="Foto {{ $tempat_pkl->nama_instansi }}"
                                 class="h-32 w-auto object-cover rounded-xl border-2 border-slate-200"
                             />
