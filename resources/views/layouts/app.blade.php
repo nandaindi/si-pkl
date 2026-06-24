@@ -283,20 +283,30 @@
     <!-- Bilah Samping -->
     <aside id="sidebar" class="fixed lg:static inset-y-0 left-0 w-72 h-screen glass-sidebar flex flex-col z-40 shadow-sm -translate-x-full lg:translate-x-0 transition-transform duration-300 ease-in-out">
         <!-- Logo -->
-        <div class="h-24 flex items-center px-8 border-b border-slate-200">
-            <div class="flex items-center gap-3 cursor-default">
-                <img src="{{ asset('images/logosmk.png') }}" alt="Logo" class="w-12 h-12 object-contain shrink-0" />
+        <div class="h-16 lg:h-24 flex items-center justify-between px-6 lg:px-8 border-b border-slate-200">
+            <div class="flex items-center gap-3 cursor-default min-w-0">
+                <img src="{{ asset('images/logosmk.png') }}" alt="Logo" class="w-10 h-10 lg:w-12 lg:h-12 object-contain shrink-0" />
                 <div class="flex flex-col justify-center overflow-hidden">
                     <span
-                        class="font-display text-slate-900 font-extrabold text-[14px] tracking-tight leading-tight mb-0.5 truncate"
+                        class="font-display text-slate-900 font-extrabold text-[13px] tracking-tight leading-tight mb-0.5 truncate"
                         >SISTEM INFORMASI PKL</span
                     >
                     <span
-                        class="font-display text-[9.5px] text-slate-500 font-bold tracking-[0.08em] leading-none uppercase truncate mt-0.5"
+                        class="font-display text-[9px] text-slate-500 font-bold tracking-[0.08em] leading-none uppercase truncate mt-0.5"
                         >SMK Mandiri 01 Panongan</span
                     >
                 </div>
             </div>
+            <!-- Tombol tutup sidebar (mobile only) -->
+            <button
+                id="sidebar-close"
+                class="lg:hidden shrink-0 p-1.5 rounded-lg text-slate-400 hover:bg-slate-100 hover:text-slate-600 transition-colors"
+                aria-label="Tutup menu"
+            >
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/>
+                </svg>
+            </button>
         </div>
 
         <!-- Tautan Navigasi -->
@@ -648,21 +658,23 @@
             const sidebar   = document.getElementById('sidebar');
             const overlay   = document.getElementById('sidebar-overlay');
             const toggleBtn = document.getElementById('sidebar-toggle');
+            const closeBtn  = document.getElementById('sidebar-close');
 
             function openSidebar() {
                 sidebar.classList.remove('-translate-x-full');
                 overlay.classList.remove('hidden');
-                document.body.classList.add('overflow-hidden', 'lg:overflow-auto');
+                document.body.classList.add('overflow-hidden');
             }
             function closeSidebar() {
                 sidebar.classList.add('-translate-x-full');
                 overlay.classList.add('hidden');
-                document.body.classList.remove('overflow-hidden', 'lg:overflow-auto');
+                document.body.classList.remove('overflow-hidden');
             }
 
             toggleBtn?.addEventListener('click', () => {
                 sidebar.classList.contains('-translate-x-full') ? openSidebar() : closeSidebar();
             });
+            closeBtn?.addEventListener('click', closeSidebar);
             overlay?.addEventListener('click', closeSidebar);
 
             // Close sidebar on nav link click (mobile UX)
