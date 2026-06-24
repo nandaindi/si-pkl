@@ -306,6 +306,17 @@
             #sidebar-toggle  { display: none !important; }
             #sidebar-close   { display: none !important; }
         }
+
+        /* Notification dropdown: pin ke bawah header di mobile agar tidak overflow */
+        @media (max-width: 640px) {
+            #notification-dropdown-menu {
+                position: fixed !important;
+                right: 0.75rem !important;
+                left: 0.75rem !important;
+                top: 4.25rem !important;
+                width: auto !important;
+            }
+        }
     </style>
 
     <!-- SweetAlert2 (Loaded via NPM in app.js) -->
