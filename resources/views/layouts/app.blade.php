@@ -270,6 +270,41 @@
             outline: 3px solid var(--color-accent-2) !important;
             outline-offset: 3px !important;
         }
+
+        /* ── Mobile Sidebar Drawer ───────────────────────────── */
+        #sidebar {
+            position: fixed;
+            inset-block: 0;
+            left: 0;
+            width: 18rem;
+            transform: translateX(-100%);
+            transition: transform 300ms ease-in-out;
+            z-index: 40;
+        }
+        #sidebar-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.4);
+            z-index: 30;
+        }
+        #sidebar-toggle { display: flex; }
+        #sidebar-close  { display: flex; }
+
+        #sidebar.is-open   { transform: translateX(0); }
+        #sidebar-overlay.is-open { display: block; }
+
+        @media (min-width: 1024px) {
+            #sidebar {
+                position: static;
+                transform: none !important;
+                height: 100vh;
+                flex-shrink: 0;
+            }
+            #sidebar-overlay { display: none !important; }
+            #sidebar-toggle  { display: none !important; }
+            #sidebar-close   { display: none !important; }
+        }
     </style>
 
     <!-- SweetAlert2 (Loaded via NPM in app.js) -->
@@ -278,10 +313,10 @@
     class="font-sans antialiased selection:bg-slate-900 selection:text-white relative min-h-screen flex"
 >
     <!-- Mobile sidebar overlay -->
-    <div id="sidebar-overlay" class="fixed inset-0 bg-black/40 z-30 hidden lg:hidden" aria-hidden="true"></div>
+    <div id="sidebar-overlay" aria-hidden="true"></div>
 
     <!-- Bilah Samping -->
-    <aside id="sidebar" class="fixed lg:static inset-y-0 left-0 w-72 h-screen glass-sidebar flex flex-col z-40 shadow-sm -translate-x-full lg:translate-x-0 transition-transform duration-300 ease-in-out">
+    <aside id="sidebar" class="glass-sidebar flex flex-col shadow-sm">
         <!-- Logo -->
         <div class="h-16 lg:h-24 flex items-center justify-between px-6 lg:px-8 border-b border-slate-200">
             <div class="flex items-center gap-3 cursor-default min-w-0">
@@ -512,10 +547,10 @@
     </aside>
 
     <main class="flex-1 flex flex-col min-h-screen lg:h-screen z-10 relative overflow-x-hidden">
-        <header class="h-16 lg:h-24 glass-topbar flex items-center justify-between px-4 lg:px-10 z-20 shrink-0">
+        <header class="h-16 lg:h-24 glass-topbar flex items-center justify-between px-4 lg:px-10 z-20 shrink-0" style="position:sticky;top:0">
             <!-- Hamburger (mobile only) -->
-            <button id="sidebar-toggle" class="lg:hidden p-2 rounded-lg text-slate-500 hover:bg-slate-100 transition-colors" aria-label="Buka menu">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+            <button id="sidebar-toggle" style="padding:0.5rem;border-radius:0.5rem;color:#64748b;background:transparent;border:none;cursor:pointer;align-items:center;justify-content:center" aria-label="Buka menu">
+                <svg style="width:1.5rem;height:1.5rem" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
             </button>
             <div class="flex items-center gap-6">
                 <div class="relative" id="notification-dropdown-trigger">
@@ -661,18 +696,18 @@
             const closeBtn  = document.getElementById('sidebar-close');
 
             function openSidebar() {
-                sidebar.classList.remove('-translate-x-full');
-                overlay.classList.remove('hidden');
-                document.body.classList.add('overflow-hidden');
+                sidebar.classList.add('is-open');
+                overlay.classList.add('is-open');
+                document.body.style.overflow = 'hidden';
             }
             function closeSidebar() {
-                sidebar.classList.add('-translate-x-full');
-                overlay.classList.add('hidden');
-                document.body.classList.remove('overflow-hidden');
+                sidebar.classList.remove('is-open');
+                overlay.classList.remove('is-open');
+                document.body.style.overflow = '';
             }
 
             toggleBtn?.addEventListener('click', () => {
-                sidebar.classList.contains('-translate-x-full') ? openSidebar() : closeSidebar();
+                sidebar.classList.contains('is-open') ? closeSidebar() : openSidebar();
             });
             closeBtn?.addEventListener('click', closeSidebar);
             overlay?.addEventListener('click', closeSidebar);
