@@ -275,10 +275,13 @@
     <!-- SweetAlert2 (Loaded via NPM in app.js) -->
 </head>
 <body
-    class="font-sans antialiased selection:bg-slate-900 selection:text-white relative min-h-screen overflow-hidden flex"
+    class="font-sans antialiased selection:bg-slate-900 selection:text-white relative min-h-screen flex"
 >
+    <!-- Mobile sidebar overlay -->
+    <div id="sidebar-overlay" class="fixed inset-0 bg-black/40 z-30 hidden lg:hidden" aria-hidden="true"></div>
+
     <!-- Bilah Samping -->
-    <aside class="w-72 h-screen glass-sidebar flex flex-col z-20 shadow-sm">
+    <aside id="sidebar" class="fixed lg:static inset-y-0 left-0 w-72 h-screen glass-sidebar flex flex-col z-40 shadow-sm -translate-x-full lg:translate-x-0 transition-transform duration-300 ease-in-out">
         <!-- Logo -->
         <div class="h-24 flex items-center px-8 border-b border-slate-200">
             <div class="flex items-center gap-3 cursor-default">
@@ -498,8 +501,12 @@
         </div>
     </aside>
 
-    <main class="flex-1 flex flex-col h-screen z-10 relative">
-        <header class="h-24 glass-topbar flex items-center justify-end px-10 z-20">
+    <main class="flex-1 flex flex-col min-h-screen lg:h-screen z-10 relative overflow-x-hidden">
+        <header class="h-16 lg:h-24 glass-topbar flex items-center justify-between px-4 lg:px-10 z-20 shrink-0">
+            <!-- Hamburger (mobile only) -->
+            <button id="sidebar-toggle" class="lg:hidden p-2 rounded-lg text-slate-500 hover:bg-slate-100 transition-colors" aria-label="Buka menu">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+            </button>
             <div class="flex items-center gap-6">
                 <div class="relative" id="notification-dropdown-trigger">
                     <button
@@ -630,10 +637,40 @@
         </header>
 
         <!-- Page Content -->
-        <div class="flex-1 overflow-y-auto p-6 sm:p-10" style="background-color: var(--color-paper)">
+        <div class="flex-1 overflow-y-auto p-4 sm:p-6 lg:p-10" style="background-color: var(--color-paper)">
             @yield ('content')
         </div>
     </main>
+
+    <!-- Mobile Sidebar Toggle -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const sidebar   = document.getElementById('sidebar');
+            const overlay   = document.getElementById('sidebar-overlay');
+            const toggleBtn = document.getElementById('sidebar-toggle');
+
+            function openSidebar() {
+                sidebar.classList.remove('-translate-x-full');
+                overlay.classList.remove('hidden');
+                document.body.classList.add('overflow-hidden', 'lg:overflow-auto');
+            }
+            function closeSidebar() {
+                sidebar.classList.add('-translate-x-full');
+                overlay.classList.add('hidden');
+                document.body.classList.remove('overflow-hidden', 'lg:overflow-auto');
+            }
+
+            toggleBtn?.addEventListener('click', () => {
+                sidebar.classList.contains('-translate-x-full') ? openSidebar() : closeSidebar();
+            });
+            overlay?.addEventListener('click', closeSidebar);
+
+            // Close sidebar on nav link click (mobile UX)
+            sidebar?.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+                if (window.innerWidth < 1024) closeSidebar();
+            }));
+        });
+    </script>
 
     <!-- Page Entrance Animation -->
     <script>
