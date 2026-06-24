@@ -294,7 +294,8 @@
         #sidebar.is-open   { transform: translateX(0); }
         #sidebar-overlay.is-open { display: block; }
 
-        @media (min-width: 1024px) {
+        /* ponytail: md (768px) dipilih agar 885px viewport termasuk desktop */
+        @media (min-width: 768px) {
             #sidebar {
                 position: static;
                 transform: none !important;
