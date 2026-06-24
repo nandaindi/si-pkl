@@ -793,7 +793,7 @@ class SiswaSeeder extends Seeder
                 LaporanAkhir::firstOrCreate(
                     ['siswa_id' => $siswa->id],
                     [
-                        'file_laporan' => 'laporan_akhir/placeholder_' . $data['nisn'] . '.pdf',
+                        'file_laporan' => 'laporan_akhir/' . $data['nisn'] . '.pdf',
                         'status_verifikasi' => 'disetujui',
                     ],
                 );
