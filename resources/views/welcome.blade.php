@@ -158,10 +158,13 @@
         }
         /* Bento Grid (F1 Bento Grid) */
         .bento-shell {
-        max-width: 80rem; /* matches max-w-7xl */
+        max-width: 80rem;
         margin: 0 auto;
-        padding-inline: 1.5rem;
-        padding-bottom: 6rem;
+        padding-inline: 1rem;
+        padding-bottom: 4rem;
+        }
+        @media (min-width: 40rem) {
+        .bento-shell { padding-inline: 1.5rem; padding-bottom: 6rem; }
         }
         .bento-grid {
         display: grid;
@@ -569,27 +572,27 @@
 @section ('content')
     <div class="selection:bg-black selection:text-white">
         <header class="nav-hum" id="nav-hum">
-            <nav class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-                <div class="flex items-center gap-3.5">
+            <nav class="max-w-7xl mx-auto px-4 sm:px-6 h-16 sm:h-20 flex items-center justify-between gap-3">
+                <div class="flex items-center gap-2.5 min-w-0 flex-1">
                     <img
                         src="{{ asset('images/logosmk.png') }}"
                         alt="Logo"
-                        class="w-14 h-14 md:w-16 md:h-16 object-contain"
+                        class="w-10 h-10 sm:w-14 sm:h-14 object-contain shrink-0"
                     />
-                    <div class="flex flex-col justify-center">
+                    <div class="flex flex-col min-w-0">
                         <span
-                            class="font-display text-slate-900 font-extrabold text-lg md:text-xl tracking-tight leading-tight"
+                            class="font-display text-slate-900 font-extrabold text-sm sm:text-lg md:text-xl tracking-tight leading-tight truncate"
                             >SISTEM INFORMASI PKL</span
                         >
                         <span
-                            class="mono-label text-slate-500 font-bold text-[10px] md:text-xs tracking-wider uppercase leading-tight mt-0.5"
+                            class="hidden sm:block mono-label text-slate-500 font-bold text-[10px] md:text-xs tracking-wider uppercase leading-tight mt-0.5"
                             >SMK Mandiri 01 Panongan</span
                         >
                     </div>
                 </div>
-                <div>
+                <div class="shrink-0">
                     @auth
-                        <a href="{{ url('/dashboard') }}" class="btn btn--soft btn--sm">Masuk Dasbor</a>
+                        <a href="{{ url('/dashboard') }}" class="btn btn--soft btn--sm">Dasbor</a>
                     @else
                         <a href="{{ route('login') }}" class="btn btn--sm">Login</a>
                     @endauth
