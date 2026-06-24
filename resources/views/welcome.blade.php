@@ -207,6 +207,7 @@
         {
         .bento-grid {
         grid-template-columns: repeat(2, 1fr);
+        gap: 1.25rem;
         }
         .span-4x1 { grid-column: span 2; }
         .span-2x2 { grid-column: span 2; grid-row: span 2; }
@@ -218,10 +219,17 @@
         .bento-grid {
         grid-template-columns: 1fr;
         grid-auto-rows: auto;
+        gap: 0.875rem;
         }
-        .span-2x2, .span-2x1, .span-1x2 {
+        .span-4x1,
+        .span-2x2,
+        .span-2x1,
+        .span-1x2 {
         grid-column: span 1 !important;
         grid-row: span 1 !important;
+        }
+        .card-bento {
+        padding: 1.25rem !important;
         }
         }
         /* Interactive Mascot (Signature #5 with 3D details & Speech Bubble) */
