@@ -142,7 +142,7 @@ class JurnalHarianController extends Controller
     public function edit(LaporanHarian $jurnal_harian)
     {
         $siswa = Auth::user()->siswa;
-        if (!$siswa || $jurnal_harian->siswa_id !== $siswa->id) {
+        if (!$siswa || $jurnal_harian->siswa_id != $siswa->id) {
             abort(403, 'Akses ditolak.');
         }
 
@@ -157,7 +157,7 @@ class JurnalHarianController extends Controller
     public function update(Request $request, LaporanHarian $jurnal_harian)
     {
         $siswa = Auth::user()->siswa;
-        if (!$siswa || $jurnal_harian->siswa_id !== $siswa->id) {
+        if (!$siswa || $jurnal_harian->siswa_id != $siswa->id) {
             abort(403, 'Akses ditolak.');
         }
 
@@ -187,7 +187,7 @@ class JurnalHarianController extends Controller
     public function destroy(LaporanHarian $jurnal_harian)
     {
         $siswa = Auth::user()->siswa;
-        if (!$siswa || $jurnal_harian->siswa_id !== $siswa->id) {
+        if (!$siswa || $jurnal_harian->siswa_id != $siswa->id) {
             abort(403, 'Akses ditolak.');
         }
 

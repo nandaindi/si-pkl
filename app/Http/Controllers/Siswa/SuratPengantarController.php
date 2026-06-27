@@ -29,7 +29,7 @@ class SuratPengantarController extends Controller
     public function cetak(PengajuanPkl $pengajuan)
     {
         $siswa = Auth::user()->siswa;
-        if (!$siswa || $pengajuan->siswa_id !== $siswa->id) {
+        if (!$siswa || $pengajuan->siswa_id != $siswa->id) {
             abort(403, 'Akses ditolak.');
         }
 

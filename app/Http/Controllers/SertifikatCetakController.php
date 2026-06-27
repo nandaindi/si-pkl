@@ -14,7 +14,7 @@ class SertifikatCetakController extends Controller
         
         if ($user->hasRole('siswa')) {
             $siswa = $user->siswa;
-            if (!$siswa || $sertifikat->siswa_id !== $siswa->id) {
+            if (!$siswa || $sertifikat->siswa_id != $siswa->id) {
                 abort(403, 'Akses ditolak.');
             }
         }
