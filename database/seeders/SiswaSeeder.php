@@ -2,17 +2,18 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
-use App\Models\User;
-use App\Models\Siswa;
 use App\Models\Guru;
-use App\Models\PengajuanPkl;
-use App\Models\LaporanHarian;
-use App\Models\LaporanAkhir;
 use App\Models\JadwalSidang;
+use App\Models\LaporanAkhir;
+use App\Models\LaporanHarian;
 use App\Models\NilaiPkl;
-use App\Models\Sertifikat;
+use App\Models\PengajuanPkl;
+use App\Models\Siswa;
+use App\Models\TempatPkl;
+use App\Models\User;
 use Carbon\Carbon;
+use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Storage;
 
 class SiswaSeeder extends Seeder
 {
@@ -500,12 +501,12 @@ class SiswaSeeder extends Seeder
             }
 
             $clean_name = strtolower(preg_replace('/[^a-zA-Z0-9]+/', '.', $item['nama']));
-            $email = $clean_name . '@smkmandiri01panongan.sch.id';
+            $email = $clean_name.'@smkmandiri01panongan.sch.id';
 
             $originalEmail = $email;
             $counter = 1;
             while (User::where('email', $email)->exists()) {
-                $email = $originalEmail . $counter;
+                $email = $originalEmail.$counter;
                 $counter++;
             }
 
@@ -681,7 +682,7 @@ class SiswaSeeder extends Seeder
             ],
         ];
 
-        $images = \Illuminate\Support\Facades\Storage::disk('public')->files('tempat_pkl');
+        $images = Storage::disk('public')->files('tempat_pkl');
 
         foreach ($mitras as $mitra) {
             $gambar = null;
@@ -700,14 +701,14 @@ class SiswaSeeder extends Seeder
                     break;
                 }
             }
-            
-            \App\Models\TempatPkl::updateOrCreate(
+
+            TempatPkl::updateOrCreate(
                 ['nama_instansi' => $mitra['nama_instansi']],
                 [
-                    'alamat' => $mitra['alamat'], 
+                    'alamat' => $mitra['alamat'],
                     'kuota' => $mitra['kuota'],
                     'gambar' => $gambar,
-                    'jurusan' => $mitra['jurusan'] ?? null
+                    'jurusan' => $mitra['jurusan'] ?? null,
                 ]
             );
         }
@@ -741,10 +742,11 @@ class SiswaSeeder extends Seeder
                 'email' => 'cici.cahyati@smkmandiri01panongan.sch.id',
                 'nisn' => '0051001009',
                 'kelas' => '12',
-                'jurusan' => 'Teknik Komputer Jaringan',
-                'tempat_pkl_nama' => 'PT Indofood',
+                'jurusan' => 'Teknik Kendaraan Ringan',
+                'tempat_pkl_nama' => 'PT Astra Daihatsu Motor',
                 'stage' => 'sudah_sidang',
                 'pkl_start' => '2026-01-10',
+                'laporan_akhir' => 'JURNAL_CICI_CAHYATI.pdf',
             ],
         ];
 
@@ -765,9 +767,9 @@ class SiswaSeeder extends Seeder
                 ],
             );
 
-            $tempatPkl = \App\Models\TempatPkl::firstOrCreate(
+            $tempatPkl = TempatPkl::firstOrCreate(
                 ['nama_instansi' => $data['tempat_pkl_nama']],
-                ['alamat' => 'Alamat ' . $data['tempat_pkl_nama'], 'kuota' => 10],
+                ['alamat' => 'Alamat '.$data['tempat_pkl_nama'], 'kuota' => 10],
             );
 
             $pengajuan = PengajuanPkl::firstOrCreate(
@@ -783,7 +785,7 @@ class SiswaSeeder extends Seeder
                             'tanggal' => Carbon::parse($data['pkl_start'])->addDays($i)->toDateString(),
                         ],
                         [
-                            'kegiatan' => 'Kegiatan PKL Hari ke-' . ($i + 1),
+                            'kegiatan' => 'Kegiatan PKL Hari ke-'.($i + 1),
                             'status' => 'disetujui',
                             'bukti_foto' => null,
                         ],
@@ -793,7 +795,7 @@ class SiswaSeeder extends Seeder
                 LaporanAkhir::firstOrCreate(
                     ['siswa_id' => $siswa->id],
                     [
-                        'file_laporan' => 'laporan_akhir/' . $data['nisn'] . '.pdf',
+                        'file_laporan' => isset($data['laporan_akhir']) ? 'laporan_akhir/'.$data['laporan_akhir'] : 'laporan_akhir/'.$data['nisn'].'.pdf',
                         'status_verifikasi' => 'disetujui',
                     ],
                 );
