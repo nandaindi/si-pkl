@@ -56,7 +56,7 @@
                         <!-- Card Banner Image -->
                         @if($tempat->gambar)
                             <div class="w-full h-48 bg-gray-100 border-b border-gray-100 shrink-0">
-                                <img src="{{ asset('images/' . $tempat->gambar) }}" alt="{{ $tempat->nama_instansi }}" class="w-full h-full object-cover">
+                                <img src="{{ asset('storage/' . $tempat->gambar) }}" alt="{{ $tempat->nama_instansi }}" class="w-full h-full object-cover">
                             </div>
                         @else
                             <div class="w-full h-48 bg-gradient-to-br from-blue-50 to-indigo-50 border-b border-gray-100 shrink-0 flex items-center justify-center">

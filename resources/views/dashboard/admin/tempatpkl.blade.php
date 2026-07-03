@@ -51,9 +51,9 @@
                                 <tr class="hover:bg-slate-50 transition-colors">
                                     <td class="px-6 py-4 text-sm">
                                         @if ($tempat->gambar)
-                                            <a href="{{ asset('images/' . $tempat->gambar) }}" target="_blank" class="block w-32 h-20 rounded-xl overflow-hidden shadow-sm border-2 border-slate-200 hover:shadow-md transition-all hover:scale-105" title="Klik untuk perbesar">
+                                            <a href="{{ asset('storage/' . $tempat->gambar) }}" target="_blank" class="block w-32 h-20 rounded-xl overflow-hidden shadow-sm border-2 border-slate-200 hover:shadow-md transition-all hover:scale-105" title="Klik untuk perbesar">
                                                 <img
-                                                    src="{{ asset('images/' . $tempat->gambar) }}"
+                                                    src="{{ asset('storage/' . $tempat->gambar) }}"
                                                     alt="{{ $tempat->nama_instansi }}"
                                                     class="w-full h-full object-cover"
                                                 />

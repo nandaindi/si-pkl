@@ -960,7 +960,7 @@
                                         @if ($mitra->gambar)
                                             <div class="w-full h-32 overflow-hidden bg-slate-50 relative">
                                                 <img
-                                                    src="{{ asset('images/' . $mitra->gambar) }}"
+                                                    src="{{ asset('storage/' . $mitra->gambar) }}"
                                                     alt="{{ $mitra->nama_instansi }}"
                                                     class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                                                 />
@@ -982,7 +982,7 @@
                                         @if ($mitra->gambar)
                                             <div class="w-full h-32 overflow-hidden bg-slate-50 relative">
                                                 <img
-                                                    src="{{ asset('images/' . $mitra->gambar) }}"
+                                                    src="{{ asset('storage/' . $mitra->gambar) }}"
                                                     alt="{{ $mitra->nama_instansi }}"
                                                     class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                                                 />

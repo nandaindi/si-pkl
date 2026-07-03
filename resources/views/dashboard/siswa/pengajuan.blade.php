@@ -55,7 +55,7 @@
                                     class="shrink-0 w-full md:w-64 h-40 rounded-2xl overflow-hidden border-2 border-slate-200 shadow-sm"
                                 >
                                     <img
-                                        src="{{ asset('images/' . $pengajuan->tempatPkl->gambar) }}"
+                                        src="{{ asset('storage/' . $pengajuan->tempatPkl->gambar) }}"
                                         alt="Foto Tempat PKL"
                                         class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
                                     />
