@@ -285,14 +285,22 @@
             display: none;
             position: fixed;
             inset: 0;
-            background: rgba(0,0,0,0.4);
+            background: rgba(0, 0, 0, 0.4);
             z-index: 30;
         }
-        #sidebar-toggle { display: flex; }
-        #sidebar-close  { display: flex; }
+        #sidebar-toggle {
+            display: flex;
+        }
+        #sidebar-close {
+            display: flex;
+        }
 
-        #sidebar.is-open   { transform: translateX(0); }
-        #sidebar-overlay.is-open { display: block; }
+        #sidebar.is-open {
+            transform: translateX(0);
+        }
+        #sidebar-overlay.is-open {
+            display: block;
+        }
 
         /* ponytail: md (768px) dipilih agar 885px viewport termasuk desktop */
         @media (min-width: 768px) {
@@ -302,9 +310,15 @@
                 height: 100vh;
                 flex-shrink: 0;
             }
-            #sidebar-overlay { display: none !important; }
-            #sidebar-toggle  { display: none !important; }
-            #sidebar-close   { display: none !important; }
+            #sidebar-overlay {
+                display: none !important;
+            }
+            #sidebar-toggle {
+                display: none !important;
+            }
+            #sidebar-close {
+                display: none !important;
+            }
         }
 
         /* Notification dropdown: pin ke bawah header di mobile agar tidak overflow */
@@ -321,9 +335,7 @@
 
     <!-- SweetAlert2 (Loaded via NPM in app.js) -->
 </head>
-<body
-    class="font-sans antialiased selection:bg-slate-900 selection:text-white relative min-h-screen flex"
->
+<body class="font-sans antialiased selection:bg-slate-900 selection:text-white relative min-h-screen flex">
     <!-- Mobile sidebar overlay -->
     <div id="sidebar-overlay" aria-hidden="true"></div>
 
@@ -332,7 +344,11 @@
         <!-- Logo -->
         <div class="h-16 lg:h-24 flex items-center justify-between px-6 lg:px-8 border-b border-slate-200">
             <div class="flex items-center gap-3 cursor-default min-w-0">
-                <img src="{{ asset('images/logosmk.png') }}" alt="Logo" class="w-10 h-10 lg:w-12 lg:h-12 object-contain shrink-0" />
+                <img
+                    src="{{ asset('images/logosmk.png') }}"
+                    alt="Logo"
+                    class="w-10 h-10 lg:w-12 lg:h-12 object-contain shrink-0"
+                />
                 <div class="flex flex-col justify-center overflow-hidden">
                     <span
                         class="font-display text-slate-900 font-extrabold text-[13px] tracking-tight leading-tight mb-0.5 truncate"
@@ -351,7 +367,7 @@
                 aria-label="Tutup menu"
             >
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12" />
                 </svg>
             </button>
         </div>
@@ -413,7 +429,7 @@
                         <i
                             class="fa-solid fa-fw fa-building text-[1.1rem] {{ request()->routeIs('admin.tempat-pkl.*') ? 'text-blue-600' : 'text-slate-400 group-hover:text-blue-600' }}"
                         ></i>
-                        Kelola Data PKL</a
+                        Kelola Data Industri</a
                     >
                 @endhasrole
                 @hasrole ('pembimbing')
@@ -559,10 +575,26 @@
     </aside>
 
     <main class="flex-1 flex flex-col min-h-screen lg:h-screen z-10 relative overflow-x-hidden">
-        <header class="h-16 lg:h-24 glass-topbar flex items-center justify-between px-4 lg:px-10 z-20 shrink-0" style="position:sticky;top:0">
+        <header
+            class="h-16 lg:h-24 glass-topbar flex items-center justify-between px-4 lg:px-10 z-20 shrink-0"
+            style="position: sticky; top: 0"
+        >
             <!-- Hamburger (mobile only) -->
-            <button id="sidebar-toggle" style="padding:0.5rem;border-radius:0.5rem;color:#64748b;background:transparent;border:none;cursor:pointer;align-items:center;justify-content:center" aria-label="Buka menu">
-                <svg style="width:1.5rem;height:1.5rem" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+            <button
+                id="sidebar-toggle"
+                style="
+                    padding: 0.5rem;
+                    border-radius: 0.5rem;
+                    color: #64748b;
+                    background: transparent;
+                    border: none;
+                    cursor: pointer;
+                    align-items: center;
+                    justify-content: center;
+                "
+                aria-label="Buka menu"
+            >
+                <svg style="width:1.5rem;height:1.5rem" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" /></svg>
             </button>
             <div class="flex items-center gap-6 ml-auto">
                 <div class="relative" id="notification-dropdown-trigger">
@@ -702,10 +734,10 @@
     <!-- Mobile Sidebar Toggle -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const sidebar   = document.getElementById('sidebar');
-            const overlay   = document.getElementById('sidebar-overlay');
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('sidebar-overlay');
             const toggleBtn = document.getElementById('sidebar-toggle');
-            const closeBtn  = document.getElementById('sidebar-close');
+            const closeBtn = document.getElementById('sidebar-close');
 
             function openSidebar() {
                 sidebar.classList.add('is-open');
@@ -725,9 +757,11 @@
             overlay?.addEventListener('click', closeSidebar);
 
             // Close sidebar on nav link click (mobile UX)
-            sidebar?.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
-                if (window.innerWidth < 1024) closeSidebar();
-            }));
+            sidebar?.querySelectorAll('a').forEach((a) =>
+                a.addEventListener('click', () => {
+                    if (window.innerWidth < 1024) closeSidebar();
+                }),
+            );
         });
     </script>
 
