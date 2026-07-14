@@ -14,10 +14,16 @@ return new class extends Migration
         Schema::create('nilai_pkls', function (Blueprint $table) {
             $table->id();
             $table->foreignId('siswa_id')->constrained('siswas')->onDelete('cascade');
+            
+            // Nilai dari Guru Pembimbing (berdasarkan progres jurnal dan laporan akhir)
             $table->float('nilai_pembimbing')->nullable();
+            
+            // Nilai dari Guru Penguji (berdasarkan performa saat presentasi sidang)
             $table->float('nilai_penguji')->nullable();
+            
+            // Nilai Akhir (biasanya rata-rata dari kedua nilai di atas)
             $table->float('nilai_akhir')->nullable();
-            $table->timestamps();
+            $table->timestamps(); // Membuat kolom created_at dan updated_at
         });
     }
 

@@ -1,3 +1,8 @@
+{{-- 
+    View: Pembimbing - Detail Laporan Harian Siswa
+    Fungsi: Menampilkan daftar lengkap aktivitas harian (jurnal harian) dari satu siswa spesifik.
+    Guru dapat melihat bukti foto dan memberikan status (disetujui/revisi).
+--}}
 @extends ('layouts.app')
 @section ('content')
     @section ('header')

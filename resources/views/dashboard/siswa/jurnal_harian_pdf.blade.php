@@ -1,3 +1,7 @@
+{{-- 
+    View: Siswa - Export PDF Jurnal Harian
+    Fungsi: Template HTML yang akan dicetak menjadi dokumen PDF (rekap seluruh kegiatan PKL siswa).
+--}}
 <!DOCTYPE html>
 <html lang="id">
 <head>

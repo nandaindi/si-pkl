@@ -1,3 +1,8 @@
+{{-- 
+    View: Pembimbing - Dashboard
+    Fungsi: Menampilkan halaman beranda khusus untuk Guru Pembimbing.
+    Menyajikan statistik jumlah siswa bimbingan, jadwal sidang, dsb.
+--}}
 @extends ('layouts.app')
 @section ('content')
     @section ('header')

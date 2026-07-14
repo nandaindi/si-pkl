@@ -12,6 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('tempat_pkls', function (Blueprint $table) {
+            // Menambahkan kolom gambar untuk foto/logo tempat instansi PKL, ditaruh setelah kolom 'kuota'
             $table->string('gambar')->nullable()->after('kuota');
         });
     }

@@ -1,3 +1,7 @@
+{{-- 
+    View: Siswa - Buat Jurnal Harian
+    Fungsi: Form bagi siswa untuk menginput kegiatan harian PKL dan mengunggah bukti foto.
+--}}
 @extends ('layouts.app')
 @section ('content')
     @section ('header')

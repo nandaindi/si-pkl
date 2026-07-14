@@ -1,3 +1,7 @@
+{{-- 
+    View: Penguji - Input Nilai Sidang
+    Fungsi: Form bagi guru penguji untuk memasukkan nilai dari hasil presentasi/sidang siswa.
+--}}
 @extends ('layouts.app')
 @section ('content')
     @section ('header')

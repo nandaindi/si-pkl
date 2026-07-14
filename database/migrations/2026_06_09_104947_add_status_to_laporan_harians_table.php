@@ -12,6 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('laporan_harians', function (Blueprint $table) {
+            // Menambahkan status validasi jurnal harian oleh pembimbing
             $table->enum('status', ['menunggu', 'disetujui', 'revisi'])->default('menunggu');
         });
     }

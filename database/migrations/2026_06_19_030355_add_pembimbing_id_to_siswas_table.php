@@ -12,6 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('siswas', function (Blueprint $table) {
+            // Menambahkan relasi pembimbing ke tabel siswas.
+            // nullOnDelete() mengatur agar jika guru (pembimbing) dihapus dari sistem, 
+            // profil siswa tidak ikut dihapus, melainkan field pembimbing_id-nya akan diset menjadi null.
             $table->foreignId('pembimbing_id')->nullable()->constrained('gurus')->nullOnDelete();
         });
     }

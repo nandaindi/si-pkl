@@ -1,3 +1,7 @@
+{{-- 
+    View: Pembimbing - Edit Jadwal Sidang
+    Fungsi: Form antarmuka untuk mengubah jadwal sidang yang sudah pernah dibuat.
+--}}
 @extends ('layouts.app')
 @section ('content')
     @section ('header')

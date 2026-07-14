@@ -1,3 +1,8 @@
+{{-- 
+    View: Pembimbing - Input Nilai PKL
+    Fungsi: Form bagi guru pembimbing untuk memberikan nilai (angka) 
+    kepada siswa yang telah menyelesaikan PKL dan Laporan.
+--}}
 @extends ('layouts.app')
 @section ('content')
     @section ('header')

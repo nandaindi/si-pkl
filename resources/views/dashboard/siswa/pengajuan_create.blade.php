@@ -1,3 +1,7 @@
+{{-- 
+    View: Siswa - Buat Pengajuan Tempat PKL
+    Fungsi: Form bagi siswa untuk memilih tempat PKL dari daftar instansi yang masih memiliki kuota kosong.
+--}}
 @extends('layouts.app')
 @section('content')
 <div class="max-w-7xl mx-auto py-8 px-4 sm:px-6">

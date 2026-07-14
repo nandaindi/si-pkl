@@ -1,3 +1,7 @@
+{{-- 
+    View: Siswa - Riwayat Pengajuan Tempat PKL
+    Fungsi: Menampilkan status dari pengajuan tempat PKL (pending, disetujui, atau ditolak beserta alasannya).
+--}}
 @extends ('layouts.app')
 @section ('content')
     @section ('header')

@@ -1,3 +1,7 @@
+{{-- 
+    View: Siswa - Surat Pengantar PKL
+    Fungsi: Antarmuka untuk melihat status surat pengantar ke instansi yang dapat dicetak/diunduh.
+--}}
 @extends ('layouts.app')
 @section ('content')
     @section ('header')

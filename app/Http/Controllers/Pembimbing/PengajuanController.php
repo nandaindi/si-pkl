@@ -9,10 +9,14 @@ use Illuminate\Support\Facades\DB;
 
 class PengajuanController extends Controller
 {
+    /**
+     * Menampilkan daftar pengajuan tempat PKL dari siswa bimbingan.
+     */
     public function index(Request $request)
     {
         $search = $request->input('search');
         $pengajuans = PengajuanPkl::whereHas('siswa', function ($q) {
+                // Filter hanya untuk siswa bimbingan guru yang login
                 $q->where('pembimbing_id', auth()->user()->guru->id);
             })
             ->with(['siswa.user', 'tempatPkl'])
@@ -24,11 +28,16 @@ class PengajuanController extends Controller
                 });
             })
             ->latest()->paginate(10);
+            
         return view('dashboard.pembimbing.pengajuan', compact('pengajuans'));
     }
 
+    /**
+     * Memverifikasi pengajuan PKL (Menerima atau Menolak).
+     */
     public function verifikasi(Request $request, PengajuanPkl $pengajuan)
     {
+        // Validasi: Kalau status 'ditolak', maka alasan wajib diisi (required_if).
         $request->validate([
             'status' => 'required|in:disetujui,ditolak',
             'alasan_ditolak' => 'required_if:status,ditolak|nullable|string|max:1000',
@@ -41,10 +50,14 @@ class PengajuanController extends Controller
                 $oldStatus = $pengajuan->status;
                 $tempat = $pengajuan->tempatPkl;
 
+                // Logika Pengecekan Kuota
+                // Kuota tidak otomatis dikurangi di sini, karena model TempatPkl menggunakan Accessor (getSisaKuotaAttribute)
+                // untuk menghitung kuota yang terpakai dengan cara men-query tabel pengajuan_pkls.
+                // Jadi, kita hanya perlu mengecek sisa kuota, lalu mengupdate status pengajuannya ke DB.
                 if ($status === 'disetujui') {
-                    if ($oldStatus !== 'disetujui') {
-                        if ($tempat->sisa_kuota <= 0) {
-                            throw new \Exception('Kuota perusahaan ini sudah penuh.');
+                    if ($oldStatus !== 'disetujui') { // Jika sebelumnya tidak disetujui
+                        if ($tempat->sisa_kuota <= 0) { // sisa_kuota adalah attribute/accessor dari model TempatPkl
+                            throw new \Exception('Kuota perusahaan ini sudah penuh.'); // Lempar error ke blok catch
                         }
                     }
                 }
@@ -54,6 +67,7 @@ class PengajuanController extends Controller
                     'alasan_ditolak' => $status === 'ditolak' ? $request->alasan_ditolak : null,
                 ]);
 
+                // Kirim notifikasi
                 if ($pengajuan->siswa && $pengajuan->siswa->user) {
                     $msg = $status === 'disetujui' 
                            ? "Pengajuan PKL di {$tempat->nama_instansi} telah DISETUJUI." 

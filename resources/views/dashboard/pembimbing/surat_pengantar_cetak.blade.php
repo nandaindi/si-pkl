@@ -1,3 +1,7 @@
+{{-- 
+    View: Pembimbing - Cetak Surat Pengantar PKL
+    Fungsi: Template HTML yang akan dirender (diubah) menjadi dokumen PDF untuk diserahkan ke instansi/tempat PKL.
+--}}
 <!DOCTYPE html>
 <html lang="id">
 <head>

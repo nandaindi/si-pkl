@@ -1,3 +1,7 @@
+{{-- 
+    View: Penguji - Dashboard
+    Fungsi: Menampilkan beranda untuk Guru Penguji, termasuk informasi jumlah jadwal sidang.
+--}}
 @extends ('layouts.app')
 @section ('content')
     @section ('header')

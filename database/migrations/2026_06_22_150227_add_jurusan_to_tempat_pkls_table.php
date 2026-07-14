@@ -12,6 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('tempat_pkls', function (Blueprint $table) {
+            // Menambahkan kolom jurusan untuk memfilter tempat PKL yang relevan dengan jurusan siswa
             $table->string('jurusan')->nullable()->after('kuota');
         });
     }

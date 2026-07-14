@@ -1,3 +1,8 @@
+{{-- 
+    View: Admin - Kelola Tempat PKL
+    Fungsi: Menampilkan daftar perusahaan/instansi tempat PKL. 
+    Menyediakan UI untuk menambah lokasi PKL baru dan mengatur kuota.
+--}}
 @extends ('layouts.app')
 @section ('content')
     <div>

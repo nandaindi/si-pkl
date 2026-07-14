@@ -1,3 +1,8 @@
+{{-- 
+    View: Admin - Kelola Data Siswa
+    Fungsi: Antarmuka untuk melihat daftar siswa, mengelola (tambah, edit, hapus) siswa beserta status dan pembimbingnya.
+    Data dikirim dari Admin/SiswaController.
+--}}
 @extends ('layouts.app')
 @section ('content')
     <div>

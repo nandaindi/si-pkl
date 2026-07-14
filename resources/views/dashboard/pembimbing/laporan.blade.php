@@ -1,3 +1,8 @@
+{{-- 
+    View: Pembimbing - Verifikasi Laporan Akhir
+    Fungsi: Menampilkan daftar siswa yang telah mengunggah Laporan Akhir (PDF).
+    Guru dapat melihat file, menyetujui, atau meminta revisi.
+--}}
 @extends ('layouts.app')
 @section ('content')
     @section ('header')

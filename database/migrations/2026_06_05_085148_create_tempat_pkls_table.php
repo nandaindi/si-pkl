@@ -15,8 +15,10 @@ return new class extends Migration
             $table->id();
             $table->string('nama_instansi');
             $table->text('alamat');
+            // Jumlah maksimal siswa yang bisa diterima di tempat PKL ini. 
+            // Default 0 artinya tempat tersebut baru, belum dikonfigurasi kuotanya.
             $table->integer('kuota')->default(0);
-            $table->timestamps();
+            $table->timestamps(); // Membuat kolom created_at dan updated_at
         });
     }
 

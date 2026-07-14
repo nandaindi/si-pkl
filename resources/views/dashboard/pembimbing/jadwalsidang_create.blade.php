@@ -1,3 +1,7 @@
+{{-- 
+    View: Pembimbing - Buat Jadwal Sidang
+    Fungsi: Form antarmuka bagi pembimbing untuk menentukan waktu, ruangan, dan penguji sidang siswa.
+--}}
 @extends ('layouts.app')
 @section ('content')
     @section ('header')

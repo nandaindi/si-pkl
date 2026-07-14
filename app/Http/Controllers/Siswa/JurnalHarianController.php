@@ -13,6 +13,10 @@ use Carbon\CarbonPeriod;
 
 class JurnalHarianController extends Controller
 {
+    /**
+     * Menampilkan halaman Jurnal Harian.
+     * Menggunakan query parameter 'tab' (tracking/riwayat) untuk menentukan tampilan UI-nya.
+     */
     public function index(Request $request)
     {
         $siswa = Auth::user()->siswa;
@@ -20,27 +24,33 @@ class JurnalHarianController extends Controller
             return redirect()->route('dashboard')->with('error', 'Profil siswa belum dibuat oleh admin.');
         }
 
+        // Mengecek apakah pengajuan sudah disetujui (syarat bisa mengisi jurnal harian)
         $pengajuan_disetujui = PengajuanPkl::where('siswa_id', $siswa->id)->where('status', 'disetujui')->first();
+        // Mengecek apakah laporan akhir sudah ada (kalau sudah, tidak boleh isi jurnal harian lagi)
         $laporan_akhir_exists = LaporanAkhir::where('siswa_id', $siswa->id)->exists();
 
         $dates = [];
         $laporansGrouped = collect();
-        $laporans = null; // For Riwayat Tab
-        $tab = $request->query('tab', 'tracking');
+        $laporans = null; // Untuk keperluan tab 'Riwayat'
+        $tab = $request->query('tab', 'tracking'); // Ambil parameter ?tab= dari URL, default ke 'tracking'
 
         if ($pengajuan_disetujui) {
+            // Logika Tab Tracking: Menampilkan kalender absen sejak hari pengajuan disetujui.
             $startDate = Carbon::parse($pengajuan_disetujui->updated_at)->startOfDay();
             $endDate = Carbon::today();
             $period = CarbonPeriod::create($startDate, $endDate);
-            $dates = array_reverse($period->toArray());
+            $dates = array_reverse($period->toArray()); // Dibalik supaya yang terbaru ada di atas
 
             $allLogs = LaporanHarian::where('siswa_id', $siswa->id)->get();
+            // Kelompokkan semua laporan berdasarkan format tanggal 'YYYY-MM-DD' agar mudah dicek per harinya
             $laporansGrouped = $allLogs->groupBy(function ($log) {
                 return Carbon::parse($log->tanggal)->format('Y-m-d');
             });
 
+            // Jika user memilih tab Riwayat
             if ($tab === 'riwayat') {
                 $query = LaporanHarian::where('siswa_id', $siswa->id);
+                // Tambahkan filter jika ada pencarian (search) dari user
                 if ($request->has('search')) {
                     $search = $request->search;
                     $query->where(function ($q) use ($search) {
@@ -48,6 +58,7 @@ class JurnalHarianController extends Controller
                           ->orWhere('tanggal', 'like', "%{$search}%");
                     });
                 }
+                // Paginasi hasil pencarian
                 $laporans = $query->orderBy('tanggal', 'desc')->orderBy('created_at', 'desc')->paginate(12);
             }
         }
@@ -55,6 +66,9 @@ class JurnalHarianController extends Controller
         return view('dashboard.siswa.jurnal_harian', compact('dates', 'laporansGrouped', 'pengajuan_disetujui', 'laporan_akhir_exists', 'tab', 'laporans'));
     }
 
+    /**
+     * Menampilkan form untuk mengisi jurnal harian baru.
+     */
     public function create()
     {
         $siswa = Auth::user()->siswa;
@@ -62,11 +76,13 @@ class JurnalHarianController extends Controller
             return redirect()->route('dashboard')->with('error', 'Profil siswa belum dibuat oleh admin.');
         }
 
+        // Syarat 1: Harus ada PKL yang disetujui
         $pengajuan_disetujui = PengajuanPkl::where('siswa_id', $siswa->id)->where('status', 'disetujui')->exists();
         if (!$pengajuan_disetujui) {
             return redirect()->route('siswa.jurnal-harian.index')->with('error', 'Anda belum memiliki tempat PKL yang disetujui.');
         }
 
+        // Syarat 2: Belum upload laporan akhir
         $laporan_akhir = LaporanAkhir::where('siswa_id', $siswa->id)->exists();
         if ($laporan_akhir) {
             return redirect()->route('siswa.jurnal-harian.index')->with('error', 'Anda tidak dapat menambahkan jurnal harian lagi karena Anda sudah mengunggah Laporan Akhir.');
@@ -75,6 +91,9 @@ class JurnalHarianController extends Controller
         return view('dashboard.siswa.jurnal_harian_create');
     }
 
+    /**
+     * Menyimpan data jurnal harian.
+     */
     public function store(Request $request)
     {
         $siswa = Auth::user()->siswa;
@@ -101,10 +120,12 @@ class JurnalHarianController extends Controller
         $tanggal_input = Carbon::parse($request->tanggal)->toDateString();
         $hari_ini = Carbon::today()->toDateString();
 
+        // Validasi Waktu: Jurnal harian hanya bisa diisi untuk hari yang sedang berjalan (tidak bisa mundur)
         if ($tanggal_input !== $hari_ini) {
             return redirect()->back()->with('error', 'Anda hanya dapat mengisi laporan untuk hari ini. Hari sebelumnya sudah terlewat.');
         }
 
+        // Validasi Duplikasi Kegiatan di hari yang sama
         $existing = LaporanHarian::where('siswa_id', $siswa->id)
             ->where('tanggal', $tanggal_input)
             ->where('kegiatan', $request->kegiatan)
@@ -124,9 +145,10 @@ class JurnalHarianController extends Controller
             'tanggal' => $tanggal_input,
             'kegiatan' => $request->kegiatan,
             'bukti_foto' => $filePath,
-            'status' => 'disetujui',
+            'status' => 'disetujui', // Status default saat pertama upload
         ]);
 
+        // Kirim Notifikasi ke Guru Pembimbing
         if ($siswa->pembimbing && $siswa->pembimbing->user) {
             $siswa->pembimbing->user->notify(new \App\Notifications\PklNotification(
                 'Jurnal Harian Baru',
@@ -139,6 +161,9 @@ class JurnalHarianController extends Controller
         return redirect()->route('siswa.jurnal-harian.index')->with('success', 'Jurnal harian berhasil dicatat.');
     }
 
+    /**
+     * Menampilkan form edit jurnal harian.
+     */
     public function edit(LaporanHarian $jurnal_harian)
     {
         $siswa = Auth::user()->siswa;
@@ -154,6 +179,9 @@ class JurnalHarianController extends Controller
         return view('dashboard.siswa.jurnal_harian_edit', compact('jurnal_harian'));
     }
 
+    /**
+     * Mengupdate jurnal harian (misalnya untuk merevisi sesuai permintaan pembimbing).
+     */
     public function update(Request $request, LaporanHarian $jurnal_harian)
     {
         $siswa = Auth::user()->siswa;
@@ -168,7 +196,7 @@ class JurnalHarianController extends Controller
 
         $request->validate([
             'kegiatan' => 'required|string',
-            'bukti_foto' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+            'bukti_foto' => 'nullable|image|mimes:jpg,jpeg,png|max:2048', // Boleh kosong jika tidak ingin mengubah foto
         ]);
 
         $filePath = $jurnal_harian->bukti_foto;
@@ -179,11 +207,15 @@ class JurnalHarianController extends Controller
         $jurnal_harian->update([
             'kegiatan' => $request->kegiatan,
             'bukti_foto' => $filePath,
+            // Jika ada perubahan, kita anggap statusnya tetap seperti yang sudah ditentukan pembimbing
         ]);
 
         return redirect()->route('siswa.jurnal-harian.index', ['tab' => 'riwayat'])->with('success', 'Jurnal harian berhasil diperbarui.');
     }
 
+    /**
+     * Menghapus jurnal harian.
+     */
     public function destroy(LaporanHarian $jurnal_harian)
     {
         $siswa = Auth::user()->siswa;
@@ -201,6 +233,10 @@ class JurnalHarianController extends Controller
         return redirect()->route('siswa.jurnal-harian.index', ['tab' => 'riwayat'])->with('success', 'Jurnal harian berhasil dihapus.');
     }
 
+    /**
+     * Ekspor semua Jurnal Harian milik siswa menjadi dokumen PDF.
+     * Menggunakan library barryvdh/laravel-dompdf.
+     */
     public function export()
     {
         $siswa = Auth::user()->siswa;
@@ -208,10 +244,14 @@ class JurnalHarianController extends Controller
             abort(403, 'Akses ditolak.');
         }
 
+        // Ambil semua laporan harian dan urutkan dari yang paling lama
         $laporans = LaporanHarian::where('siswa_id', $siswa->id)->orderBy('tanggal', 'asc')->get();
+        
+        // Memuat view blade untuk PDF. Data disisipkan melalui compact()
         $pdf = \Barryvdh\DomPDF\Facade\Pdf::loadView('dashboard.siswa.jurnal_harian_pdf', compact('siswa', 'laporans'))
             ->setPaper('a4', 'portrait');
 
+        // Men-download file dengan nama dinamis yang menyertakan nama siswa
         return $pdf->download('Laporan_Harian_' . str_replace(' ', '_', $siswa->user->name) . '.pdf');
     }
 }

@@ -12,6 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('pengajuan_pkls', function (Blueprint $table) {
+            // Kolom untuk menyimpan alasan / keterangan jika pengajuan tempat PKL ditolak oleh pembimbing
             $table->text('alasan_ditolak')->nullable()->after('status');
         });
     }

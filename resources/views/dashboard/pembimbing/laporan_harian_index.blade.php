@@ -1,3 +1,7 @@
+{{-- 
+    View: Pembimbing - Laporan Harian (Index)
+    Fungsi: Menampilkan daftar siswa bimbingan beserta progres jumlah jurnal harian yang sudah mereka isi.
+--}}
 @extends ('layouts.app')
 @section ('content')
     @section ('header')

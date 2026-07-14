@@ -1,3 +1,8 @@
+{{-- 
+    View: Pembimbing - Verifikasi Pengajuan Tempat PKL
+    Fungsi: Menampilkan daftar permohonan tempat PKL dari siswa bimbingan.
+    Pembimbing dapat menyetujui atau menolak (dengan alasan) pengajuan tersebut.
+--}}
 @extends ('layouts.app')
 @section ('content')
     @section ('header')

@@ -1,3 +1,7 @@
+{{-- 
+    View: Siswa - Sertifikat PKL
+    Fungsi: Menampilkan halaman unduh/cetak sertifikat digital tanda bukti kelulusan PKL.
+--}}
 @extends ('layouts.app')
 @section ('content')
     @section ('header')

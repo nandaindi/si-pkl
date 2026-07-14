@@ -1,3 +1,8 @@
+{{-- 
+    View: Admin - Kelola Guru Pembimbing
+    Fungsi: Menampilkan tabel daftar guru pembimbing, serta modal untuk tambah/edit data.
+    Data dikirim dari Admin/GuruPembimbingController.
+--}}
 @extends ('layouts.app')
 @section ('content')
     <div>

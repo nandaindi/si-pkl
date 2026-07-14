@@ -11,6 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
+        // Menambahkan Index (indeks database) pada kolom-kolom yang sering dicari/difilter.
+        // Hal ini berguna untuk mempercepat performa pencarian (query) data saat aplikasi sudah membesar.
+        
         Schema::table('laporan_harians', function (Blueprint $table) {
             $table->index(['siswa_id', 'status']);
         });

@@ -1,3 +1,7 @@
+{{-- 
+    View: Siswa - Unggah Laporan Akhir
+    Fungsi: Halaman form bagi siswa untuk mengunggah file laporan akhir (PDF) jika persyaratan jurnal harian sudah terpenuhi.
+--}}
 @extends ('layouts.app')
 @section ('content')
     @section ('header')

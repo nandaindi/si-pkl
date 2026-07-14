@@ -1,3 +1,8 @@
+{{-- 
+    View: Siswa - Jurnal Harian
+    Fungsi: Antarmuka utama untuk mengelola jurnal harian.
+    Menampilkan tab Tracking (kalender absen) dan tab Riwayat (daftar kegiatan).
+--}}
 @extends ('layouts.app')
 @section ('content')
     @section ('header')

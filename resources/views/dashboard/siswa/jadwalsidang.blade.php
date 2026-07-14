@@ -1,3 +1,8 @@
+{{-- 
+    View: Siswa - Jadwal Sidang
+    Fungsi: Menampilkan informasi kapan dan di mana siswa tersebut akan disidang, 
+    serta siapa guru pembimbing dan pengujinya.
+--}}
 @extends ('layouts.app')
 @section ('content')
     @section ('header')

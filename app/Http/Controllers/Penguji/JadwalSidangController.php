@@ -8,13 +8,17 @@ use App\Models\JadwalSidang;
 
 class JadwalSidangController extends Controller
 {
+    /**
+     * Menampilkan daftar jadwal sidang di mana guru yang login bertugas sebagai penguji.
+     */
     public function index(Request $request)
     {
         $guru = auth()->user()->guru;
         $search = $request->input('search');
+        
         $jadwals = $guru 
             ? JadwalSidang::where('penguji_id', $guru->id)
-                ->whereDoesntHave('siswa.sertifikat')
+                ->whereDoesntHave('siswa.sertifikat') // Abaikan yang sudah lulus
                 ->when($search, function ($query, $search) {
                     $query->whereHas('siswa.user', function ($q) use ($search) {
                         $q->where('name', 'like', "%{$search}%");

@@ -4,6 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Model Sertifikat
+ * Menampung data sertifikat kelulusan PKL siswa.
+ */
 class Sertifikat extends Model
 {
     protected $fillable = [
@@ -16,6 +20,9 @@ class Sertifikat extends Model
         'tanggal_selesai'
     ];
 
+    /**
+     * Relasi ke model Siswa pemilik sertifikat.
+     */
     public function siswa()
     {
         return $this->belongsTo(Siswa::class);

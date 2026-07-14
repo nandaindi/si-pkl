@@ -1,3 +1,8 @@
+{{-- 
+    View: Admin - Dashboard Utama
+    Fungsi: Halaman beranda untuk admin. Menampilkan ringkasan statistik (jumlah siswa, guru, tempat PKL, dll).
+    Data dikirim dari Admin/HomeController.
+--}}
 @extends ('layouts.app')
 @section ('content')
     @section ('header')

@@ -1,3 +1,8 @@
+{{-- 
+    View: Admin - Kelola Guru Penguji
+    Fungsi: Menampilkan tabel daftar guru penguji beserta modal untuk manajemen data guru penguji.
+    Data dikirim dari Admin/GuruPengujiController.
+--}}
 @extends ('layouts.app')
 @section ('content')
     <div>

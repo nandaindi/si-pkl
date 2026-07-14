@@ -11,9 +11,14 @@ use Illuminate\Support\Facades\DB;
 
 class GuruPengujiController extends Controller
 {
+    /**
+     * Menampilkan daftar Guru Penguji beserta fitur pencariannya.
+     */
     public function index(Request $request)
     {
         $search = $request->input('search');
+        
+        // Query guru yang memiliki role 'penguji' (dibedakan dengan role pembimbing)
         $gurus = Guru::whereHas('user', function ($query) {
             $query->role('penguji');
         })
@@ -24,14 +29,21 @@ class GuruPengujiController extends Controller
                 });
         })->latest()
         ->with('user')->paginate(10);
+        
         return view('dashboard.admin.gurupenguji', compact('gurus'));
     }
 
+    /**
+     * Menampilkan halaman form untuk menambah Guru Penguji.
+     */
     public function create()
     {
         return view('dashboard.admin.gurupenguji.create');
     }
 
+    /**
+     * Menyimpan data Guru Penguji baru.
+     */
     public function store(Request $request)
     {
         $request->validate([
@@ -41,6 +53,7 @@ class GuruPengujiController extends Controller
             'nip' => 'required|string|unique:gurus',
         ]);
 
+        // Transaksi DB: Agar jika pembuatan profil guru gagal, akun usernya tidak ikut terbuat.
         DB::transaction(function () use ($request) {
             $user = User::create([
                 'name' => $request->name,
@@ -58,11 +71,17 @@ class GuruPengujiController extends Controller
         return redirect()->route('admin.guru-penguji.index')->with('success', 'Data Guru Penguji berhasil ditambahkan.');
     }
 
+    /**
+     * Menampilkan form edit untuk Guru Penguji tertentu.
+     */
     public function edit(Guru $guru_penguji)
     {
         return view('dashboard.admin.gurupenguji.edit', ['guru' => $guru_penguji]);
     }
 
+    /**
+     * Menyimpan pembaruan data Guru Penguji.
+     */
     public function update(Request $request, Guru $guru_penguji)
     {
         $request->validate([
@@ -77,6 +96,7 @@ class GuruPengujiController extends Controller
                 'name' => $request->name,
                 'email' => $request->email,
             ];
+            // Cek jika field password diisi, maka update password
             if ($request->filled('password')) {
                 $userData['password'] = Hash::make($request->password);
             }
@@ -90,6 +110,9 @@ class GuruPengujiController extends Controller
         return redirect()->route('admin.guru-penguji.index')->with('success', 'Data Guru Penguji berhasil diperbarui.');
     }
 
+    /**
+     * Menghapus Guru Penguji dari database.
+     */
     public function destroy(Guru $guru_penguji)
     {
         $guru_penguji->user->delete();

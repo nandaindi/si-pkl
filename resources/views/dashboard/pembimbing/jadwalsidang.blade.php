@@ -1,3 +1,8 @@
+{{-- 
+    View: Pembimbing - Jadwal Sidang (Index)
+    Fungsi: Menampilkan daftar jadwal sidang untuk siswa-siswa bimbingannya.
+    Berisi tabel jadwal dan tombol aksi untuk membuat/edit jadwal.
+--}}
 @extends ('layouts.app')
 @section ('content')
     @section ('header')

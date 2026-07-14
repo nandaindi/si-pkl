@@ -1,3 +1,7 @@
+{{-- 
+    View: Penguji - Jadwal Sidang
+    Fungsi: Menampilkan daftar jadwal sidang di mana guru yang login bertugas sebagai penguji.
+--}}
 @extends ('layouts.app')
 @section ('content')
     @section ('header')

@@ -1,3 +1,8 @@
+{{-- 
+    View: Pembimbing - Kelola Sertifikat PKL
+    Fungsi: Antarmuka untuk melihat siswa mana saja yang sudah dinilai dan siap diterbitkan sertifikatnya,
+    serta form untuk mengisi data kelulusan.
+--}}
 @extends ('layouts.app')
 @section ('content')
     @section ('header')

@@ -1,3 +1,7 @@
+{{-- 
+    View: Siswa - Edit Jurnal Harian
+    Fungsi: Form bagi siswa untuk merevisi atau mengubah catatan kegiatan harian yang telah diinput sebelumnya.
+--}}
 @extends ('layouts.app')
 @section ('content')
     @section ('header')

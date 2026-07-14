@@ -1,3 +1,8 @@
+{{-- 
+    View: Cetak Sertifikat PKL
+    Fungsi: Template khusus untuk mencetak sertifikat PKL dalam format A4 Landscape. 
+    Akan dipanggil dari controller dan otomatis membuka mode print browser (lihat bagian tag script di bawah).
+--}}
 <!DOCTYPE html>
 <html lang="id">
 <head>

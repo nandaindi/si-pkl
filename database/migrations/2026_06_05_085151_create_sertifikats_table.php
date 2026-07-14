@@ -14,9 +14,13 @@ return new class extends Migration
         Schema::create('sertifikats', function (Blueprint $table) {
             $table->id();
             $table->foreignId('siswa_id')->constrained('siswas')->onDelete('cascade');
+            
+            // Path ke file sertifikat digital / PDF
             $table->string('file_sertifikat');
+            
+            // Nomor urut unik untuk keperluan legalitas atau validasi sertifikat resmi
             $table->string('nomor_sertifikat')->unique();
-            $table->timestamps();
+            $table->timestamps(); // Membuat kolom created_at dan updated_at
         });
     }
 

@@ -1,3 +1,7 @@
+{{-- 
+    View: Dashboard Default (General)
+    Fungsi: Halaman fallback jika user belum memiliki role spesifik, atau dashboard bawaan Laravel Breeze.
+--}}
 @extends ('layouts.app')
 @section ('content')
     @section ('header')

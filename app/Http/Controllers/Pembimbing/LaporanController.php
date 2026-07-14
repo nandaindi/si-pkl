@@ -10,9 +10,15 @@ use App\Models\LaporanAkhir;
 
 class LaporanController extends Controller
 {
+    /**
+     * Menampilkan daftar Laporan Akhir siswa yang merupakan bimbingannya.
+     */
     public function index(Request $request)
     {
         $search = $request->input('search');
+        
+        // Mengambil Laporan Akhir, filter hanya untuk siswa yang pembimbing_id-nya sesuai
+        // dengan ID guru yang sedang login.
         $laporan_akhirs = LaporanAkhir::whereHas('siswa', function ($q) {
                 $q->where('pembimbing_id', auth()->user()->guru->id);
             })
@@ -26,5 +32,4 @@ class LaporanController extends Controller
 
         return view('dashboard.pembimbing.laporan', compact('laporan_akhirs'));
     }
-
 }

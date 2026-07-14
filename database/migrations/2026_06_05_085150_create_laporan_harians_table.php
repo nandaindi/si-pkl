@@ -13,11 +13,18 @@ return new class extends Migration
     {
         Schema::create('laporan_harians', function (Blueprint $table) {
             $table->id();
+            // Siapa siswa yang membuat laporan harian ini
             $table->foreignId('siswa_id')->constrained('siswas')->onDelete('cascade');
+            
+            // Tanggal pelaksanaan kegiatan PKL
             $table->date('tanggal');
+            
+            // Deskripsi kegiatan yang dilakukan pada hari itu
             $table->text('kegiatan');
+            
+            // Path ke bukti foto kegiatan (disimpan lokal di server)
             $table->string('bukti_foto')->nullable();
-            $table->timestamps();
+            $table->timestamps(); // Membuat kolom created_at dan updated_at
         });
     }
 

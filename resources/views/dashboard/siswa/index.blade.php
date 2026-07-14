@@ -1,3 +1,8 @@
+{{-- 
+    View: Siswa - Dashboard
+    Fungsi: Halaman beranda bagi siswa. Menampilkan progres PKL secara umum 
+    (seperti status pengajuan, jadwal sidang, alert pengingat jurnal).
+--}}
 @extends ('layouts.app')
 @section ('content')
     @section ('header')
