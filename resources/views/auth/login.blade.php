@@ -41,7 +41,9 @@
             border: 2px solid var(--color-border);
             border-radius: var(--radius-card);
             box-shadow: var(--shadow-clay);
-            transition: border-color 250ms ease-out, box-shadow 250ms ease-out;
+            transition:
+                border-color 250ms ease-out,
+                box-shadow 250ms ease-out;
         }
         .card-bento:hover {
             box-shadow: var(--shadow-clay-hover);
@@ -91,7 +93,9 @@
             background: var(--btn-face);
             cursor: pointer;
             position: relative;
-            transition: background-color 160ms, opacity 160ms;
+            transition:
+                background-color 160ms,
+                opacity 160ms;
             font-size: var(--text-sm);
         }
         .btn:hover {
@@ -131,7 +135,7 @@
             transition: all 300ms var(--ease-spring);
         }
         .mascot-face:hover {
-            background: oklch(76% 0.20 25); /* Red hover */
+            background: oklch(76% 0.2 25); /* Red hover */
             transform: scale(1.1) rotate(8deg);
             box-shadow:
                 0 12px 24px oklch(68% 0.24 25 / 0.3),
@@ -200,7 +204,9 @@
             bottom: -6px;
             z-index: 10;
             transition: all 400ms var(--ease-spring);
-            box-shadow: inset -2px -2px 5px oklch(78% 0.18 95 / 0.5), inset 2px 2px 5px oklch(100% 0 0 / 0.8);
+            box-shadow:
+                inset -2px -2px 5px oklch(78% 0.18 95 / 0.5),
+                inset 2px 2px 5px oklch(100% 0 0 / 0.8);
         }
         .mascot-hand-left {
             left: -8px;

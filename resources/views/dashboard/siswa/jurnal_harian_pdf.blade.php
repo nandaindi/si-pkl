@@ -88,6 +88,7 @@
     </style>
 </head>
 <body>
+    {{-- Bagian Header Dokumen PDF --}}
     <div class="header">
         <h1>Riwayat Laporan Harian Praktek Kerja Lapangan</h1>
         <p>Tahun Ajaran {{ date('Y') }} / {{ date('Y') + 1 }}</p>
@@ -105,9 +106,16 @@
                 <td class="colon">:</td>
                 <td>{{ $siswa->nisn }}</td>
             </tr>
+            
+            {{-- 
+               Mengambil data pengajuan PKL yang sudah disetujui.
+               Ini adalah contoh pengambilan data langsung (query) dari dalam file view (walaupun sebaiknya dilakukan di Controller).
+            --}}
             @php
                 $pengajuan = \App\Models\PengajuanPkl::where('siswa_id', $siswa->id)->where('status', 'disetujui')->first();
             @endphp
+            
+            {{-- Mengecek apakah $pengajuan ditemukan dan apakah tempat PKL-nya ada --}}
             @if ($pengajuan && $pengajuan->tempatPkl)
                 <tr>
                     <td class="label">Tempat PKL</td>
@@ -118,6 +126,7 @@
             <tr>
                 <td class="label">Guru Pembimbing</td>
                 <td class="colon">:</td>
+                {{-- Menampilkan nama guru pembimbing, jika null maka akan tampil strip (-) menggunakan null coalescing operator (??) --}}
                 <td>{{ $siswa->pembimbing->user->name ?? '-' }}</td>
             </tr>
         </table>
@@ -132,10 +141,20 @@
             </tr>
         </thead>
         <tbody>
+            {{-- 
+               @forelse digunakan untuk melooping data. 
+               Jika variabel $laporans ada isinya, maka kode di dalam @forelse akan dijalankan.
+               Jika $laporans kosong, kode di bagian @empty akan dijalankan.
+            --}}
             @forelse ($laporans as $index => $laporan)
                 <tr>
+                    {{-- $index + 1 digunakan sebagai nomor urut tabel otomatis --}}
                     <td style="text-align: center">{{ $index + 1 }}</td>
                     <td>
+                        {{-- 
+                           Mengubah format tanggal dari database (biasanya YYYY-MM-DD) 
+                           menjadi format yang mudah dibaca (contoh: 17 Agustus 1945) menggunakan Carbon.
+                        --}}
                         {{
                             \Carbon\Carbon::parse($laporan->tanggal)->translatedFormat(
                                 'd F Y',
@@ -157,6 +176,7 @@
         <p>Mengetahui,</p>
         <p>Guru Pembimbing</p>
         <div class="signature-space"></div>
+        {{-- Menampilkan nama guru pembimbing untuk bagian tanda tangan --}}
         <p><strong><u>{{
                 $siswa->pembimbing->user->name ??
                     '.....................................'

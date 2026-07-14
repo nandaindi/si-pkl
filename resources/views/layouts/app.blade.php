@@ -288,9 +288,6 @@
             background: rgba(0, 0, 0, 0.4);
             z-index: 30;
         }
-        #sidebar-toggle {
-            display: flex;
-        }
         #sidebar-close {
             display: flex;
         }
@@ -302,8 +299,7 @@
             display: block;
         }
 
-        /* ponytail: md (768px) dipilih agar 885px viewport termasuk desktop */
-        @media (min-width: 768px) {
+        @media (min-width: 1024px) {
             #sidebar {
                 position: static;
                 transform: none !important;
@@ -311,12 +307,6 @@
                 flex-shrink: 0;
             }
             #sidebar-overlay {
-                display: none !important;
-            }
-            #sidebar-toggle {
-                display: none !important;
-            }
-            #sidebar-close {
                 display: none !important;
             }
         }
@@ -579,24 +569,37 @@
             class="h-16 lg:h-24 glass-topbar flex items-center justify-between px-4 lg:px-10 z-20 shrink-0"
             style="position: sticky; top: 0"
         >
-            <!-- Hamburger (mobile only) -->
-            <button
-                id="sidebar-toggle"
-                style="
-                    padding: 0.5rem;
-                    border-radius: 0.5rem;
-                    color: #64748b;
-                    background: transparent;
-                    border: none;
-                    cursor: pointer;
-                    align-items: center;
-                    justify-content: center;
-                "
-                aria-label="Buka menu"
-            >
-                <svg style="width:1.5rem;height:1.5rem" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" /></svg>
-            </button>
-            <div class="flex items-center gap-6 ml-auto">
+            <div class="flex items-center gap-3">
+                <!-- Hamburger (mobile only) -->
+                <button
+                    id="sidebar-toggle"
+                    class="lg:hidden p-2 -ml-2 rounded-lg text-slate-500 hover:bg-slate-100 hover:text-slate-700 transition-colors focus:outline-none flex items-center justify-center"
+                    aria-label="Buka menu"
+                >
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
+                
+                <!-- Mobile Logo (hidden on desktop) -->
+                <div class="lg:hidden flex items-center gap-2 cursor-default">
+                    <img
+                        src="{{ asset('images/logosmk.png') }}"
+                        alt="Logo"
+                        class="w-8 h-8 object-contain shrink-0"
+                    />
+                    <div class="flex flex-col justify-center overflow-hidden">
+                        <span class="font-display text-slate-900 font-extrabold text-[12px] tracking-tight leading-tight mb-[1px] truncate">
+                            SIPKL
+                        </span>
+                        <span class="font-display text-[8px] text-slate-500 font-bold tracking-[0.08em] leading-none uppercase truncate">
+                            SMK Mandiri 01
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-4 sm:gap-6 ml-auto">
                 <div class="relative" id="notification-dropdown-trigger">
                     <button
                         class="p-2 text-slate-500 hover:text-slate-700 relative focus:outline-none transition-colors"
